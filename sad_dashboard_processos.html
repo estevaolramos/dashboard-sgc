@@ -1,0 +1,243 @@
+
+<style>
+.dash-wrap { padding: 1rem 0; }
+.tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab-btn { padding: 7px 18px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; cursor: pointer; font-size: 13px; color: var(--color-text-secondary); font-family: var(--font-sans); }
+.tab-btn.active { background: var(--color-background-secondary); color: var(--color-text-primary); font-weight: 500; border-color: var(--color-border-primary); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; }
+.metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.metric-value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; font-size: 12px; color: var(--color-text-secondary); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; }
+h3 { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 1rem; }
+</style>
+
+<div class="dash-wrap">
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('orgaos')">Processos por órgão</button>
+  <button class="tab-btn" onclick="showTab('stage')">Processos por stage</button>
+  <button class="tab-btn" onclick="showTab('tempo')">Tempo médio</button>
+</div>
+
+<div id="tab-orgaos" class="tab-panel active">
+  <div class="metric-grid">
+    <div class="metric"><div class="metric-label">Total de processos</div><div class="metric-value" id="m-total">—</div></div>
+    <div class="metric"><div class="metric-label">Órgãos ativos</div><div class="metric-value" id="m-orgaos">—</div></div>
+    <div class="metric"><div class="metric-label">Maior demandante</div><div class="metric-value" id="m-top" style="font-size:15px;line-height:1.3">—</div></div>
+  </div>
+  <h3>Distribuição de processos por órgão (top 15)</h3>
+  <div id="legend-orgaos" class="legend-row"></div>
+  <div style="position:relative;width:100%;height:420px;"><canvas id="chart-orgaos"></canvas></div>
+</div>
+
+<div id="tab-stage" class="tab-panel">
+  <div class="metric-grid">
+    <div class="metric"><div class="metric-label">Stages ativas</div><div class="metric-value" id="m-stages">—</div></div>
+    <div class="metric"><div class="metric-label">Stage com mais processos</div><div class="metric-value" id="m-top-stage" style="font-size:14px;line-height:1.3">—</div></div>
+    <div class="metric"><div class="metric-label">Processos finalizados</div><div class="metric-value" id="m-finalizados">—</div></div>
+  </div>
+  <h3>Processos por stage atual</h3>
+  <div id="legend-stages" class="legend-row"></div>
+  <div style="position:relative;width:100%;height:340px;"><canvas id="chart-stage"></canvas></div>
+</div>
+
+<div id="tab-tempo" class="tab-panel">
+  <div class="metric-grid">
+    <div class="metric"><div class="metric-label">Tempo médio geral</div><div class="metric-value" id="m-tempo-medio">—</div></div>
+    <div class="metric"><div class="metric-label">Processo mais rápido</div><div class="metric-value" id="m-mais-rapido" style="font-size:14px;line-height:1.3">—</div></div>
+    <div class="metric"><div class="metric-label">Processo mais lento</div><div class="metric-value" id="m-mais-lento" style="font-size:14px;line-height:1.3">—</div></div>
+  </div>
+  <h3>Tempo médio de processo por órgão (dias, top 15)</h3>
+  <div id="legend-tempo" class="legend-row"></div>
+  <div style="position:relative;width:100%;height:420px;"><canvas id="chart-tempo"></canvas></div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const processes = [
+  {id:201,organization_id:6,stage_id:1,created_at:'2026-01-23',process_number:'36/2026'},
+  {id:218,organization_id:1,stage_id:1,created_at:'2026-01-27',process_number:'53/2026'},
+  {id:220,organization_id:1,stage_id:1,created_at:'2026-01-27',process_number:'55/2026'},
+  {id:194,organization_id:6,stage_id:1,created_at:'2026-01-21',process_number:'29/2026'},
+  {id:77,organization_id:2,stage_id:9,created_at:'2025-11-05',process_number:'67/2025'},
+  {id:208,organization_id:1,stage_id:1,created_at:'2026-01-27',process_number:'43/2026'},
+  {id:71,organization_id:1,stage_id:1,created_at:'2025-10-14',process_number:'61/2025'},
+  {id:219,organization_id:1,stage_id:1,created_at:'2026-01-27',process_number:'54/2026'},
+  {id:85,organization_id:6,stage_id:1,created_at:'2025-11-14',process_number:'75/2025'},
+  {id:88,organization_id:1,stage_id:13,created_at:'2025-11-26',process_number:'78/2025'},
+  {id:267,organization_id:2,stage_id:13,created_at:'2026-02-12',process_number:'102/2026'},
+  {id:95,organization_id:6,stage_id:1,created_at:'2025-12-02',process_number:'83/2025'},
+  {id:66,organization_id:6,stage_id:16,created_at:'2025-10-09',process_number:'56/2025'},
+  {id:193,organization_id:11,stage_id:5,created_at:'2026-01-20',process_number:'28/2026'},
+  {id:286,organization_id:38,stage_id:1,created_at:'2026-02-26',process_number:'121/2026'},
+  {id:305,organization_id:1,stage_id:6,created_at:'2026-03-09',process_number:'139/2026'},
+  {id:373,organization_id:8,stage_id:9,created_at:'2026-03-26',process_number:'207/2026'},
+  {id:351,organization_id:8,stage_id:13,created_at:'2026-03-20',process_number:'185/2026'},
+  {id:377,organization_id:9,stage_id:9,created_at:'2026-03-26',process_number:'211/2026'},
+  {id:379,organization_id:4,stage_id:1,created_at:'2026-03-27',process_number:'213/2026'},
+  {id:374,organization_id:4,stage_id:9,created_at:'2026-03-26',process_number:'208/2026'},
+  {id:281,organization_id:32,stage_id:9,created_at:'2026-02-23',process_number:'116/2026'},
+  {id:325,organization_id:4,stage_id:13,created_at:'2026-03-11',process_number:'159/2026'},
+  {id:365,organization_id:25,stage_id:9,created_at:'2026-03-24',process_number:'199/2026'},
+  {id:378,organization_id:1,stage_id:9,created_at:'2026-03-27',process_number:'212/2026'},
+  {id:380,organization_id:32,stage_id:9,created_at:'2026-03-27',process_number:'214/2026'},
+  {id:269,organization_id:1,stage_id:14,created_at:'2026-02-12',process_number:'104/2026'},
+  {id:76,organization_id:1,stage_id:6,created_at:'2025-10-25',process_number:'66/2025'},
+  {id:263,organization_id:1,stage_id:9,created_at:'2026-02-11',process_number:'98/2026'},
+  {id:383,organization_id:1,stage_id:1,created_at:'2026-03-30',process_number:'217/2026'},
+  {id:376,organization_id:38,stage_id:9,created_at:'2026-03-26',process_number:'210/2026'},
+  {id:147,organization_id:54,stage_id:9,created_at:'2026-01-07',process_number:'5/2026'},
+  {id:186,organization_id:1,stage_id:5,created_at:'2026-01-15',process_number:'21/2026'},
+  {id:140,organization_id:1,stage_id:6,created_at:'2025-12-26',process_number:'109/2025'},
+  {id:121,organization_id:1,stage_id:9,created_at:'2025-12-05',process_number:'94/2025'},
+  {id:57,organization_id:2,stage_id:14,created_at:'2025-09-18',process_number:'47/2025'},
+  {id:98,organization_id:6,stage_id:9,created_at:'2025-12-09',process_number:'86/2025'},
+  {id:96,organization_id:2,stage_id:9,created_at:'2025-12-05',process_number:'84/2025'},
+  {id:87,organization_id:1,stage_id:9,created_at:'2025-11-18',process_number:'77/2025'},
+  {id:190,organization_id:6,stage_id:9,created_at:'2026-01-19',process_number:'25/2026'},
+  {id:94,organization_id:2,stage_id:9,created_at:'2025-12-04',process_number:'82/2025'},
+  {id:123,organization_id:1,stage_id:9,created_at:'2025-12-05',process_number:'95/2025'},
+  {id:181,organization_id:1,stage_id:9,created_at:'2026-01-13',process_number:'16/2026'},
+  {id:228,organization_id:2,stage_id:9,created_at:'2026-01-30',process_number:'63/2026'},
+];
+
+const organs = {1:'SES',2:'SAD',3:'SES',4:'SEE',5:'SEMAS',6:'SDS',7:'APAC',8:'ARPE',9:'ATI',10:'CAMIL',11:'SDSCJ',12:'CONDEPE',13:'DEFN',14:'DER',15:'DETRAN',16:'FACEPE',17:'FUNAPE',18:'FUNASE',20:'GABGOV',21:'GABVICE',22:'HEMOPE',23:'IASSEPE',24:'CCIVIL',25:'JUCEPE',26:'PGE',27:'SAS',28:'SCGE',29:'SDA',30:'SDEC',31:'SDSCJ',32:'SEAP',33:'SECMULHER',34:'SECOM',35:'SECTI',36:'SECULT',37:'SEDEPE',38:'SEFAZ',39:'SEMOBI',40:'SEPE',41:'SEPLAG',42:'SETUR',43:'SJDH',44:'SPVD',45:'SRHE',53:'CPRH',54:'ADAGRO',55:'SAESPRI',56:'FUNDARPE',57:'IPEM',58:'HSE'};
+const orgNames = {1:'Sec. de Saúde',2:'Sec. de Administração',4:'Sec. de Educação',6:'Sec. de Defesa Social',8:'Ag. Reguladora',9:'Ag. Tecnologia Info.',11:'Sec. Des. Social',25:'Junta Comercial',32:'Sec. Adm. Penitenciária',38:'Sec. da Fazenda',54:'ADAGRO',57:'IPEM',58:'HSE',25:'JUCEPE',11:'SDSCJ'};
+const stages = {1:'Em Cadastramento',2:'Ag. Ass. Técnica',3:'Ag. Aut. Órgão',4:'Reprovado',5:'Ajustes Solicitados',6:'Ajustes Realizados',7:'Autorizado',8:'Ag. Distribuição',9:'Em Análise',10:'Suspenso',11:'Retomado',12:'Aut. Publicação',13:'Análise SEI',14:'Fase de Disputa',15:'Trâmites Finais',16:'Finalizado',17:'Análise Cotas',18:'Cota Reprovada',19:'Doc. Cotas em Construção'};
+
+const COLORS = ['#378ADD','#1D9E75','#D85A30','#7F77DD','#BA7517','#D4537E','#639922','#888780','#185FA5','#0F6E56','#993C1D','#534AB7','#3B6D11','#854F0B','#993556'];
+
+function now() { return new Date('2026-03-30'); }
+
+function diffDays(a, b) {
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+
+function buildCharts() {
+  const orgCount = {};
+  processes.forEach(p => {
+    const sig = organs[p.organization_id] || ('Org'+p.organization_id);
+    orgCount[sig] = (orgCount[sig]||0) + 1;
+  });
+  const sortedOrg = Object.entries(orgCount).sort((a,b)=>b[1]-a[1]).slice(0,15);
+  document.getElementById('m-total').textContent = processes.length;
+  document.getElementById('m-orgaos').textContent = Object.keys(orgCount).length;
+  document.getElementById('m-top').textContent = sortedOrg[0][0] + ' (' + sortedOrg[0][1] + ')';
+
+  const legendO = document.getElementById('legend-orgaos');
+  sortedOrg.forEach(([sig],i) => {
+    const sp = document.createElement('span');
+    sp.style.cssText='display:flex;align-items:center;gap:4px;';
+    sp.innerHTML=`<span class="legend-dot" style="background:${COLORS[i%COLORS.length]}"></span>${sig}`;
+    legendO.appendChild(sp);
+  });
+
+  new Chart(document.getElementById('chart-orgaos'), {
+    type: 'bar',
+    data: {
+      labels: sortedOrg.map(e=>e[0]),
+      datasets: [{ label: 'Processos', data: sortedOrg.map(e=>e[1]), backgroundColor: sortedOrg.map((_,i)=>COLORS[i%COLORS.length]), borderRadius: 4, borderSkipped: false }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' '+ctx.raw+' processos' } } },
+      scales: {
+        x: { ticks: { color: '#888', font: { size: 11 }, maxRotation: 45, autoSkip: false }, grid: { display: false } },
+        y: { ticks: { color: '#888', font: { size: 11 }, stepSize: 1 }, grid: { color: 'rgba(128,128,128,0.15)' } }
+      }
+    }
+  });
+
+  const stageCount = {};
+  processes.forEach(p => {
+    const s = stages[p.stage_id] || ('Stage '+p.stage_id);
+    stageCount[s] = (stageCount[s]||0)+1;
+  });
+  const sortedStage = Object.entries(stageCount).sort((a,b)=>b[1]-a[1]);
+  document.getElementById('m-stages').textContent = sortedStage.length;
+  document.getElementById('m-top-stage').textContent = sortedStage[0][0]+' ('+sortedStage[0][1]+')';
+  const fin = stageCount['Finalizado']||0;
+  document.getElementById('m-finalizados').textContent = fin;
+
+  const legendS = document.getElementById('legend-stages');
+  sortedStage.forEach(([s],i) => {
+    const sp = document.createElement('span');
+    sp.style.cssText='display:flex;align-items:center;gap:4px;';
+    sp.innerHTML=`<span class="legend-dot" style="background:${COLORS[i%COLORS.length]}"></span>${s}`;
+    legendS.appendChild(sp);
+  });
+
+  const stagePct = sortedStage.map(([s,v]) => ({s, v, pct: Math.round(v/processes.length*100)}));
+  new Chart(document.getElementById('chart-stage'), {
+    type: 'doughnut',
+    data: {
+      labels: sortedStage.map(e=>e[0]),
+      datasets: [{ data: sortedStage.map(e=>e[1]), backgroundColor: sortedStage.map((_,i)=>COLORS[i%COLORS.length]), borderWidth: 1, borderColor: 'transparent' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ' '+ctx.raw+' proc. ('+Math.round(ctx.raw/processes.length*100)+'%)' } }
+      }
+    }
+  });
+
+  const orgTempos = {};
+  const orgCounts2 = {};
+  processes.forEach(p => {
+    const sig = organs[p.organization_id] || ('Org'+p.organization_id);
+    const dias = diffDays(p.created_at, '2026-03-30');
+    if (!orgTempos[sig]) { orgTempos[sig]=0; orgCounts2[sig]=0; }
+    orgTempos[sig] += dias;
+    orgCounts2[sig]++;
+  });
+  const tempoMedio = Object.entries(orgTempos).map(([sig,total])=>({sig, avg: Math.round(total/orgCounts2[sig])})).sort((a,b)=>b.avg-a.avg).slice(0,15);
+
+  const allTempos = processes.map(p=>diffDays(p.created_at,'2026-03-30'));
+  const mediaGeral = Math.round(allTempos.reduce((a,b)=>a+b,0)/allTempos.length);
+  document.getElementById('m-tempo-medio').textContent = mediaGeral+' dias';
+
+  const fastest = processes.reduce((a,b) => diffDays(a.created_at,'2026-03-30') < diffDays(b.created_at,'2026-03-30') ? a : b);
+  const slowest = processes.reduce((a,b) => diffDays(a.created_at,'2026-03-30') > diffDays(b.created_at,'2026-03-30') ? a : b);
+  document.getElementById('m-mais-rapido').textContent = fastest.process_number+' ('+diffDays(fastest.created_at,'2026-03-30')+'d)';
+  document.getElementById('m-mais-lento').textContent = slowest.process_number+' ('+diffDays(slowest.created_at,'2026-03-30')+'d)';
+
+  const legendT = document.getElementById('legend-tempo');
+  tempoMedio.forEach(({sig},i) => {
+    const sp = document.createElement('span');
+    sp.style.cssText='display:flex;align-items:center;gap:4px;';
+    sp.innerHTML=`<span class="legend-dot" style="background:${COLORS[i%COLORS.length]}"></span>${sig}`;
+    legendT.appendChild(sp);
+  });
+
+  new Chart(document.getElementById('chart-tempo'), {
+    type: 'bar',
+    data: {
+      labels: tempoMedio.map(e=>e.sig),
+      datasets: [{ label: 'Dias médios', data: tempoMedio.map(e=>e.avg), backgroundColor: tempoMedio.map((_,i)=>COLORS[i%COLORS.length]), borderRadius:4, borderSkipped:false }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' '+ctx.raw+' dias' } } },
+      scales: {
+        x: { ticks: { color:'#888', font:{size:11}, maxRotation:45, autoSkip:false }, grid:{display:false} },
+        y: { ticks: { color:'#888', font:{size:11} }, grid:{color:'rgba(128,128,128,0.15)'} }
+      }
+    }
+  });
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+buildCharts();
+</script>
