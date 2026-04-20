@@ -21,6 +21,7 @@ export const TAB_CONFIG = {
         title: "Painel Administrativo Consolidado",
         chartIds: [
             "chart-orgaos",
+            "chart-gerencias",
             "chart-tempo",
             "chart-critical-delay",
             "chart-temporal-orgaos",
@@ -34,9 +35,6 @@ export const TAB_CONFIG = {
             "chart-stage-evolution-total-gradient",
             "chart-stage-evolution-doughnut-mono",
             "chart-stage-evolution-bar-mono",
-            "chart-stage-evolution-status-temporal-mono",
-            "chart-stage-evolution-status-temporal-dense",
-            "chart-stage-evolution-status-temporal-soft",
         ],
     },
 };
@@ -53,6 +51,7 @@ export const dashboardState = {
     fileStamp: "",
     processed: {
         sortedOrg: [],
+        sortedGerencia: [],
         sortedStage: [],
         sortedTempo: [],
         stageDual: [],

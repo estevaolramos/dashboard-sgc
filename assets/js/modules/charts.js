@@ -55,12 +55,16 @@ function toDetailLabel(key) {
         id: "ID",
         process_number: "Numero do processo",
         orgao: "Orgao",
-        stage: "Status atual",
+        stage: "Etapa atual",
         user_name: "Criado por",
         current_owner_name: "Responsavel atual",
         created_at: "Data de criacao",
         updated_at: "Ultima atualizacao",
         stage_started_at: "Inicio do stage atual",
+        gerencia_nome: "Gerencia",
+        gerencia_id: "ID da gerencia",
+        atual_entrada_neste_estagio: "Entrada no estagio atual",
+        tempo_no_estagio_atual: "Tempo no estagio atual",
         finalized_at: "Data de finalizacao",
         _age_days: "Dias em tramitacao",
         _sla_limit_days: "Limite SLA (dias)",
@@ -406,6 +410,104 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
 
     renderOrgaosChart();
 
+    const detailedRows = Array.isArray(espelhoRows) ? espelhoRows : [];
+
+    const gerenciaRowsBase = detailedRows
+        .reduce((accumulator, row) => {
+            const gerenciaNome = String(row?.gerencia_nome || "Sem gerencia").trim() || "Sem gerencia";
+            const current = accumulator[gerenciaNome] || { gerencia_nome: gerenciaNome, total_processos: 0 };
+            current.total_processos += 1;
+            accumulator[gerenciaNome] = current;
+            return accumulator;
+        }, {});
+
+    const sortedGerencias = Object.values(gerenciaRowsBase)
+        .sort((a, b) => Number(b.total_processos || 0) - Number(a.total_processos || 0))
+        .slice(0, 15);
+    if (sortedGerencias.length === 0) {
+        sortedGerencias.push({ gerencia_nome: "Sem gerencia", total_processos: 0 });
+    }
+    const hiddenGerenciasLegendItems = new Set();
+    const gerenciaColorByName = new Map(
+        sortedGerencias.map((item, index) => [String(item.gerencia_nome || "Sem gerencia"), COLORS[index % COLORS.length]])
+    );
+
+    const renderGerenciasChart = () => {
+        const availableNames = new Set(sortedGerencias.map((item) => String(item.gerencia_nome || "Sem gerencia")));
+        [...hiddenGerenciasLegendItems].forEach((name) => {
+            if (!availableNames.has(name)) {
+                hiddenGerenciasLegendItems.delete(name);
+            }
+        });
+
+        const visibleRows = sortedGerencias.filter((item) => !hiddenGerenciasLegendItems.has(String(item.gerencia_nome || "Sem gerencia")));
+        const rowsForChart = visibleRows.length > 0 ? visibleRows : sortedGerencias;
+
+        dashboardState.processed.sortedGerencia = rowsForChart;
+
+        fillLegend("legend-gerencias", sortedGerencias, (item) => item.gerencia_nome || "Sem gerencia", {
+            isActive: (item) => !hiddenGerenciasLegendItems.has(String(item.gerencia_nome || "Sem gerencia")),
+            getColor: (item) => gerenciaColorByName.get(String(item.gerencia_nome || "Sem gerencia")) || COLORS[0],
+            onToggle: (item) => {
+                const gerenciaName = String(item.gerencia_nome || "Sem gerencia");
+                if (hiddenGerenciasLegendItems.has(gerenciaName)) {
+                    hiddenGerenciasLegendItems.delete(gerenciaName);
+                } else {
+                    hiddenGerenciasLegendItems.add(gerenciaName);
+                }
+
+                renderGerenciasChart();
+            },
+        });
+
+        createChart("chart-gerencias", {
+            type: "bar",
+            data: {
+                labels: rowsForChart.map((item) => item.gerencia_nome || "Sem gerencia"),
+                datasets: [
+                    {
+                        label: "Processos",
+                        data: rowsForChart.map((item) => Number(item.total_processos || 0)),
+                        backgroundColor: rowsForChart.map(
+                            (item) => gerenciaColorByName.get(String(item.gerencia_nome || "Sem gerencia")) || COLORS[0]
+                        ),
+                        borderRadius: 6,
+                        borderSkipped: false,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false, ...legendHoverCursor },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => ` ${formatNumber(ctx.raw)} processos`,
+                        },
+                    },
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#6c757d",
+                            maxRotation: 45,
+                            autoSkip: false,
+                        },
+                        grid: { display: false },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: "#6c757d" },
+                        grid: { color: "rgba(116, 120, 141, 0.15)" },
+                    },
+                },
+            },
+        });
+    };
+
+    renderGerenciasChart();
+
     setMetricText("m-stages", formatNumber(porStage.length));
     setMetricText(
         "m-top-stage",
@@ -449,7 +551,6 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
     }
 
     const scopeSelect = document.getElementById("filter-tempo-scope");
-    const detailedRows = Array.isArray(espelhoRows) ? espelhoRows : [];
     const referenceDate = getMacroReferenceDate(detailedRows);
     const hiddenTempoLegendItems = new Set();
 
@@ -1108,7 +1209,7 @@ function buildStageEvolutionHeatmapChart(model) {
                         label: (ctx) => {
                             const stageCode = String(ctx.raw?.stageCode || "Sem codigo");
                             const stageLabel = model.codeLabelMap[stageCode] || "Nao Informado";
-                            return ` Status ${stageCode} - ${stageLabel}: ${formatNumber(ctx.raw?.value || 0)} processos`;
+                            return ` Etapas ${stageCode} - ${stageLabel}: ${formatNumber(ctx.raw?.value || 0)} processos`;
                         },
                     },
                 },
@@ -1163,7 +1264,7 @@ function buildStageEvolutionHeatmapChart(model) {
                             }
 
                             const code = yCodes[index];
-                            return `Status ${code}`;
+                            return `Etapa ${code}`;
                         },
                     },
                     grid: { color: "rgba(116, 120, 141, 0.1)" },
@@ -1254,6 +1355,7 @@ function buildStageEvolutionTotalGradientChart(model) {
 
 function buildStageEvolutionDoughnutMonochromeChart(model) {
     const codes = model.orderedCodesByVolume.slice(0, 10);
+    const labels = codes.map((code) => model.codeLabelMap[code] || `Etapa ${code}`);
     const data = codes.map((code) => {
         const series = model.byCodeSeries[code] || [];
         return series.reduce((sum, value) => sum + Number(value || 0), 0);
@@ -1261,16 +1363,17 @@ function buildStageEvolutionDoughnutMonochromeChart(model) {
 
     if (codes.length === 0) {
         codes.push("Sem codigo");
+        labels.push("Nao Informado");
         data.push(0);
     }
 
     createChart("chart-stage-evolution-doughnut-mono", {
         type: "doughnut",
         data: {
-            labels: codes.map((code) => `Status ${code}`),
+            labels,
             datasets: [
                 {
-                    label: "Volume por status",
+                    label: "Volume por Etapa",
                     data,
                     backgroundColor: buildMonochromePalette(codes.length),
                     borderColor: "#ffffff",
@@ -1290,10 +1393,6 @@ function buildStageEvolutionDoughnutMonochromeChart(model) {
                 },
                 tooltip: {
                     callbacks: {
-                        title: (ctx) => {
-                            const code = String(codes[ctx[0].dataIndex] || "");
-                            return `${ctx[0].label} - ${model.codeLabelMap[code] || "Nao Informado"}`;
-                        },
                         label: (ctx) => ` ${formatNumber(ctx.raw)} processos`,
                     },
                 },
@@ -1305,6 +1404,7 @@ function buildStageEvolutionDoughnutMonochromeChart(model) {
 
 function buildStageEvolutionBarMonochromeChart(model) {
     const codes = model.orderedCodesById.length > 0 ? model.orderedCodesById : ["Sem codigo"];
+    const labels = codes.map((code) => model.codeLabelMap[code] || `Etapa ${code}`);
     const totals = codes.map((code) => {
         const series = model.byCodeSeries[code] || [];
         return series.reduce((sum, value) => sum + Number(value || 0), 0);
@@ -1324,10 +1424,10 @@ function buildStageEvolutionBarMonochromeChart(model) {
     createChart("chart-stage-evolution-bar-mono", {
         type: "bar",
         data: {
-            labels: codes.map((code) => `Status ${code}`),
+            labels,
             datasets: [
                 {
-                    label: "Total por status",
+                    label: "Total por Etapa",
                     data: totals,
                     backgroundColor,
                     borderRadius: 4,
@@ -1346,10 +1446,6 @@ function buildStageEvolutionBarMonochromeChart(model) {
                 },
                 tooltip: {
                     callbacks: {
-                        title: (ctx) => {
-                            const code = String(codes[ctx[0].dataIndex] || "");
-                            return `${ctx[0].label} - ${model.codeLabelMap[code] || "Nao Informado"}`;
-                        },
                         label: (ctx) => ` ${formatNumber(ctx.raw)} processos`,
                     },
                 },
@@ -1369,213 +1465,11 @@ function buildStageEvolutionBarMonochromeChart(model) {
                     grid: { display: false },
                     title: {
                         display: true,
-                        text: "Status em ordem de ID",
+                        text: "Etapa",
                     },
                 },
             },
         },
-    });
-}
-
-function buildTemporalStatusHeatmapChart(model, chartId, config = {}) {
-    const {
-        label = "Intensidade",
-        gamma = 0.7,
-        zeroAlpha = 0.2,
-        nonZeroAlpha = 0.95,
-        pointStyle = "rectRounded",
-        radiusMode = "fixed",
-    } = config;
-
-    const xCodes = model.orderedCodesById.length > 0 ? model.orderedCodesById : ["Sem codigo"];
-    const yPeriods = model.labels.length > 0 ? model.labels : ["Sem periodo"];
-    const statusTotals = xCodes.map((code) => {
-        const series = model.byCodeSeries[code] || [];
-        return series.reduce((sum, value) => sum + Number(value || 0), 0);
-    });
-
-    const matrixData = [];
-    yPeriods.forEach((_, periodIndex) => {
-        xCodes.forEach((code, statusIndex) => {
-            const value = Number(model.byCodeSeries[code]?.[periodIndex] || 0);
-            matrixData.push({
-                x: statusIndex,
-                y: periodIndex,
-                value,
-                stageCode: code,
-                period: yPeriods[periodIndex],
-                statusTotal: statusTotals[statusIndex],
-            });
-        });
-    });
-
-    const maxValue = matrixData.reduce((max, item) => Math.max(max, item.value), 0);
-
-    const getColorByValue = (value) => {
-        const safeMax = Math.max(Number(maxValue || 0), 1);
-        const safeValue = Math.max(Number(value || 0), 0);
-        if (safeValue === 0) {
-            return `rgba(214, 228, 247, ${zeroAlpha})`;
-        }
-
-        const ratio = Math.min(1, safeValue / safeMax);
-        const normalized = Math.pow(ratio, gamma);
-        const baseColor = interpolateMonochromeColor(normalized).replace("rgb(", "").replace(")", "");
-        return `rgba(${baseColor}, ${nonZeroAlpha})`;
-    };
-
-    createChart(chartId, {
-        type: "bubble",
-        data: {
-            datasets: [
-                {
-                    label,
-                    data: matrixData.map((item) => ({
-                        x: item.x,
-                        y: item.y,
-                        value: item.value,
-                        stageCode: item.stageCode,
-                        period: item.period,
-                        statusTotal: item.statusTotal,
-                    })),
-                    backgroundColor: (ctx) => getColorByValue(ctx.raw?.value),
-                    borderColor: "rgba(255, 255, 255, 0.7)",
-                    borderWidth: 1,
-                    hoverBorderColor: "#1f2a44",
-                    hoverBorderWidth: 1,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                    ...legendHoverCursor,
-                },
-                tooltip: {
-                    callbacks: {
-                        title: (ctx) => {
-                            const raw = ctx[0].raw;
-                            return raw?.period || "Sem periodo";
-                        },
-                        label: (ctx) => {
-                            const stageCode = String(ctx.raw?.stageCode || "Sem codigo");
-                            const stageLabel = model.codeLabelMap[stageCode] || "Nao Informado";
-                            return ` Status ${stageCode} - ${stageLabel}: ${formatNumber(ctx.raw?.value || 0)} processos`;
-                        },
-                        footer: (ctx) => `Total no status: ${formatNumber(ctx[0].raw?.statusTotal || 0)}`,
-                    },
-                },
-            },
-            elements: {
-                point: {
-                    pointStyle,
-                    radius: (ctx) => {
-                        const chartArea = ctx.chart.chartArea;
-                        if (!chartArea) {
-                            return 7;
-                        }
-
-                        const width = chartArea.right - chartArea.left;
-                        const height = chartArea.bottom - chartArea.top;
-                        const cellWidth = width / Math.max(xCodes.length, 1);
-                        const cellHeight = height / Math.max(yPeriods.length, 1);
-                        const base = Math.max(3, Math.min(cellWidth, cellHeight) / 2 - 2);
-                        if (radiusMode === "value") {
-                            const ratio = maxValue > 0 ? Number(ctx.raw?.value || 0) / maxValue : 0;
-                            return Math.max(2, base * (0.45 + ratio * 0.55));
-                        }
-
-                        if (radiusMode === "compact") {
-                            return Math.max(2, base * 0.75);
-                        }
-
-                        return base;
-                    },
-                },
-            },
-            scales: {
-                x: {
-                    type: "linear",
-                    min: -0.5,
-                    max: Math.max(xCodes.length - 0.5, 0.5),
-                    ticks: {
-                        color: "#495057",
-                        stepSize: 1,
-                        callback: (value) => {
-                            const index = Number(value);
-                            if (!Number.isInteger(index) || index < 0 || index >= xCodes.length) {
-                                return "";
-                            }
-                            const code = xCodes[index];
-                            return `S${code} (${formatNumber(statusTotals[index] || 0)})`;
-                        },
-                    },
-                    grid: { color: "rgba(116, 120, 141, 0.1)" },
-                    title: {
-                        display: true,
-                        text: "Status (ID) e volume total",
-                    },
-                },
-                y: {
-                    type: "linear",
-                    min: -0.5,
-                    max: Math.max(yPeriods.length - 0.5, 0.5),
-                    reverse: true,
-                    ticks: {
-                        color: "#6c757d",
-                        stepSize: 1,
-                        callback: (value) => {
-                            const index = Number(value);
-                            if (!Number.isInteger(index) || index < 0 || index >= yPeriods.length) {
-                                return "";
-                            }
-                            return yPeriods[index];
-                        },
-                    },
-                    grid: { color: "rgba(116, 120, 141, 0.1)" },
-                    title: {
-                        display: true,
-                        text: "Eixo temporal",
-                    },
-                },
-            },
-        },
-    });
-}
-
-function buildStageEvolutionTemporalStatusMonoChart(model) {
-    buildTemporalStatusHeatmapChart(model, "chart-stage-evolution-status-temporal-mono", {
-        label: "Monocromatico balanceado",
-        gamma: 0.75,
-        zeroAlpha: 0.16,
-        nonZeroAlpha: 0.92,
-        pointStyle: "rectRounded",
-        radiusMode: "fixed",
-    });
-}
-
-function buildStageEvolutionTemporalStatusMonoDenseChart(model) {
-    buildTemporalStatusHeatmapChart(model, "chart-stage-evolution-status-temporal-dense", {
-        label: "Monocromatico denso",
-        gamma: 0.6,
-        zeroAlpha: 0.22,
-        nonZeroAlpha: 0.97,
-        pointStyle: "rect",
-        radiusMode: "value",
-    });
-}
-
-function buildStageEvolutionTemporalStatusMonoSoftChart(model) {
-    buildTemporalStatusHeatmapChart(model, "chart-stage-evolution-status-temporal-soft", {
-        label: "Monocromatico suave",
-        gamma: 0.9,
-        zeroAlpha: 0.14,
-        nonZeroAlpha: 0.88,
-        pointStyle: "rectRounded",
-        radiusMode: "compact",
     });
 }
 
@@ -1750,9 +1644,6 @@ function buildStageEvolutionChart() {
     buildStageEvolutionTotalGradientChart(model);
     buildStageEvolutionDoughnutMonochromeChart(model);
     buildStageEvolutionBarMonochromeChart(model);
-    buildStageEvolutionTemporalStatusMonoChart(model);
-    buildStageEvolutionTemporalStatusMonoDenseChart(model);
-    buildStageEvolutionTemporalStatusMonoSoftChart(model);
 }
 
 export function setMacroMetricValues(filteredRows) {
@@ -1778,6 +1669,14 @@ export function setMacroMetricValues(filteredRows) {
     setMetricTextMany(
         ["m-consolidado-minor-orgao"],
         minorOrgao ? `${minorOrgao[0]} (${formatNumber(minorOrgao[1])})` : "Nao identificado"
+    );
+
+    const gerenciaCounts = aggregateCountBy(filteredRows, (row) => String(row.gerencia_nome || "Sem gerencia"));
+    const orderedGerencias = Object.entries(gerenciaCounts).sort((a, b) => b[1] - a[1]);
+    const topGerencia = orderedGerencias[0];
+    setMetricTextMany(
+        ["m-consolidado-top-gerencia"],
+        topGerencia ? `${topGerencia[0]} (${formatNumber(topGerencia[1])})` : "Nao identificado"
     );
 
 

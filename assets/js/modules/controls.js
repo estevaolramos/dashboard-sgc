@@ -226,6 +226,13 @@ function getCsvRowsForChart(chartId) {
         }));
     }
 
+    if (chartId === "chart-gerencias") {
+        return dashboardState.processed.sortedGerencia.map((row) => ({
+            gerencia_nome: String(row.gerencia_nome || "Sem gerencia"),
+            total_processos: Number(row.total_processos || 0),
+        }));
+    }
+
     if (chartId === "chart-temporal-orgaos") {
         const temporalBuckets = buildTemporalBuckets(dashboardState.macro.allRows, temporalFilters.granularity);
         const rows = [];
@@ -334,9 +341,6 @@ function getCsvRowsForChart(chartId) {
         "chart-stage-evolution-total-gradient",
         "chart-stage-evolution-doughnut-mono",
         "chart-stage-evolution-bar-mono",
-        "chart-stage-evolution-status-temporal-mono",
-        "chart-stage-evolution-status-temporal-dense",
-        "chart-stage-evolution-status-temporal-soft",
     ].includes(chartId)) {
         const normalizedRows = normalizeEvolutionRows(dashboardState.macro.evolutionRows);
         const filteredRows = applyEvolutionFilters(normalizedRows, macroFilters);
@@ -495,6 +499,14 @@ function getCsvRowsForTab(tabId) {
 
         dashboardState.processed.sortedOrg.forEach((row) => {
             rows.push({ bloco: "por_orgao", referencia: row.sigla, valor_1: row.nome, valor_2: Number(row.total_processos || 0) });
+        });
+
+        dashboardState.processed.sortedGerencia.forEach((row) => {
+            rows.push({
+                bloco: "por_gerencia",
+                referencia: String(row.gerencia_nome || "Sem gerencia"),
+                valor_1: Number(row.total_processos || 0),
+            });
         });
 
         dashboardState.processed.sortedTempo.forEach((row) => {
