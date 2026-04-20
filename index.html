@@ -1,503 +1,1031 @@
 <!doctype html>
 <html lang="pt-BR">
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard SGC | Processos</title>
-  <meta name="description"
-    content="Dashboard de processos SGC com indicadores por orgao, stage, tempo medio e espelho de gestao." />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard SGC | Processos</title>
+    <meta name="description"
+      content="Dashboard de processos SGC com indicadores por orgao, stage, tempo medio e espelho de gestao." />
 
-  <link rel="shortcut icon" href="./assets/images/favicon.ico" />
-  <link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="./assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-  <link href="./assets/css/app.min.css" rel="stylesheet" type="text/css" />
-  <link href="./assets/css/index.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" />
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet"
+      type="text/css" />
+    <link href="./assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="./assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="./assets/css/index.css" rel="stylesheet" type="text/css" />
 
-  <script src="./assets/js/plugin.js"></script>
-</head>
+    <script src="./assets/js/plugin.js"></script>
+  </head>
 
-<body data-sidebar="light">
-  <div id="layout-wrapper">
-    <header id="page-topbar">
-      <div class="navbar-header">
-        <div class="d-flex align-items-center">
-          <div class="navbar-brand-box">
-            <a href="index.html" class="logo logo-dark">
-              <span class="logo-sm"><img src="./assets/images/logo-dark.svg" alt="" height="22" /></span>
-              <span class="logo-lg"><img src="./assets/images/sgc_icon_dark.png" alt="" height="30" /></span>
-            </a>
-            <a href="index.html" class="logo logo-light">
-              <span class="logo-sm"><img src="./assets/images/logo-light.svg" alt="" height="22" /></span>
-              <span class="logo-lg"><img src="./assets/images/sgc_icon_light.png" alt="Logo do SGC"
-                  height="30" /></span>
-            </a>
+  <body data-sidebar="light">
+    <div id="layout-wrapper">
+      <header id="page-topbar">
+        <div class="navbar-header">
+          <div class="d-flex align-items-center">
+            <div class="navbar-brand-box">
+              <a href="index.html" class="logo logo-dark">
+                <span class="logo-sm"><img src="./assets/images/logo-dark.svg"
+                    alt height="22" /></span>
+                <span class="logo-lg"><img
+                    src="./assets/images/sgc_icon_dark.png" alt
+                    height="30" /></span>
+              </a>
+              <a href="index.html" class="logo logo-light">
+                <span class="logo-sm"><img src="./assets/images/logo-light.svg"
+                    alt height="22" /></span>
+                <span class="logo-lg"><img
+                    src="./assets/images/sgc_icon_light.png" alt="Logo do SGC"
+                    height="30" /></span>
+              </a>
+            </div>
+            <button
+              class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+              id="vertical-menu-btn" type="button">
+              <i class="fa fa-fw fa-bars"></i>
+            </button>
           </div>
-          <button class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn" type="button">
-            <i class="fa fa-fw fa-bars"></i>
-          </button>
+          <div class="d-flex align-items-center">
+            <span class="text-muted d-none d-md-inline">Painel de acompanhamento
+              SGC</span>
+          </div>
         </div>
-        <div class="d-flex align-items-center">
-          <span class="text-muted d-none d-md-inline">Painel de acompanhamento SGC</span>
+      </header>
+
+      <div class="vertical-menu">
+        <div class="h-100" data-simplebar>
+          <div id="sidebar-menu">
+            <ul class="metismenu list-unstyled" id="side-menu">
+              <li class="menu-title">Painel SGC</li>
+              <li><a class="waves-effect" href="#sec-consolidado"><i
+                    class="bx bx-grid-alt"></i><span>Painel
+                    Consolidado</span></a></li>
+              <li><a class="waves-effect" href="#sec-volume"><i
+                    class="bx bx-bar-chart-square"></i><span>Volume e
+                    Evolucao</span></a></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </header>
 
-    <div class="vertical-menu">
-      <div class="h-100" data-simplebar>
-        <div id="sidebar-menu">
-          <ul class="metismenu list-unstyled" id="side-menu">
-            <li class="menu-title">Painel SGC</li>
-            <li><a class="waves-effect" href="#sec-resumo"><i class="bx bx-grid-alt"></i><span>Resumo
-                  Executivo</span></a></li>
-            <li><a class="waves-effect" href="#sec-volume"><i class="bx bx-bar-chart-square"></i><span>Volume e
-                  Evolucao</span></a></li>
-            <li><a class="waves-effect" href="#sec-tempo"><i class="bx bx-time-five"></i><span>Tempo de
-                  Processos</span></a></li>
-            <li><a class="waves-effect" href="#sec-espelho"><i class="bx bx-spreadsheet"></i><span>Gestao Macro
-                  (Espelho)</span></a></li>
-            <li><a class="waves-effect" href="#sec-evolucao"><i class="bx bx-spreadsheet"></i><span> Evolução dos
-                  status</span></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="main-content">
-      <div class="page-content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12">
-              <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Painel Administrativo de Processos</h4>
-                <div class="page-title-right">
-                  <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item">SGC</li>
-                    <li class="breadcrumb-item active">Admin Dashboard</li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-              <div class="card insight-card">
-                <div class="card-body">
-                  <h5 class="card-title mb-3"><i class="bx bx-bot me-2"></i>Insights da IA</h5>
-                  <div id="ai-content" class="insight-body">Carregando analise...</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-              <div class="export-toolbar">
-                <div>
-                  <h6 class="mb-0">Exportacao do painel completo</h6>
-                  <small class="text-muted">Baixe o dashboard consolidado em PNG, CSV ou PDF.</small>
-                </div>
-                <div class="btn-group">
-                  <button class="btn btn-outline-primary btn-sm" id="btn-export-png" type="button">Exportar PNG</button>
-                  <button class="btn btn-outline-success btn-sm" id="btn-export-csv" type="button">Exportar CSV</button>
-                  <button class="btn btn-outline-danger btn-sm" id="btn-export-pdf" type="button">Exportar PDF</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card macro-section-card mb-3" id="sec-resumo">
-            <div class="card-header">
-              <div class="section-title">Resumo Executivo</div>
-              <div class="section-subtitle">Indicadores consolidados de volume, fluxo e desempenho.</div>
-            </div>
-            <div class="card-body">
-              <div class="row g-3 mb-3">
-                <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Total de processos</p>
-                      <div class="metric-value" id="m-total">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Orgãos ativos</p>
-                      <div class="metric-value" id="m-orgaos">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Status ativos</p>
-                      <div class="metric-value" id="m-stages">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Tempo medio geral</p>
-                      <div class="metric-value" id="m-tempo-medio">-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row g-3">
-                <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Maior demandante</p>
-                      <div class="metric-value metric-subtle" id="m-top">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Status com mais processos</p>
-                      <div class="metric-value metric-subtle" id="m-top-stage">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Processos finalizados</p>
-                      <div class="metric-value" id="m-finalizados">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Modalidade predominante</p>
-                      <div class="metric-value metric-subtle" id="m-macro-modality">-</div>
-                    </div>
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="page-title-box d-sm-flex align-items-center justify-content-between">
+                  <h4 class="mb-sm-0">Painel Administrativo de Processos</h4>
+                  <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item">SGC</li>
+                      <li class="breadcrumb-item active">Admin Dashboard</li>
+                    </ol>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="card macro-section-card mb-3" id="sec-volume">
-            <div class="card-header">
-              <div class="section-title">Volume e Evolucao Temporal</div>
-              <div class="section-subtitle">Visão de demanda por orgao e evolucao temporal dos processos.</div>
+            <div class="row">
+              <div class="col-12">
+                <div class="card insight-card">
+                  <div class="card-body">
+                    <h5 class="card-title mb-3" id="text-insights-title"><i
+                        class="bx bx-bot me-2"></i>Insights da IA</h5>
+                    <div id="ai-content" class="insight-body">Carregando
+                      analise...</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-              <div class="row g-3">
-                <div class="col-12">
-                  <div class="macro-chart-panel">
-                    <div class="chart-panel-header">
-                      <div class="macro-chart-title mb-0">Distribuicao de processos por orgao (top 15)</div>
-                      <div class="chart-panel-actions">
-                        <button class="btn btn-light btn-sm chart-tool-btn" data-action="info"
-                          data-chart-id="chart-orgaos" type="button">Info</button>
-                        <button class="btn btn-outline-primary btn-sm chart-tool-btn" data-action="png"
-                          data-chart-id="chart-orgaos" type="button">PNG</button>
-                        <button class="btn btn-outline-success btn-sm chart-tool-btn" data-action="csv"
-                          data-chart-id="chart-orgaos" type="button">CSV</button>
-                        <button class="btn btn-outline-danger btn-sm chart-tool-btn" data-action="pdf"
-                          data-chart-id="chart-orgaos" type="button">PDF</button>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="export-toolbar">
+                  <div>
+                    <h6 class="mb-0" id="text-export-title">Exportacao do painel
+                      completo</h6>
+                    <small class="text-muted" id="text-export-description">Baixe
+                      o dashboard consolidado em PNG, CSV ou PDF.</small>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn btn-outline-primary btn-sm"
+                      id="btn-export-png" type="button">Exportar PNG</button>
+                    <button class="btn btn-outline-success btn-sm"
+                      id="btn-export-csv" type="button">Exportar CSV</button>
+                    <button class="btn btn-outline-danger btn-sm"
+                      id="btn-export-pdf" type="button">Exportar PDF</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card macro-section-card mb-3" id="sec-consolidado">
+              <div class="card-header">
+                <div class="section-title" id="text-sec-espelho-title">Painel
+                  Consolidado</div>
+                <div class="section-subtitle"
+                  id="text-sec-espelho-description">Indicadores consolidados,
+                  analise operacional com filtros e inferencias de risco.</div>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <h4 class="card-title mb-3">Indicadores consolidados</h4>
+                  <div class="row g-3">
+                    <div class="col-xl-4 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Total de
+                            processos que passaram na fase de cadastramento</p>
+                          <div class="metric-value"
+                            id="m-consolidado-total">-</div>
+                        </div>
                       </div>
                     </div>
-                    <div id="legend-orgaos" class="legend-wrap"></div>
-                    <div class="chart-box chart-box-lg"><canvas id="chart-orgaos"></canvas></div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="macro-chart-panel">
-                    <div class="chart-panel-header">
-                      <div class="macro-chart-title mb-0">Evolucão temporal de processos por orgão</div>
-                      <div class="chart-panel-actions">
-                        <label class="form-label mb-0" for="filter-temporal-group">Granularidade</label>
-                        <select id="filter-temporal-group" class="form-select form-select-sm">
-                          <option value="day">Por dia existente</option>
-                          <option value="week">Semanal</option>
-                          <option value="month">Mensal</option>
-                          <option value="total">Total</option>
-                        </select>
-                        <label class="form-label mb-0" for="filter-temporal-start">Inicio</label>
-                        <input id="filter-temporal-start" type="date" class="form-control form-control-sm" />
-                        <label class="form-label mb-0" for="filter-temporal-end">Fim</label>
-                        <input id="filter-temporal-end" type="date" class="form-control form-control-sm" />
-                        <button class="btn btn-outline-secondary btn-sm chart-tool-btn" data-action="fullscreen"
-                          data-chart-id="chart-temporal-orgaos" type="button">Tela cheia</button>
-                        <button class="btn btn-light btn-sm chart-tool-btn" data-action="info"
-                          data-chart-id="chart-temporal-orgaos" type="button">Info</button>
-                        <button class="btn btn-outline-primary btn-sm chart-tool-btn" data-action="png"
-                          data-chart-id="chart-temporal-orgaos" type="button">PNG</button>
-                        <button class="btn btn-outline-success btn-sm chart-tool-btn" data-action="csv"
-                          data-chart-id="chart-temporal-orgaos" type="button">CSV</button>
-                        <button class="btn btn-outline-danger btn-sm chart-tool-btn" data-action="pdf"
-                          data-chart-id="chart-temporal-orgaos" type="button">PDF</button>
+                    <div class="col-xl-4 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Processos
+                            concluídos</p>
+                          <div class="metric-value"
+                            id="m-consolidado-finalizados">-</div>
+                        </div>
                       </div>
                     </div>
-                    <small class="text-muted d-block mb-2">Eixo Y temporal e eixo X com quantidade de processos,
-                      empilhado por orgao. No modo diario, exibe os ultimos 31 dias.</small>
-                    <div class="chart-scroll-y" id="temporal-chart-scroll">
-                      <div class="chart-box chart-box-dynamic" id="temporal-chart-box"><canvas
-                          id="chart-temporal-orgaos"></canvas></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card macro-section-card mb-3" id="sec-tempo">
-            <div class="card-header">
-              <div class="section-title">Tempo de Processos</div>
-              <div class="section-subtitle">Comparativo de tempos medios e extremos por orgao.</div>
-            </div>
-            <div class="card-body">
-              <div class="row g-3 mb-3">
-                <div class="col-lg-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Processo mais rapido</p>
-                      <div class="metric-value metric-subtle" id="m-mais-rapido">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Processo mais lento</p>
-                      <div class="metric-value metric-subtle" id="m-mais-lento">-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="macro-chart-panel">
-                <div class="chart-panel-header">
-                  <div class="macro-chart-title mb-0">Tempo médio de processo por orgao (dias, top 15)</div>
-                  <div class="chart-panel-actions">
-                    <button class="btn btn-light btn-sm chart-tool-btn" data-action="info" data-chart-id="chart-tempo"
-                      type="button">Info</button>
-                    <button class="btn btn-outline-primary btn-sm chart-tool-btn" data-action="png"
-                      data-chart-id="chart-tempo" type="button">PNG</button>
-                    <button class="btn btn-outline-success btn-sm chart-tool-btn" data-action="csv"
-                      data-chart-id="chart-tempo" type="button">CSV</button>
-                    <button class="btn btn-outline-danger btn-sm chart-tool-btn" data-action="pdf"
-                      data-chart-id="chart-tempo" type="button">PDF</button>
-                  </div>
-                </div>
-                <div id="legend-tempo" class="legend-wrap"></div>
-                <div class="chart-box chart-box-lg"><canvas id="chart-tempo"></canvas></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card macro-section-card" id="sec-espelho">
-            <div class="card-header">
-              <div class="section-title">Gestao Macro (Espelho)</div>
-              <div class="section-subtitle">Analise operacional com filtros e inferencias de risco.</div>
-            </div>
-            <div class="card-body">
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-                    <h4 class="card-title mb-0">Filtros da Gestao Macro</h4>
-                    <button class="btn btn-light btn-sm" type="button" id="btn-macro-clear">Limpar filtros</button>
-                  </div>
-                  <div class="filters-grid">
-                    <div><label class="form-label mb-1" for="filter-macro-orgao">Orgao</label><select
-                        id="filter-macro-orgao" class="form-select form-select-sm"></select></div>
-                    <div><label class="form-label mb-1" for="filter-macro-priority">Prioridade</label><select
-                        id="filter-macro-priority" class="form-select form-select-sm">
-                        <option value="all">Todas</option>
-                        <option value="1">Prioritario</option>
-                        <option value="0">Nao prioritario</option>
-                      </select></div>
-                    <div><label class="form-label mb-1" for="filter-macro-modality">Modalidade</label><select
-                        id="filter-macro-modality" class="form-select form-select-sm"></select></div>
-                    <div><label class="form-label mb-1" for="filter-macro-stage">Status</label><select
-                        id="filter-macro-stage" class="form-select form-select-sm"></select></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row g-3 mb-3">
-                <div class="col-xl-4 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Total de Processos Mapeados</p>
-                      <div class="metric-value" id="m-macro-total">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Processos em Pregao Eletronico</p>
-                      <div class="metric-value" id="m-macro-pregao">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 col-md-12">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Taxa de prioridade</p>
-                      <div class="metric-value" id="m-macro-priority-rate">-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row g-3 mb-3">
-                <div class="col-xl-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Taxa de processos atrasados</p>
-                      <div class="metric-value" id="m-macro-overdue-rate">-</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-6">
-                  <div class="card mini-stats-wid h-100">
-                    <div class="card-body">
-                      <p class="text-muted fw-medium mb-2">Orgao critico (maior atraso)</p>
-                      <div class="metric-value metric-subtle" id="m-macro-critical-orgao">-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row g-3">
-                <div class="col-12">
-                  <div class="macro-chart-panel">
-                    <div class="chart-panel-header">
-                      <div class="macro-chart-title mb-0">Modalidade x Forum de Julgamento por Risco de Prazo</div>
-                      <div class="chart-panel-actions"><button class="btn btn-light btn-sm chart-tool-btn"
-                          data-action="info" data-chart-id="chart-macro-mod-jud-risk" type="button">Info</button><button
-                          class="btn btn-outline-primary btn-sm chart-tool-btn" data-action="png"
-                          data-chart-id="chart-macro-mod-jud-risk" type="button">PNG</button><button
-                          class="btn btn-outline-success btn-sm chart-tool-btn" data-action="csv"
-                          data-chart-id="chart-macro-mod-jud-risk" type="button">CSV</button><button
-                          class="btn btn-outline-danger btn-sm chart-tool-btn" data-action="pdf"
-                          data-chart-id="chart-macro-mod-jud-risk" type="button">PDF</button></div>
-                    </div><small class="text-muted d-block mb-2">Consolidacao dos dois graficos em um unico painel, com
-                      empilhamento por status de risco.</small>
-                    <div class="chart-box chart-box-panel-lg"><canvas id="chart-macro-mod-jud-risk"></canvas></div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="macro-chart-panel">
-                    <div class="chart-panel-header">
-                      <div class="macro-chart-title mb-0">Concentracao por Status x Prioridade</div>
-                      <div class="chart-panel-actions"><button class="btn btn-light btn-sm chart-tool-btn"
-                          data-action="info" data-chart-id="chart-macro-priority-stage"
-                          type="button">Info</button><button class="btn btn-outline-primary btn-sm chart-tool-btn"
-                          data-action="png" data-chart-id="chart-macro-priority-stage" type="button">PNG</button><button
-                          class="btn btn-outline-success btn-sm chart-tool-btn" data-action="csv"
-                          data-chart-id="chart-macro-priority-stage" type="button">CSV</button><button
-                          class="btn btn-outline-danger btn-sm chart-tool-btn" data-action="pdf"
-                          data-chart-id="chart-macro-priority-stage" type="button">PDF</button></div>
-                    </div>
-                    <div class="chart-box chart-box-panel"><canvas id="chart-macro-priority-stage"></canvas></div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="macro-chart-panel">
-                    <div class="chart-panel-header">
-                      <div class="macro-chart-title mb-0">Risco de Prazo por Orgão (No prazo / Alerta / Atrasado)</div>
-                      <div class="chart-panel-actions"><button class="btn btn-light btn-sm chart-tool-btn"
-                          data-action="info" data-chart-id="chart-macro-sla-risk" type="button">Info</button><button
-                          class="btn btn-outline-primary btn-sm chart-tool-btn" data-action="png"
-                          data-chart-id="chart-macro-sla-risk" type="button">PNG</button><button
-                          class="btn btn-outline-success btn-sm chart-tool-btn" data-action="csv"
-                          data-chart-id="chart-macro-sla-risk" type="button">CSV</button><button
-                          class="btn btn-outline-danger btn-sm chart-tool-btn" data-action="pdf"
-                          data-chart-id="chart-macro-sla-risk" type="button">PDF</button></div>
-                    </div>
-                    <div class="chart-box chart-box-panel-lg"><canvas id="chart-macro-sla-risk"></canvas></div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="row g-3 mb-3" id="sec-evolucao">
-                <!-- Gráfico de evolucao de processos -->
-                <div class="col-12">
-                  <div class="macro-chart-panel">
-                    <div class="chart-panel-header">
-                      <div class="macro-chart-title mb-0">Evolução diária dos processos por status nos últimos 30 dias
+                    <div class="col-xl-4 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Tempo médio de
+                            conclusão dos processos</p>
+                          <div class="metric-value"
+                            id="m-consolidado-tempo-medio">-</div>
+                        </div>
                       </div>
-                      <div class="chart-panel-actions"><button class="btn btn-light btn-sm chart-tool-btn"
-                          data-action="info" data-chart-id="chart-stage-evolution" type="button">Info</button><button
-                          class="btn btn-outline-primary btn-sm chart-tool-btn" data-action="png"
-                          data-chart-id="chart-stage-evolution" type="button">PNG</button><button
-                          class="btn btn-outline-success btn-sm chart-tool-btn" data-action="csv"
-                          data-chart-id="chart-stage-evolution" type="button">CSV</button><button
-                          class="btn btn-outline-danger btn-sm chart-tool-btn" data-action="pdf"
-                          data-chart-id="chart-stage-evolution" type="button">PDF</button></div>
                     </div>
-                    <div class="metrics" id="metrics"></div>
-                    <div class="filter-row" id="filters"></div>
-                    <div class="legend" id="legend"></div>
-                    <div class="chart-box chart-box-panel-lg"><canvas id="chart-stage-evolution"></canvas></div>
+                    <div class="col-xl-3 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Maior
+                            demandante</p>
+                          <div class="metric-value metric-subtle"
+                            id="m-consolidado-top-orgao">-</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Menor
+                            demandante</p>
+                          <div class="metric-value metric-subtle"
+                            id="m-consolidado-minor-orgao">-</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Status com mais
+                            processos</p>
+                          <div class="metric-value metric-subtle"
+                            id="m-consolidado-top-stage">-</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Modalidade
+                            predominante</p>
+                          <div class="metric-value metric-subtle"
+                            id="m-consolidado-top-modality">-</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                <div class="mb-3">
+                  <h4 class="card-title mb-3">Operacional e risco</h4>
+                  <div class="row g-3">
+                    <div class="col-xl-4 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Taxa de
+                            prioridade</p>
+                          <div class="metric-value"
+                            id="m-operacional-priority-rate">-</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Taxa de processos
+                            atrasados</p>
+                          <div class="metric-value"
+                            id="m-operacional-overdue-rate">-</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                      <div class="card mini-stats-wid h-100">
+                        <div class="card-body">
+                          <p class="text-muted fw-medium mb-2">Orgão crítico
+                            (maior atraso)</p>
+                          <div class="metric-value metric-subtle"
+                            id="m-operacional-critical-orgao">-</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div
+                      class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                      <h4 class="card-title mb-0">Análise com filtros</h4>
+                      <button class="btn btn-light btn-sm" type="button"
+                        id="btn-macro-clear">Limpar filtros</button>
+                    </div>
+                    <div class="filters-grid">
+                      <div><label class="form-label mb-1"
+                          for="filter-macro-orgao">Orgão /
+                          Autarquias</label><select
+                          id="filter-macro-orgao"
+                          class="form-select form-select-sm"></select></div>
+                      <div><label class="form-label mb-1"
+                          for="filter-macro-priority">Prioridade</label><select
+                          id="filter-macro-priority"
+                          class="form-select form-select-sm">
+                          <option value="all">Todas</option>
+                          <option value="1">Prioritario</option>
+                          <option value="0">Nao prioritario</option>
+                        </select></div>
+                      <div><label class="form-label mb-1"
+                          for="filter-macro-modality">Modalidade</label><select
+                          id="filter-macro-modality"
+                          class="form-select form-select-sm"></select></div>
+                      <div><label class="form-label mb-1"
+                          for="filter-macro-stage">Status</label><select
+                          id="filter-macro-stage"
+                          class="form-select form-select-sm"></select></div>
+                      <div><label class="form-label mb-1"
+                          for="filter-macro-overdue">Recorte de atraso</label><select
+                          id="filter-macro-overdue"
+                          class="form-select form-select-sm">
+                          <option value="only">Somente atrasados</option>
+                          <option value="all" selected>Todos os processos</option>
+                        </select></div>
+                    </div>
+                   
+                  </div>
+                </div>
+
+                <div class="row g-3">
+
+                  <div class="col-xl-6 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-macro-sla-risk-title">Carregando
+                          titulo...
+                        </div>
+                        <div class="chart-panel-actions"><button
+                            class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-macro-sla-risk"
+                            type="button">Info</button><button
+                            class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-macro-sla-risk"
+                            type="button">PNG</button><button
+                            class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-macro-sla-risk"
+                            type="button">CSV</button><button
+                            class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-macro-sla-risk"
+                            type="button">PDF</button></div>
+                      </div>
+                      <div class="chart-box chart-box-lg"><canvas
+                          id="chart-macro-sla-risk" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-orgaos-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-orgaos"
+                            type="button">Info</button>
+                          <button
+                            class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-orgaos"
+                            type="button">PNG</button>
+                          <button
+                            class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-orgaos"
+                            type="button">CSV</button>
+                          <button
+                            class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-orgaos"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div id="legend-orgaos" class="legend-wrap"></div>
+                      <div class="chart-box chart-box-lg"><canvas
+                          id="chart-orgaos" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-xl-6">
+                    <div class="macro-chart-panel" id="sec-evolucao">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-macro-mod-jud-risk-title">Carregando
+                          titulo...
+                        </div>
+                        <div class="chart-panel-actions"><button
+                            class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-macro-mod-jud-risk"
+                            type="button">Info</button><button
+                            class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-macro-mod-jud-risk"
+                            type="button">PNG</button><button
+                            class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-macro-mod-jud-risk"
+                            type="button">CSV</button><button
+                            class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-macro-mod-jud-risk"
+                            type="button">PDF</button></div>
+                      </div><small class="text-muted d-block mb-2"
+                        id="text-chart-macro-mod-jud-risk-description">Carregando
+                        descricao...</small>
+                      <div class="chart-box chart-box-lg"><canvas
+                          id="chart-macro-mod-jud-risk" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-xl-6">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-macro-priority-stage-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions"><button
+                            class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-macro-priority-stage"
+                            type="button">Info</button><button
+                            class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-macro-priority-stage"
+                            type="button">PNG</button><button
+                            class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-macro-priority-stage"
+                            type="button">CSV</button><button
+                            class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-macro-priority-stage"
+                            type="button">PDF</button></div>
+                      </div>
+                      <div class="chart-box chart-box-lg"><canvas
+                          id="chart-macro-priority-stage" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="card macro-section-card mb-3" id="sec-volume">
+              <div class="card-header">
+                <div class="section-title" id="text-sec-volume-title">Histórico</div>
+                <div class="section-subtitle"
+                  id="text-sec-volume-description">Visão de demanda por órgão e
+                  evolução temporal dos processos.</div>
+              </div>
+              <div class="card-body">
+                <div class="row g-3 mb-3">
+                  <div class="col-lg-6">
+                    <div class="card mini-stats-wid h-100">
+                      <div class="card-body">
+                        <p class="text-muted fw-medium mb-2">Processo mais
+                          rapido</p>
+                        <div class="metric-value metric-subtle"
+                          id="m-mais-rapido">-</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="card mini-stats-wid h-100">
+                      <div class="card-body">
+                        <p class="text-muted fw-medium mb-2">Processo mais
+                          lento</p>
+                        <div class="metric-value metric-subtle"
+                          id="m-mais-lento">-</div>
+                      </div>
+                    </div>
+                  </div>
+                   <div class="chart-panel-actions mt-3">
+                      <label class="form-label mb-0 card-title"
+                        for="filter-temporal-group">Recorte Temporal (Últimos 30
+                        dias, Semanal, Mensal e Total)</label>
+                      <select id="filter-temporal-group"
+                        class="form-select form-select-sm">
+                        <option value="day">Por dia</option>
+                        <option value="week">Semanal</option>
+                        <option value="month">Mensal</option>
+                        <option value="total">Total</option>
+                      </select>
+                      <label class="form-label mb-0"
+                        for="filter-temporal-start">Inicio</label>
+                      <input id="filter-temporal-start" type="date"
+                        class="form-control form-control-sm" />
+                      <label class="form-label mb-0"
+                        for="filter-temporal-end">Fim</label>
+                      <input id="filter-temporal-end" type="date"
+                        class="form-control form-control-sm" />
+                      
+                    </div>
+                </div>
+
+              </div>
+              
+               <div class="card-body">
+                <div class="row g-3">
+
+                  <div class="col-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-title">Carregando
+                          titulo...
+                        </div>
+                        <div class="chart-panel-actions"><button
+                            class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution"
+                            type="button">Info</button><button
+                            class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution"
+                            type="button">PNG</button><button
+                            class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution"
+                            type="button">CSV</button><button
+                            class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution"
+                            type="button">PDF</button></div>
+                      </div>
+                      <div class="metrics" id="metrics"></div>
+                      <div class="chart-scroll-y" id="stage-evolution-chart-scroll">
+                        <div class="chart-box chart-box-dynamic"
+                          id="stage-evolution-chart-box"><canvas
+                            id="chart-stage-evolution" role="img"
+                            aria-label></canvas></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-12 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-line-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-line"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-line"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-line"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-line"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-line" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-12 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-area-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-area"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-area"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-area"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-area"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-area" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-heatmap-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-heatmap"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-heatmap"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-heatmap"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-heatmap"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-heatmap" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-total-gradient-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-total-gradient"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-total-gradient"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-total-gradient"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-total-gradient"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-total-gradient" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-doughnut-mono-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-doughnut-mono"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-doughnut-mono"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-doughnut-mono"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-doughnut-mono"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-doughnut-mono" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-bar-mono-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-bar-mono"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-bar-mono"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-bar-mono"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-bar-mono"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-bar-mono" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-status-temporal-mono-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-status-temporal-mono"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-status-temporal-mono"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-status-temporal-mono"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-status-temporal-mono"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-status-temporal-mono" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-status-temporal-dense-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-status-temporal-dense"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-status-temporal-dense"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-status-temporal-dense"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-status-temporal-dense"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-status-temporal-dense" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-stage-evolution-status-temporal-soft-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-stage-evolution-status-temporal-soft"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-stage-evolution-status-temporal-soft"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-stage-evolution-status-temporal-soft"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-stage-evolution-status-temporal-soft"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div class="chart-box chart-box-panel"><canvas
+                          id="chart-stage-evolution-status-temporal-soft" role="img"
+                          aria-label></canvas></div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-temporal-orgaos-title">Carregando
+                          titulo...
+                        </div>
+                        <div class="chart-panel-actions">
+                          <button class="btn btn-outline-secondary btn-sm chart-tool-btn"
+                            data-action="fullscreen"
+                            data-chart-id="chart-temporal-orgaos"
+                            type="button">Tela cheia</button>
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info"
+                            data-chart-id="chart-temporal-orgaos"
+                            type="button">Info</button>
+                          <button class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-temporal-orgaos"
+                            type="button">PNG</button>
+                          <button class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-temporal-orgaos"
+                            type="button">CSV</button>
+                          <button class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-temporal-orgaos"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <small class="text-muted d-block mb-2"
+                        id="text-chart-temporal-orgaos-description">Carregando
+                        descricao...</small>
+                      <div class="chart-scroll-y" id="temporal-chart-scroll">
+                        <div class="chart-box chart-box-dynamic"
+                          id="temporal-chart-box"><canvas
+                            id="chart-temporal-orgaos"
+                            role="img" aria-label></canvas></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-md-12">
+                    <div class="macro-chart-panel">
+                      <div class="chart-panel-header">
+                        <div class="macro-chart-title mb-0"
+                          id="text-chart-tempo-title">Carregando
+                          titulo...</div>
+                        <div class="chart-panel-actions">
+                          <select id="filter-tempo-scope"
+                            class="form-select form-select-sm"
+                            aria-label="Filtro de status do processo">
+                            <option value="total">Total</option>
+                            <option value="finalized">Finalizados</option>
+                            <option value="open">Em andamento</option>
+                          </select>
+                          <button class="btn btn-light btn-sm chart-tool-btn"
+                            data-action="info" data-chart-id="chart-tempo"
+                            type="button">Info</button>
+                          <button
+                            class="btn btn-outline-primary btn-sm chart-tool-btn"
+                            data-action="png"
+                            data-chart-id="chart-tempo"
+                            type="button">PNG</button>
+                          <button
+                            class="btn btn-outline-success btn-sm chart-tool-btn"
+                            data-action="csv"
+                            data-chart-id="chart-tempo"
+                            type="button">CSV</button>
+                          <button
+                            class="btn btn-outline-danger btn-sm chart-tool-btn"
+                            data-action="pdf"
+                            data-chart-id="chart-tempo"
+                            type="button">PDF</button>
+                        </div>
+                      </div>
+                      <div id="legend-tempo" class="legend-wrap"></div>
+                      <div class="chart-box chart-box-lg"><canvas
+                          id="chart-tempo"
+                          role="img" aria-label></canvas></div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="row g-3 mt-1">
+                      <div class="col-xl-5 col-md-12">
+                        <div class="macro-chart-panel">
+                          <div class="chart-panel-header">
+                            <div class="macro-chart-title mb-0"
+                              id="text-chart-critical-delay-title">Carregando
+                              titulo...</div>
+                            <div class="chart-panel-actions"><button
+                                class="btn btn-light btn-sm chart-tool-btn"
+                                data-action="info"
+                                data-chart-id="chart-critical-delay"
+                                type="button">Info</button><button
+                                class="btn btn-outline-primary btn-sm chart-tool-btn"
+                                data-action="png"
+                                data-chart-id="chart-critical-delay"
+                                type="button">PNG</button><button
+                                class="btn btn-outline-success btn-sm chart-tool-btn"
+                                data-action="csv"
+                                data-chart-id="chart-critical-delay"
+                                type="button">CSV</button><button
+                                class="btn btn-outline-danger btn-sm chart-tool-btn"
+                                data-action="pdf"
+                                data-chart-id="chart-critical-delay"
+                                type="button">PDF</button></div>
+                          </div><small class="text-muted d-block mb-2"
+                            id="text-chart-critical-delay-description">Carregando
+                            descricao...</small>
+                          <div class="row g-2 mb-3">
+                            <div class="col-6">
+                              <div class="card mini-stats-wid h-100">
+                                <div class="card-body py-2">
+                                  <p class="text-muted fw-medium mb-1">Qtd.
+                                    processos atrasados</p>
+                                  <div class="metric-value"
+                                    id="m-critical-delay-total">-</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="card mini-stats-wid h-100">
+                                <div class="card-body py-2">
+                                  <p class="text-muted fw-medium mb-1">Maior
+                                    atraso</p>
+                                  <div class="metric-value metric-subtle"
+                                    id="m-critical-delay-max">-</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="chart-box chart-box-lg"><canvas
+                              id="chart-critical-delay" role="img"
+                              aria-label></canvas></div>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-7 col-md-12">
+                        <div class="card macro-chart-panel">
+                          <div class="card-body">
+                            <h4 class="card-title mb-1">Tabela de processos com
+                              atrasos</h4>
+                            <small class="text-muted d-block mb-2">Clique em uma linha para ver todos os detalhes do processo.</small>
+                            <div class="table-responsive critical-delay-table-scroll">
+                              <table class="table table-sm table-striped align-middle">
+                                <thead>
+                                  <tr>
+                                    <th>ID</th>
+                                    <th>Processo</th>
+                                    <th>Órgão</th>
+                                    <th>Status atual</th>
+                                    <th>Tramitação</th>
+                                    <th>Limite SLA</th>
+                                    <th>Atraso</th>
+                                    <th>Últ. stage (hist.)</th>
+                                    <th>Últ. movimentação</th>
+                                    <th>Dias sem mov.</th>
+                                    <th>Qtd. mov.</th>
+                                  </tr>
+                                </thead>
+                                <tbody id="table-critical-delay-body"></tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <span class="footer-note">Dashboard SGC - atualizado
+                  automaticamente pelo pipeline ETL.</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <div class="modal fade" id="chart-rule-modal" tabindex="-1"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="chart-rule-modal-title">Regra de
+              negocio</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body" id="chart-rule-modal-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="temporal-fullscreen-modal" tabindex="-1"
+      aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen-xl-down">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"
+              id="text-chart-temporal-orgaos-fullscreen-title">Carregando
+              titulo...</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="chart-scroll-y" id="temporal-chart-scroll-fullscreen">
+              <div class="chart-box chart-box-dynamic"
+                id="temporal-chart-box-fullscreen">
+                <canvas id="chart-temporal-orgaos-fullscreen" role="img"
+                  aria-label></canvas>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <footer class="footer">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <span class="footer-note">Dashboard SGC - atualizado automaticamente pelo pipeline ETL.</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
-  </div>
 
-  <div class="modal fade" id="chart-rule-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="chart-rule-modal-title">Regra de negocio</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-        <div class="modal-body" id="chart-rule-modal-body"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="temporal-fullscreen-modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-xl-down">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Evolucao temporal de processos por orgao</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-        <div class="modal-body">
-          <div class="chart-scroll-y" id="temporal-chart-scroll-fullscreen">
-            <div class="chart-box chart-box-dynamic" id="temporal-chart-box-fullscreen">
-              <canvas id="chart-temporal-orgaos-fullscreen"></canvas>
-            </div>
+    <div class="modal fade" id="critical-delay-row-modal" tabindex="-1"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="critical-delay-row-modal-title">Detalhes do processo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Fechar"></button>
           </div>
+          <div class="modal-body" id="critical-delay-row-modal-body"></div>
         </div>
       </div>
     </div>
-  </div>
 
-
-
-  <script src="./assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="./assets/js/app.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="./assets/js/pages/index.js"></script>
-</body>
+    <script src="./assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/app.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="./assets/js/pages/index.init.js"></script>
+  </body>
 
 </html>

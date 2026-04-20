@@ -1,0 +1,169 @@
+{
+  "charts": [
+    {
+      "id": "chart-orgaos",
+      "titleTagId": "text-chart-orgaos-title",
+      "name": "Distribuição de processos por órgão (Top 15)",
+      "description": "Fonte: por_orgao. Ordena pela quantidade total de processos em ordem decrescente e exibe os 15 órgãos com maior volume.",
+      "alt": "Gráfico de barras com os 15 órgãos com maior volume de processos"
+    },
+    {
+      "id": "chart-temporal-orgaos",
+      "titleTagId": "text-chart-temporal-orgaos-title",
+      "descriptionTagId": "text-chart-temporal-orgaos-description",
+      "fullscreenTitleTagId": "text-chart-temporal-orgaos-fullscreen-title",
+      "name": "Evolução dos processos por órgãos",
+      "description": "Fonte: espelho_processos. Os dados estão organizados por data de criação (created_at) e agrupados por órgão e status (stage). O gráfico é apresentado em barras horizontais empilhadas, onde cada barra representa um órgão e as seções empilhadas indicam a quantidade de processos em cada status ao longo do tempo. A ordenação é feita por data, mostrando a evolução temporal dos processos para cada órgão.",
+      "alt": "Gráfico temporal de processos por órgão em barras horizontais empilhadas"
+    },
+    {
+      "id": "chart-tempo",
+      "titleTagId": "text-chart-tempo-title",
+      "name": "Faixas de tempo de cada processo por órgão",
+      "description": "Fonte: tempo_medio. Mostra a faixa máximo e minimo de tempo que os processos levam para serem concluídos, agrupados por órgão. As barras representam o tempo médio, enquanto as linhas de erro indicam os tempos mínimo e máximo registrados para cada órgão. Pode ser filtrada por processos já finalizados.",
+      "alt": "Gráfico de barras com o tempo médio de processo por órgão"
+    },
+    {
+      "id": "chart-critical-delay",
+      "titleTagId": "text-chart-critical-delay-title",
+      "descriptionTagId": "text-chart-critical-delay-description",
+      "name": "Processos com atrasos (Top 12)",
+      "description": "Fonte: espelho_processos + evolution_stage_historic. Ordena por maior atraso e exibe os 12 processos mais críticos nos filtros atuais.",
+      "alt": "Gráfico horizontal com ranking dos processos mais atrasados"
+    },
+    {
+      "id": "chart-macro-mod-jud-risk",
+      "titleTagId": "text-chart-macro-mod-jud-risk-title",
+      "descriptionTagId": "text-chart-macro-mod-jud-risk-description",
+      "name": "Modalidade vs. Fórum de Julgamento por Risco de Prazo",
+      "description": "Aplica filtros macro, agrupa por combinação modalidade|julgamento e empilha as categorias No prazo, Alerta, Atrasado e Sem referência. Ordena priorizando o maior atraso e exibe 12 grupos.",
+      "alt": "Gráfico de barras empilhadas de modalidade e julgamento por risco de prazo"
+    },
+    {
+      "id": "chart-macro-priority-stage",
+      "titleTagId": "text-chart-macro-priority-stage-title",
+      "name": "Concentração por Status vs. Prioridade",
+      "description": "Aplica filtros macro, agrupa por etapa (stage) e empilha processos prioritários e não prioritários. Exibe as 10 etapas com maior volume.",
+      "alt": "Gráfico de barras empilhadas de status por nível de prioridade"
+    },
+    {
+      "id": "chart-macro-sla-risk",
+      "titleTagId": "text-chart-macro-sla-risk-title",
+      "name": "Risco de Prazo por Órgão (No prazo / Alerta / Atrasado)",
+      "description": "Aplica filtros macro, classifica o risco por processo (No prazo/Alerta/Atrasado), agrega por órgão e ordena por criticidade (Atrasado, seguido de Alerta e, por fim, Total).",
+      "alt": "Gráfico de barras empilhadas com risco de prazo por órgão"
+    },
+    {
+      "id": "chart-stage-evolution",
+      "titleTagId": "text-chart-stage-evolution-title",
+      "name": "Histórico dos processos por status",
+      "description": "Busca informação no histórico de processos relacionando os dados por status e data de criação (created_at) ou atualização (updated_at) para mostrar a evolução diária do volume de processos por status nos últimos 30 dias, semanal, mensal e ou total, considerando os filtros aplicados.",
+      "alt": "Gráfico de evolução diária de processos por status nos últimos 30 dias"
+    },
+    {
+      "id": "chart-stage-evolution-line",
+      "titleTagId": "text-chart-stage-evolution-line-title",
+      "name": "Evolução por status (linha)",
+      "description": "Mesma base filtrada do gráfico principal, exibida em linhas para facilitar leitura de tendência por status ao longo do tempo.",
+      "alt": "Gráfico de linhas com evolução temporal de processos por status"
+    },
+    {
+      "id": "chart-stage-evolution-area",
+      "titleTagId": "text-chart-stage-evolution-area-title",
+      "name": "Evolução por status (área)",
+      "description": "Mesma base filtrada do gráfico principal, em áreas empilhadas para comparar composição e volume total em cada período.",
+      "alt": "Gráfico de áreas empilhadas com evolução temporal de processos por status"
+    },
+    {
+      "id": "chart-stage-evolution-heatmap",
+      "titleTagId": "text-chart-stage-evolution-heatmap-title",
+      "name": "Mapa de calor por status",
+      "description": "Ordena os status pelo ID (code) e usa intensidade de cor para representar quantidade de processos por período: quanto mais escuro, maior o volume.",
+      "alt": "Mapa de calor com intensidade por quantidade de processos e status ordenados por ID"
+    },
+    {
+      "id": "chart-stage-evolution-total-gradient",
+      "titleTagId": "text-chart-stage-evolution-total-gradient-title",
+      "name": "Tendência total (gradiente monocromático)",
+      "description": "Linha única com o total de processos por período e preenchimento em gradiente azul monocromático para destacar picos e vales.",
+      "alt": "Gráfico de linha do total de processos com área em gradiente monocromático"
+    },
+    {
+      "id": "chart-stage-evolution-doughnut-mono",
+      "titleTagId": "text-chart-stage-evolution-doughnut-mono-title",
+      "name": "Participação por status (rosca monocromática)",
+      "description": "Distribuição do volume acumulado por status em formato rosca, usando tons monocromáticos para comparação visual rápida.",
+      "alt": "Gráfico de rosca em tons monocromáticos com participação de cada status"
+    },
+    {
+      "id": "chart-stage-evolution-bar-mono",
+      "titleTagId": "text-chart-stage-evolution-bar-mono-title",
+      "name": "Ranking por status em ordem de ID (barras monocromáticas)",
+      "description": "Barras horizontais com status ordenados por ID; a intensidade monocromática aumenta conforme o volume total do status.",
+      "alt": "Gráfico de barras horizontais monocromáticas com status ordenados por ID"
+    },
+    {
+      "id": "chart-stage-evolution-status-temporal-mono",
+      "titleTagId": "text-chart-stage-evolution-status-temporal-mono-title",
+      "name": "Matriz temporal x status (monocromática)",
+      "description": "Eixo Y temporal e eixo X por status (ID). A cor de cada célula segue gradiente monocromático conforme a quantidade de processos.",
+      "alt": "Matriz monocromática com tempo no eixo Y e status no eixo X"
+    },
+    {
+      "id": "chart-stage-evolution-status-temporal-dense",
+      "titleTagId": "text-chart-stage-evolution-status-temporal-dense-title",
+      "name": "Matriz temporal x status (densa)",
+      "description": "Variação monocromática com maior contraste e tamanho do marcador proporcional ao volume, mantendo tempo no Y e status no X.",
+      "alt": "Matriz monocromática densa com intensidade e tamanho por quantidade de processos"
+    },
+    {
+      "id": "chart-stage-evolution-status-temporal-soft",
+      "titleTagId": "text-chart-stage-evolution-status-temporal-soft-title",
+      "name": "Matriz temporal x status (suave)",
+      "description": "Variação monocromática suave para leitura contínua por período; gradiente representa a quantidade de processos por status.",
+      "alt": "Matriz temporal e status em tons monocromáticos suaves"
+    }
+  ],
+  "summaries": [
+    {
+      "id": "summary-insights",
+      "titleTagId": "text-insights-title",
+      "name": "Insights da IA"
+    },
+    {
+      "id": "summary-export",
+      "titleTagId": "text-export-title",
+      "descriptionTagId": "text-export-description",
+      "name": "Exportacao do painel completo",
+      "description": "Baixe o dashboard consolidado em PNG, CSV ou PDF."
+    },
+    {
+      "id": "summary-sec-resumo",
+      "titleTagId": "text-sec-resumo-title",
+      "descriptionTagId": "text-sec-resumo-description",
+      "name": "Resumo Executivo",
+      "description": "Indicadores consolidados de volume, fluxo e desempenho."
+    },
+    {
+      "id": "summary-sec-volume",
+      "titleTagId": "text-sec-volume-title",
+      "descriptionTagId": "text-sec-volume-description",
+      "name": "Histórico da evolução dos processos",
+      "description": "Visão da demanda e andamento dos processos."
+    },
+    {
+      "id": "summary-sec-tempo",
+      "titleTagId": "text-sec-tempo-title",
+      "descriptionTagId": "text-sec-tempo-description",
+      "name": "Tempo de Processos",
+      "description": "Comparativo de tempos medios e extremos por orgao."
+    },
+    {
+      "id": "summary-sec-espelho",
+      "titleTagId": "text-sec-espelho-title",
+      "descriptionTagId": "text-sec-espelho-description",
+      "name": "Principais indicadores",
+      "description": "Análise generalista dos processos do SGC"
+    }
+  ]
+}
