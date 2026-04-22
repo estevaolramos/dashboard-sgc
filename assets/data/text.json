@@ -26,7 +26,7 @@
     {
       "id": "chart-tempo",
       "titleTagId": "text-chart-tempo-title",
-      "name": "Faixas de tempo de cada processo por órgão",
+      "name": "Variação de tempo de cada órgão",
       "description": "Fonte: tempo_medio. Mostra a faixa máximo e minimo de tempo que os processos levam para serem concluídos, agrupados por órgão. As barras representam o tempo médio, enquanto as linhas de erro indicam os tempos mínimo e máximo registrados para cada órgão. Pode ser filtrada por processos já finalizados.",
       "alt": "Gráfico de barras com o tempo médio de processo por órgão"
     },
@@ -92,7 +92,7 @@
     {
       "id": "chart-stage-evolution-total-gradient",
       "titleTagId": "text-chart-stage-evolution-total-gradient-title",
-      "name": "Criação de processos nos últimos 30 dias",
+      "name": "Atividades diárias de processos nos últimos 30 dias",
       "description": "Gráfico de área mostrando a quantidade de processos criados por dia nos últimos 30 dias, usando a base de espelho_processos.",
       "alt": "Gráfico de área em gradiente com total diário de processos criados nos últimos 30 dias"
     },
@@ -106,9 +106,9 @@
     {
       "id": "chart-stage-evolution-bar-mono",
       "titleTagId": "text-chart-stage-evolution-bar-mono-title",
-      "name": "Ranking por Fases em ordem de ID (barras monocromáticas)",
-      "description": "Barras horizontais com Fases ordenados por ID; a intensidade monocromática aumenta conforme o volume total do Fases.",
-      "alt": "Gráfico de barras horizontais monocromáticas com Fases ordenados por ID"
+      "name": "Recorte diário por fases nos últimos 30 dias",
+      "description": "Grafico de area empilhada por fase, com total diario de processos no periodo (considera historico anterior e permutas de fase por atualizacao).",
+      "alt": "Grafico de area empilhada com total diario de processos por fase nos ultimos 30 dias"
     }
   ],
   "summaries": [

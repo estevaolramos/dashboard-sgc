@@ -575,6 +575,10 @@ export function normalizeEvolutionRows(rows) {
                 return null;
             }
 
+            const stageStart = parseDateTimeUtc(row.created_at);
+            const stageEnd = parseDateTimeUtc(row.finished_at_calculated || row.finished_at);
+            const processUpdatedAt = parseDateTimeUtc(row.updated_at);
+
             const dateKey = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, "0")}`;
 
             return {
@@ -594,6 +598,9 @@ export function normalizeEvolutionRows(rows) {
                 priority: Number(row.priority_level || 0),
                 rn: Number(row.rn || 0),
                 process_id: row.process_id ?? null,
+                stageStart,
+                stageEnd,
+                processUpdatedAt,
             };
         })
         .filter(Boolean);

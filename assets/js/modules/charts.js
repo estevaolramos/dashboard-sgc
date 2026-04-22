@@ -669,7 +669,7 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
                 : maior
         );
 
-        setMetricText("m-mais-rapido", `${processoMaisRapido.sigla} (${formatDays(processoMaisRapido.tempo_min_dias)})`);
+        setMetricText("m-mais-rapido", `${processoMaisRapido.sigla} (${formatDays(Math.max(1,processoMaisRapido.tempo_min_dias))})`);
         setMetricText("m-mais-lento", `${processoMaisLento.sigla} (${formatDays(processoMaisLento.tempo_max_dias)})`);
         dashboardState.processed.fastestDurationDays = Number(processoMaisRapido.tempo_min_dias);
         dashboardState.processed.slowestDurationDays = Number(processoMaisLento.tempo_max_dias);
@@ -1292,15 +1292,71 @@ function getHeatmapColor(value, maxValue) {
 }
 
 function buildStageEvolutionHeatmapChart(model) {
-    const yCodes = model.orderedCodesById.length > 0 ? model.orderedCodesById : ["Sem codigo"];
+    const stageLabelByCode = {
+        CADASTRAMENTO: "Processo em Cadastramento",
+        AG_ASS_TECNICA: "Aguardando Assinatura da Área Técnica",
+        AG_AUT_ORGAO: "Aguardando Autorização da Autoridade do Órgão",
+        AG_CORRECAO: "Ajustes Solicitados",
+        CORRECAO_RELIZADA: "Ajustes Realizados",
+        AUTORIZADO: "Processo Autorizado",
+        AG_DISTRIBUICAO: "Aguardando Distribuição",
+        ANALISE: "Processo em Análise",
+        SUSPENSO: "Processo Suspenso",
+        RETOMADO: "Processo Retomado",
+        AUTORIZADO_PUBLICACAO: "Processo autorizado para Publicação do Edital",
+        ANALISE_SEI: "Processo em Análise SEI",
+        DISPUTA: "Processo em Fase de Disputa",
+        TRAMITE_FINAL: "Processo em Trâmites Finais",
+        FINALIZADO: "Processo Finalizado",
+        COTA_REPROVADA: "Cota Reprovada",
+        REPROVADO: "Processo Reprovado",
+        DOCUMENTO_COTA_EM_CONTRUCAO: "Documento de Cotas em Construção",
+        ANALISE_COTAS: "Enviado para Análise de Cotas",
+    };
+
+    const preferredStageCodeOrder = [
+        "FINALIZADO",
+        "TRAMITE_FINAL",
+        "DISPUTA",
+        "REPROVADO",
+        "AUTORIZADO_PUBLICACAO",
+        "AUTORIZADO",
+        "RETOMADO",
+        "SUSPENSO",
+        "ANALISE_SEI",
+        "CORRECAO_RELIZADA",
+        "AG_CORRECAO",
+        "COTA_REPROVADA",
+        "ANALISE_COTAS",
+        "DOCUMENTO_COTA_EM_CONTRUCAO",
+        "ANALISE",
+        "AG_DISTRIBUICAO",
+        "AG_AUT_ORGAO",
+        "AG_ASS_TECNICA",
+        "CADASTRAMENTO",
+    ];
+
+    const availableCodes = (model.orderedCodesById.length > 0 ? model.orderedCodesById : ["Sem codigo"]).map((code) => String(code || "Sem codigo").trim());
+    const availableSet = new Set(availableCodes);
+    const orderedPreferredCodes = preferredStageCodeOrder.filter((code) => availableSet.has(code));
+    const remainingCodes = availableCodes.filter((code) => !preferredStageCodeOrder.includes(code)).sort(compareStageCodeById);
+    const yCodes = [...orderedPreferredCodes, ...remainingCodes];
+    const yLabels = yCodes.map((code) => stageLabelByCode[code] || model.codeLabelMap[code] || `Etapa ${code}`);
     const heatmapData = [];
 
+    const heatmapCanvas = document.getElementById("chart-stage-evolution-heatmap");
+    const heatmapChartBox = heatmapCanvas?.closest(".chart-box");
+    if (heatmapChartBox) {
+        const dynamicHeight = Math.max(460, yLabels.length * 42);
+        heatmapChartBox.style.height = `${dynamicHeight}px`;
+    }
+
     yCodes.forEach((code, rowIndex) => {
-        model.labels.forEach((_, columnIndex) => {
+        model.labels.forEach((label, columnIndex) => {
             const value = Number(model.byCodeSeries[code]?.[columnIndex] || 0);
             heatmapData.push({
-                x: columnIndex,
-                y: rowIndex,
+                x: label,
+                y: yLabels[rowIndex],
                 value,
                 stageCode: code,
             });
@@ -1327,6 +1383,14 @@ function buildStageEvolutionHeatmapChart(model) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: 8,
+                    right: 8,
+                    bottom: 14,
+                    left: 10,
+                },
+            },
             plugins: {
                 legend: {
                     display: false,
@@ -1334,14 +1398,11 @@ function buildStageEvolutionHeatmapChart(model) {
                 },
                 tooltip: {
                     callbacks: {
-                        title: (ctx) => {
-                            const bucketIndex = Number(ctx[0].raw?.x || 0);
-                            return model.labels[bucketIndex] || "Sem periodo";
-                        },
+                        title: (ctx) => String(ctx?.[0]?.raw?.x || "Sem periodo"),
                         label: (ctx) => {
                             const stageCode = String(ctx.raw?.stageCode || "Sem codigo");
-                            const stageLabel = model.codeLabelMap[stageCode] || "Nao Informado";
-                            return ` Etapas ${stageCode} - ${stageLabel}: ${formatNumber(ctx.raw?.value || 0)} processos`;
+                            const stageLabel = stageLabelByCode[stageCode] || model.codeLabelMap[stageCode] || "Nao Informado";
+                            return ` ${stageCode} - ${stageLabel}: ${formatNumber(ctx.raw?.value || 0)} processos`;
                         },
                     },
                 },
@@ -1365,39 +1426,37 @@ function buildStageEvolutionHeatmapChart(model) {
             },
             scales: {
                 x: {
-                    type: "linear",
-                    min: -0.5,
-                    max: Math.max(model.labels.length - 0.5, 0.5),
+                    type: "category",
+                    labels: model.labels,
+                    title: {
+                        display: true,
+                        text: "Eixo X - Periodo",
+                        color: "#495057",
+                    },
                     ticks: {
                         color: "#6c757d",
-                        stepSize: 1,
-                        callback: (value) => {
-                            const index = Number(value);
-                            if (!Number.isInteger(index) || index < 0 || index >= model.labels.length) {
-                                return "";
-                            }
-                            return model.labels[index];
-                        },
+                        autoSkip: false,
+                        minRotation: 90,
+                        maxRotation: 90,
+                        padding: 8,
+                        font: { size: 10 },
                     },
                     grid: { color: "rgba(116, 120, 141, 0.1)" },
                 },
                 y: {
-                    type: "linear",
-                    min: -0.5,
-                    max: Math.max(yCodes.length - 0.5, 0.5),
+                    type: "category",
+                    labels: yLabels,
                     reverse: true,
+                    title: {
+                        display: true,
+                        text: "Eixo Y - Fases",
+                        color: "#495057",
+                    },
                     ticks: {
                         color: "#495057",
-                        stepSize: 1,
-                        callback: (value) => {
-                            const index = Number(value);
-                            if (!Number.isInteger(index) || index < 0 || index >= yCodes.length) {
-                                return "";
-                            }
-
-                            const code = yCodes[index];
-                            return `Etapa ${code}`;
-                        },
+                        autoSkip: false,
+                        padding: 10,
+                        font: { size: 11 },
                     },
                     grid: { color: "rgba(116, 120, 141, 0.1)" },
                 },
@@ -1606,6 +1665,7 @@ function buildStageEvolutionTotalGradientChart(filteredRows) {
             },
             scales: {
                 x: {
+                    stacked: true,
                     ticks: { color: "#6c757d" },
                     grid: { color: "rgba(116, 120, 141, 0.1)" },
                 },
@@ -1691,63 +1751,208 @@ function buildStageEvolutionDoughnutMonochromeChart(filteredRows) {
     });
 }
 
-function buildStageEvolutionBarMonochromeChart(model) {
-    const codes = model.orderedCodesById.length > 0 ? model.orderedCodesById : ["Sem codigo"];
-    const labels = codes.map((code) => model.codeLabelMap[code] || `Etapa ${code}`);
-    const totals = codes.map((code) => {
-        const series = model.byCodeSeries[code] || [];
-        return series.reduce((sum, value) => sum + Number(value || 0), 0);
+function buildStageEvolutionBarMonochromeChart() {
+    const normalizedRows = normalizeEvolutionRows(dashboardState.macro.evolutionRows);
+    const filteredRows = applyEvolutionFilters(normalizedRows, macroFilters);
+    const referenceDates = filteredRows
+        .flatMap((row) => [row.stageStart, row.stageEnd, row.processUpdatedAt])
+        .filter((value) => value instanceof Date && !Number.isNaN(value.getTime()));
+
+    if (referenceDates.length === 0) {
+        createChart("chart-stage-evolution-bar-mono", {
+            type: "line",
+            data: {
+                labels: ["Sem dados"],
+                datasets: [
+                    {
+                        label: "Sem fase",
+                        data: [0],
+                        borderColor: COLORS[0],
+                        backgroundColor: COLORS[0],
+                        borderWidth: 1,
+                        fill: true,
+                        pointRadius: 0,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                        ...legendHoverCursor,
+                    },
+                },
+            },
+        });
+        return;
+    }
+
+    const endDate = new Date(Math.max(...referenceDates.map((date) => date.getTime())));
+    endDate.setUTCHours(23, 59, 59, 999);
+
+    const startDate = new Date(endDate.getTime());
+    startDate.setUTCDate(startDate.getUTCDate() - 29);
+    startDate.setUTCHours(0, 0, 0, 0);
+
+    const labels = [];
+    const dayEnds = [];
+    const cursor = new Date(startDate.getTime());
+    while (cursor <= endDate) {
+        labels.push(
+            cursor.toLocaleDateString("pt-BR", {
+                timeZone: "UTC",
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+            })
+        );
+
+        const endOfDay = new Date(cursor.getTime());
+        endOfDay.setUTCHours(23, 59, 59, 999);
+        dayEnds.push(endOfDay);
+
+        cursor.setUTCDate(cursor.getUTCDate() + 1);
+    }
+
+    const filteredWindowRows = filteredRows.filter((row) => {
+        const stageStart = row.stageStart;
+        const stageEnd = row.stageEnd;
+        if (!(stageStart instanceof Date) || Number.isNaN(stageStart.getTime())) {
+            return false;
+        }
+
+        if (stageStart > endDate) {
+            return false;
+        }
+
+        if (stageEnd instanceof Date && !Number.isNaN(stageEnd.getTime()) && stageEnd < startDate) {
+            return false;
+        }
+
+        return true;
     });
 
-    const maxTotal = totals.reduce((max, value) => Math.max(max, value), 0);
-    const minTotal = totals.reduce((min, value) => Math.min(min, value), maxTotal);
-    const backgroundColor = totals.map((value) => getMonochromeColorByValue(value, minTotal, maxTotal));
+    const preferredStageCodeOrder = [
+        "CADASTRAMENTO",
+        "AG_ASS_TECNICA",
+        "AG_AUT_ORGAO",
+        "AG_DISTRIBUICAO",
+        "ANALISE",
+        "DOCUMENTO_COTA_EM_CONTRUCAO",
+        "ANALISE_COTAS",
+        "COTA_REPROVADA",
+        "AG_CORRECAO",
+        "CORRECAO_RELIZADA",
+        "ANALISE_SEI",
+        "SUSPENSO",
+        "RETOMADO",
+        "AUTORIZADO",
+        "AUTORIZADO_PUBLICACAO",
+        "REPROVADO",
+        "DISPUTA",
+        "TRAMITE_FINAL",
+        "FINALIZADO",
+    ];
+
+    const rawCodesInWindow = [...new Set(filteredWindowRows.map((row) => String(row.code || "Sem codigo").trim()))];
+    const availableSet = new Set(rawCodesInWindow);
+    const orderedPreferredCodes = preferredStageCodeOrder.filter((code) => availableSet.has(code));
+    const remainingCodes = rawCodesInWindow.filter((code) => !preferredStageCodeOrder.includes(code)).sort(compareStageCodeById);
+    const codesInWindow = [...orderedPreferredCodes, ...remainingCodes];
+
+    const byCodeSeries = codesInWindow.reduce((accumulator, code) => {
+        accumulator[code] = dayEnds.map((dayEnd) =>
+            filteredWindowRows.reduce((sum, row) => {
+                const rowCode = row.code || "Sem codigo";
+                if (rowCode !== code) {
+                    return sum;
+                }
+
+                const stageStart = row.stageStart;
+                const stageEnd = row.stageEnd;
+                const isActiveAtDayEnd =
+                    stageStart instanceof Date &&
+                    !Number.isNaN(stageStart.getTime()) &&
+                    stageStart <= dayEnd &&
+                    (!(stageEnd instanceof Date) || Number.isNaN(stageEnd.getTime()) || stageEnd > dayEnd);
+
+                return sum + (isActiveAtDayEnd ? 1 : 0);
+            }, 0)
+        );
+        return accumulator;
+    }, {});
+
+    const codeLabelMap = filteredRows.reduce((accumulator, row) => {
+        if (!accumulator[row.code]) {
+            accumulator[row.code] = row.stage;
+        }
+        return accumulator;
+    }, {});
+
+    const orderedCodes = codesInWindow;
+
+    const datasets = (orderedCodes.length > 0 ? orderedCodes : ["Sem codigo"]).map((code) => {
+        const series = byCodeSeries[code] || labels.map(() => 0);
+        const color = getCodePaletteColor(code);
+        return {
+            label: codeLabelMap[code] || code,
+            data: series.map((value) => Number(value || 0)),
+            borderColor: color,
+            backgroundColor: color,
+            borderWidth: 1,
+            tension: 0.2,
+            pointRadius: 0,
+            pointHoverRadius: 3,
+            fill: true,
+            stack: "stages-snapshot",
+        };
+    });
 
     createChart("chart-stage-evolution-bar-mono", {
-        type: "bar",
+        type: "line",
         data: {
             labels,
-            datasets: [
-                {
-                    label: "Total por Etapa",
-                    data: totals,
-                    backgroundColor,
-                    borderRadius: 4,
-                    borderSkipped: false,
-                },
-            ],
+            datasets,
         },
         options: {
-            indexAxis: "y",
             responsive: true,
             maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
             plugins: {
                 legend: {
-                    display: false,
+                    display: true,
+                    position: "top",
+                    labels: {
+                        color: "#495057",
+                        boxWidth: 12,
+                    },
                     ...legendHoverCursor,
                 },
                 tooltip: {
                     callbacks: {
-                        label: (ctx) => ` ${formatNumber(ctx.raw)} processos`,
+                        title: (ctx) => `Data: ${ctx?.[0]?.label || "-"}`,
+                        label: (ctx) => ` ${ctx.dataset.label}: ${formatNumber(ctx.raw)} processos`,
                     },
                 },
             },
             scales: {
                 x: {
-                    beginAtZero: true,
                     ticks: { color: "#6c757d" },
-                    grid: { color: "rgba(3, 26, 140, 0.15)" },
-                    title: {
-                        display: true,
-                        text: "Quantidade de processos",
-                    },
+                    grid: { color: "rgba(116, 120, 141, 0.1)" },
                 },
                 y: {
-                    ticks: { color: "#495057" },
-                    grid: { display: false },
+                    beginAtZero: true,
+                    stacked: true,
+                    ticks: {
+                        color: "#6c757d",
+                        callback: (value) => formatNumber(value),
+                    },
+                    grid: { color: "rgba(116, 120, 141, 0.15)" },
                     title: {
                         display: true,
-                        text: "Etapa",
+                        text: "Total de processos no dia",
                     },
                 },
             },
@@ -1925,7 +2130,7 @@ function buildStageEvolutionChart() {
     buildStageEvolutionHeatmapChart(model);
     buildStageEvolutionTotalGradientChart(dashboardState.macro.filteredRows);
     buildStageEvolutionDoughnutMonochromeChart(dashboardState.macro.filteredRows);
-    buildStageEvolutionBarMonochromeChart(model);
+    buildStageEvolutionBarMonochromeChart();
 }
 
 export function setMacroMetricValues(filteredRows) {
