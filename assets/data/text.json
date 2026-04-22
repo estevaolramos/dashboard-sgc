@@ -42,27 +42,28 @@
       "id": "chart-macro-mod-jud-risk",
       "titleTagId": "text-chart-macro-mod-jud-risk-title",
       "descriptionTagId": "text-chart-macro-mod-jud-risk-description",
-      "name": "Modalidade vs. Fórum de Julgamento por Risco de Prazo",
-      "description": "Aplica filtros macro, agrupa por combinação modalidade|julgamento e empilha as categorias No prazo, Alerta, Atrasado e Sem referência. Ordena priorizando o maior atraso e exibe 12 grupos.",
+      "name": "Critério de julgamento e modalidade e a relação do Risco de Prazo",
+      "description": "Agrupa duas dimensionalidades a modalidade e julgamento e empilha as categorias No prazo, Alerta, Atrasado e Sem referência. Ordena priorizando o maior atraso e exibe 12 grupos.",
       "alt": "Gráfico de barras empilhadas de modalidade e julgamento por risco de prazo"
     },
     {
       "id": "chart-macro-priority-stage",
       "titleTagId": "text-chart-macro-priority-stage-title",
       "name": "Concentração por Fases vs. Prioridade",
-      "description": "Aplica filtros macro, agrupa por etapa (stage) e empilha processos prioritários e não prioritários. Exibe as 10 Fases com maior volume.",
+      "description": "Agrupa por fase (stage) e empilha processos prioritários e não prioritários. Exibe as 10 Fases com maior volume.",
       "alt": "Gráfico de barras empilhadas de Fases por nível de prioridade"
     },
     {
       "id": "chart-macro-sla-risk",
       "titleTagId": "text-chart-macro-sla-risk-title",
       "name": "Risco de Prazo por Órgão (No prazo / Alerta / Atrasado)",
-      "description": "Aplica filtros macro, classifica o risco por processo (No prazo/Alerta/Atrasado), agrega por órgão e ordena por criticidade (Atrasado, seguido de Alerta e, por fim, Total).",
+      "description": "Classifica o risco por processo (No prazo/Alerta/Atrasado), agrega por órgão e ordena por criticidade (Atrasado, seguido de Alerta e, por fim, Total).",
       "alt": "Gráfico de barras empilhadas com risco de prazo por órgão"
     },
     {
       "id": "chart-stage-evolution",
       "titleTagId": "text-chart-stage-evolution-title",
+      "fullscreenTitleTagId": "text-chart-stage-evolution-fullscreen-title",
       "name": "Histórico dos processos por Fases",
       "description": "Busca informação no histórico de processos relacionando os dados por Fases e data de criação (created_at) ou atualização (updated_at) para mostrar a evolução diária do volume de processos por Fases nos últimos 30 dias, semanal, mensal e ou total, considerando os filtros aplicados.",
       "alt": "Gráfico de evolução diária de processos por Fases nos últimos 30 dias"
@@ -70,37 +71,37 @@
     {
       "id": "chart-stage-evolution-line",
       "titleTagId": "text-chart-stage-evolution-line-title",
-      "name": "Evolução por Fases (linha)",
+      "name": "Tendências das fases em função do tempo (Gráfico de linha)",
       "description": "Mesma base filtrada do gráfico principal, exibida em linhas para facilitar leitura de tendência por Fases ao longo do tempo.",
       "alt": "Gráfico de linhas com evolução temporal de processos por Fases"
     },
     {
       "id": "chart-stage-evolution-area",
       "titleTagId": "text-chart-stage-evolution-area-title",
-      "name": "Evolução por Fases (área)",
+      "name": "Tendência das fases em função do tempo (Gráfico de área)",
       "description": "Mesma base filtrada do gráfico principal, em áreas empilhadas para comparar composição e volume total em cada período.",
       "alt": "Gráfico de áreas empilhadas com evolução temporal de processos por Fases"
     },
     {
       "id": "chart-stage-evolution-heatmap",
       "titleTagId": "text-chart-stage-evolution-heatmap-title",
-      "name": "Mapa de calor por Fases",
+      "name": "Mapa de calor por Fases em função do tempo",
       "description": "Ordena os Fases pelo ID (code) e usa intensidade de cor para representar quantidade de processos por período: quanto mais escuro, maior o volume.",
       "alt": "Mapa de calor com intensidade por quantidade de processos e Fases ordenados por ID"
     },
     {
       "id": "chart-stage-evolution-total-gradient",
       "titleTagId": "text-chart-stage-evolution-total-gradient-title",
-      "name": "Tendência total (gradiente monocromático)",
-      "description": "Linha única com o total de processos por período e preenchimento em gradiente azul monocromático para destacar picos e vales.",
-      "alt": "Gráfico de linha do total de processos com área em gradiente monocromático"
+      "name": "Criação de processos nos últimos 30 dias",
+      "description": "Gráfico de área mostrando a quantidade de processos criados por dia nos últimos 30 dias, usando a base de espelho_processos.",
+      "alt": "Gráfico de área em gradiente com total diário de processos criados nos últimos 30 dias"
     },
     {
       "id": "chart-stage-evolution-doughnut-mono",
       "titleTagId": "text-chart-stage-evolution-doughnut-mono-title",
-      "name": "Participação por Fases (rosca monocromática)",
-      "description": "Distribuição do volume acumulado por Fases em formato rosca, usando tons monocromáticos para comparação visual rápida.",
-      "alt": "Gráfico de rosca em tons monocromáticos com participação de cada Fases"
+      "name": "Quantidade total de processos na fase atual",
+      "description": "Distribuição do total de processos por fase com base em espelho_processos, em rosca monocromática com o valor total exibido em cada fatia.",
+      "alt": "Gráfico de rosca monocromático com total de processos por fase e valores em cada fatia"
     },
     {
       "id": "chart-stage-evolution-bar-mono",
@@ -148,8 +149,34 @@
       "id": "summary-sec-espelho",
       "titleTagId": "text-sec-espelho-title",
       "descriptionTagId": "text-sec-espelho-description",
-      "name": "Principais indicadores",
-      "description": "Análise generalista dos processos do SGC"
+      "name": "Painel consolidado",
+      "description": "Resumo dos processos do SGC que passaram da etapa 1 de cadastramento que foram finalizados ou ainda estão em andamento"
     }
-  ]
+  ],
+  "kpi_thresholds": {
+    "finalizados_rate": {
+      "good": 0.6,
+      "warning": 0.35
+    },
+    "tempo_medio_dias": {
+      "good": 45,
+      "warning": 90
+    },
+    "priority_rate": {
+      "good": 0.35,
+      "warning": 0.55
+    },
+    "overdue_rate": {
+      "good": 0.08,
+      "warning": 0.18
+    },
+    "critical_delay_total": {
+      "good": 0,
+      "warning": 10
+    },
+    "mais_lento_dias": {
+      "good": 75,
+      "warning": 120
+    }
+  }
 }

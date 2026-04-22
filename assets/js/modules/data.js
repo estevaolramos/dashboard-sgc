@@ -1,7 +1,23 @@
-import { TAB_CONFIG, dashboardTextState } from "./state.js";
+import { KPI_THRESHOLD_DEFAULTS, TAB_CONFIG, dashboardTextState, dashboardUiState } from "./state.js";
 import { buildStageDualRows } from "./charts.js";
 
+const KPI_THRESHOLDS_STORAGE_KEY = "dashboard_sgc_kpi_thresholds";
+
 export function getActiveTabId() {
+    const view = document.body?.dataset?.dashboardView;
+
+    if (view === "volume") {
+        return "dashboard-volume";
+    }
+
+    if (view === "atraso") {
+        return "dashboard-atraso";
+    }
+
+    if (view === "consolidado") {
+        return "dashboard-consolidado";
+    }
+
     return "dashboard-all";
 }
 
@@ -40,6 +56,87 @@ function parseTextEntries(items) {
     });
 
     return parsed;
+}
+
+function toFiniteNumberOrFallback(value, fallback) {
+    const numericValue = Number(value);
+    return Number.isFinite(numericValue) ? numericValue : fallback;
+}
+
+function parseKpiThresholds(rawThresholds) {
+    const safeRawThresholds = rawThresholds && typeof rawThresholds === "object" ? rawThresholds : {};
+
+    return Object.entries(KPI_THRESHOLD_DEFAULTS).reduce((accumulator, [thresholdKey, defaults]) => {
+        const rawEntry = safeRawThresholds[thresholdKey];
+        const entry = rawEntry && typeof rawEntry === "object" ? rawEntry : {};
+
+        return {
+            ...accumulator,
+            [thresholdKey]: {
+                good: toFiniteNumberOrFallback(entry.good, defaults.good),
+                warning: toFiniteNumberOrFallback(entry.warning, defaults.warning),
+            },
+        };
+    }, {});
+}
+
+function cloneObject(value) {
+    return JSON.parse(JSON.stringify(value));
+}
+
+function readStoredKpiThresholds() {
+    if (!window?.localStorage) {
+        return null;
+    }
+
+    try {
+        const raw = window.localStorage.getItem(KPI_THRESHOLDS_STORAGE_KEY);
+        if (!raw) {
+            return null;
+        }
+
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === "object" ? parsed : null;
+    } catch (error) {
+        console.warn("Falha ao ler limites KPI salvos no navegador:", error);
+        return null;
+    }
+}
+
+function writeStoredKpiThresholds(nextThresholds) {
+    if (!window?.localStorage) {
+        return;
+    }
+
+    try {
+        window.localStorage.setItem(KPI_THRESHOLDS_STORAGE_KEY, JSON.stringify(nextThresholds));
+    } catch (error) {
+        console.warn("Falha ao salvar limites KPI no navegador:", error);
+    }
+}
+
+function removeStoredKpiThresholds() {
+    if (!window?.localStorage) {
+        return;
+    }
+
+    try {
+        window.localStorage.removeItem(KPI_THRESHOLDS_STORAGE_KEY);
+    } catch (error) {
+        console.warn("Falha ao limpar limites KPI salvos no navegador:", error);
+    }
+}
+
+export function saveKpiThresholds(nextThresholds) {
+    const parsedThresholds = parseKpiThresholds(nextThresholds);
+    dashboardUiState.kpiThresholds = cloneObject(parsedThresholds);
+    writeStoredKpiThresholds(parsedThresholds);
+}
+
+export function resetKpiThresholds() {
+    const baseThresholds = dashboardUiState.kpiThresholdsBase || KPI_THRESHOLD_DEFAULTS;
+    dashboardUiState.kpiThresholds = cloneObject(baseThresholds);
+    removeStoredKpiThresholds();
 }
 
 function applyTextEntriesToDom(entries, options = {}) {
@@ -104,13 +201,20 @@ export async function loadChartTexts() {
         const payload = await response.json();
         const charts = Array.isArray(payload?.charts) ? payload.charts : [];
         const summaries = Array.isArray(payload?.summaries) ? payload.summaries : [];
+        const baseThresholds = parseKpiThresholds(payload?.kpi_thresholds);
+        const storedThresholds = readStoredKpiThresholds();
+        const effectiveThresholds = storedThresholds ? parseKpiThresholds(storedThresholds) : baseThresholds;
 
         dashboardTextState.charts = parseTextEntries(charts);
         dashboardTextState.summaries = parseTextEntries(summaries);
+        dashboardUiState.kpiThresholdsBase = cloneObject(baseThresholds);
+        dashboardUiState.kpiThresholds = cloneObject(effectiveThresholds);
     } catch (error) {
         console.warn("Falha ao carregar textos dinamicos:", error);
         dashboardTextState.charts = {};
         dashboardTextState.summaries = {};
+        dashboardUiState.kpiThresholdsBase = cloneObject(KPI_THRESHOLD_DEFAULTS);
+        dashboardUiState.kpiThresholds = cloneObject(KPI_THRESHOLD_DEFAULTS);
     }
 }
 

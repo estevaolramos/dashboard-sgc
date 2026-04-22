@@ -1,4 +1,4 @@
-import { COLORS, chartRegistry, dashboardState, macroFilters, temporalFilters } from "./state.js";
+import { COLORS, chartRegistry, dashboardState, dashboardUiState, macroFilters, temporalFilters } from "./state.js";
 import { fillLegend } from "./markdown.js";
 import {
     aggregateCountBy,
@@ -41,6 +41,100 @@ function setMetricTextMany(ids, value) {
     ids.forEach((id) => setMetricText(id, value));
 }
 
+const KPI_TONE_CLASSES = ["kpi-tone-good", "kpi-tone-warning", "kpi-tone-critical", "kpi-tone-neutral"];
+
+function setMetricTone(metricId, tone) {
+    const metricElement = document.getElementById(metricId);
+    if (!metricElement) {
+        return;
+    }
+
+    const metricCard = metricElement.closest(".mini-stats-wid");
+    if (!metricCard) {
+        return;
+    }
+
+    metricCard.classList.remove(...KPI_TONE_CLASSES);
+
+    if (!tone) {
+        return;
+    }
+
+    metricCard.classList.add(`kpi-tone-${tone}`);
+}
+
+function setMetricToneMany(ids, tone) {
+    ids.forEach((id) => setMetricTone(id, tone));
+}
+
+export function refreshTempoExtremeKpiTones() {
+    const fastestDays = Number(dashboardState.processed.fastestDurationDays);
+    const slowestDays = Number(dashboardState.processed.slowestDurationDays);
+
+    if (Number.isFinite(fastestDays)) {
+        setMetricTone("m-mais-rapido", "good");
+    } else {
+        setMetricTone("m-mais-rapido", "neutral");
+    }
+
+    if (Number.isFinite(slowestDays)) {
+        setMetricTone("m-mais-lento", classifyLowerIsBetter(slowestDays, "mais_lento_dias"));
+    } else {
+        setMetricTone("m-mais-lento", "neutral");
+    }
+}
+
+function getKpiThreshold(metricKey) {
+    const threshold = dashboardUiState.kpiThresholds?.[metricKey];
+    if (!threshold || typeof threshold !== "object") {
+        return { good: 0, warning: 0 };
+    }
+
+    const good = Number(threshold.good);
+    const warning = Number(threshold.warning);
+
+    return {
+        good: Number.isFinite(good) ? good : 0,
+        warning: Number.isFinite(warning) ? warning : 0,
+    };
+}
+
+function classifyHigherIsBetter(value, metricKey) {
+    const { good, warning } = getKpiThreshold(metricKey);
+
+    if (!Number.isFinite(value)) {
+        return "neutral";
+    }
+
+    if (value >= good) {
+        return "good";
+    }
+
+    if (value >= warning) {
+        return "warning";
+    }
+
+    return "critical";
+}
+
+function classifyLowerIsBetter(value, metricKey) {
+    const { good, warning } = getKpiThreshold(metricKey);
+
+    if (!Number.isFinite(value)) {
+        return "neutral";
+    }
+
+    if (value <= good) {
+        return "good";
+    }
+
+    if (value <= warning) {
+        return "warning";
+    }
+
+    return "critical";
+}
+
 function escapeHtml(value) {
     return String(value)
         .replaceAll("&", "&amp;")
@@ -52,29 +146,59 @@ function escapeHtml(value) {
 
 function toDetailLabel(key) {
     const labels = {
+        // Identificação e Controle
         id: "ID",
-        process_number: "Numero do processo",
-        orgao: "Orgao",
+        process_number: "Número do processo",
+        orgao: "Órgão",
         stage: "Etapa atual",
         user_name: "Criado por",
-        current_owner_name: "Responsavel atual",
-        created_at: "Data de criacao",
-        updated_at: "Ultima atualizacao",
-        stage_started_at: "Inicio do stage atual",
-        gerencia_nome: "Gerencia",
-        gerencia_id: "ID da gerencia",
-        atual_entrada_neste_estagio: "Entrada no estagio atual",
-        tempo_no_estagio_atual: "Tempo no estagio atual",
-        finalized_at: "Data de finalizacao",
-        _age_days: "Dias em tramitacao",
+        current_owner_name: "Responsável atual",
+        gerencia_nome: "Gerência",
+        gerencia_id: "ID da gerência",
+        priority: "Prioridade",
+        priority_level: "Nível de prioridade",
+        
+        // Datas e Prazos
+        created_at: "Data de criação",
+        updated_at: "Última atualização",
+        stage_started_at: "Início da fase atual",
+        atual_entrada_neste_estagio: "Entrada na fase atual",
+        received_at: "Data de recebimento",
+        finalized_at: "Data de finalização",
+        award_published_at: "Data de adjudicação",
+        opening_published_at: "Data de publicação da abertura",
+        
+        // SLA e Indicadores (Prefixados com _)
+        _age_days: "Dias em tramitação",
         _sla_limit_days: "Limite SLA (dias)",
-        _days_overdue: "Dias em atraso",
-        _sla_risk: "Risco SLA",
-        _is_overdue: "Esta atrasado",
-        _stage_movement_count: "Qtd. movimentacao",
-        _last_stage_movement_at: "Ultima movimentacao do stage",
-        _last_stage_from_history: "Ultimo stage no historico",
-        _days_without_stage_movement: "Dias sem movimentacao",
+        _days_overdue: "Dias de atraso",
+        _sla_risk: "Risco de SLA",
+        _is_overdue: "Está atrasado?",
+        _stage_movement_count: "Qtd. de movimentações",
+        _last_stage_movement_at: "Última movimentação da fase",
+        _last_stage_from_history: "Última fase no histórico",
+        _days_without_stage_movement: "Dias sem movimentação",
+        tempo_no_estagio_atual: "Tempo na fase atual",
+        process_max_time: "Tempo máximo do processo",
+        
+        // Detalhes do Objeto e Licitação
+        summary_object: "Objeto de compra",
+        specification: "Especificação",
+        modality: "Modalidade",
+        judgment: "Critério de julgamento",
+        mode_of_dispute: "Modo de disputa",
+        legal_framework: "Base legal",
+        price_record: "Registro de preço",
+        topic: "Tópico/Categoria",
+        purchase_request: "Solicitação de compra",
+        
+        // Integração e SEI
+        sei: "Processo SEI",
+        sei_id: "ID do SEI",
+        initial_sei: "Protocolo SEI inicial",
+        pncp_number: "Número PNCP",
+        external_phase_number: "Número da fase externa",
+        agent_id: "ID do Agente"
     };
 
     return labels[key] || String(key).replaceAll("_", " ");
@@ -212,12 +336,14 @@ function buildCriticalDelayChart(rows) {
     dashboardState.macro.filteredDelayRows = tableRows;
 
     setMetricText("m-critical-delay-total", formatNumber(delayedRows.length));
+    setMetricTone("m-critical-delay-total", classifyLowerIsBetter(delayedRows.length, "critical_delay_total"));
     setMetricText(
         "m-critical-delay-max",
         delayedRows.length > 0
             ? `${String(delayedRows[0].process_number || "-")} (${formatDays(delayedRows[0]._days_overdue)})`
             : "Sem atrasos"
     );
+    setMetricTone("m-critical-delay-max", delayedRows.length > 0 ? "critical" : "good");
 
     renderCriticalDelayTable(tableRows);
 
@@ -409,12 +535,12 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
     };
 
     renderOrgaosChart();
-
+ 
     const detailedRows = Array.isArray(espelhoRows) ? espelhoRows : [];
 
     const gerenciaRowsBase = detailedRows
         .reduce((accumulator, row) => {
-            const gerenciaNome = String(row?.gerencia_nome || "Sem gerencia").trim() || "Sem gerencia";
+            const gerenciaNome = String(row?.gerencia_nome || "Sem gerência").trim() || "Sem gerência";
             const current = accumulator[gerenciaNome] || { gerencia_nome: gerenciaNome, total_processos: 0 };
             current.total_processos += 1;
             accumulator[gerenciaNome] = current;
@@ -425,31 +551,31 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
         .sort((a, b) => Number(b.total_processos || 0) - Number(a.total_processos || 0))
         .slice(0, 15);
     if (sortedGerencias.length === 0) {
-        sortedGerencias.push({ gerencia_nome: "Sem gerencia", total_processos: 0 });
+        sortedGerencias.push({ gerencia_nome: "Sem gerência", total_processos: 0 });
     }
     const hiddenGerenciasLegendItems = new Set();
     const gerenciaColorByName = new Map(
-        sortedGerencias.map((item, index) => [String(item.gerencia_nome || "Sem gerencia"), COLORS[index % COLORS.length]])
+        sortedGerencias.map((item, index) => [String(item.gerencia_nome || "Sem gerência"), COLORS[index % COLORS.length]])
     );
 
     const renderGerenciasChart = () => {
-        const availableNames = new Set(sortedGerencias.map((item) => String(item.gerencia_nome || "Sem gerencia")));
+        const availableNames = new Set(sortedGerencias.map((item) => String(item.gerencia_nome || "Sem gerência")));
         [...hiddenGerenciasLegendItems].forEach((name) => {
             if (!availableNames.has(name)) {
                 hiddenGerenciasLegendItems.delete(name);
             }
         });
 
-        const visibleRows = sortedGerencias.filter((item) => !hiddenGerenciasLegendItems.has(String(item.gerencia_nome || "Sem gerencia")));
+        const visibleRows = sortedGerencias.filter((item) => !hiddenGerenciasLegendItems.has(String(item.gerencia_nome || "Sem gerência")));
         const rowsForChart = visibleRows.length > 0 ? visibleRows : sortedGerencias;
 
         dashboardState.processed.sortedGerencia = rowsForChart;
 
-        fillLegend("legend-gerencias", sortedGerencias, (item) => item.gerencia_nome || "Sem gerencia", {
-            isActive: (item) => !hiddenGerenciasLegendItems.has(String(item.gerencia_nome || "Sem gerencia")),
-            getColor: (item) => gerenciaColorByName.get(String(item.gerencia_nome || "Sem gerencia")) || COLORS[0],
+        fillLegend("legend-gerencias", sortedGerencias, (item) => item.gerencia_nome || "Sem gerência", {
+            isActive: (item) => !hiddenGerenciasLegendItems.has(String(item.gerencia_nome || "Sem gerência")),
+            getColor: (item) => gerenciaColorByName.get(String(item.gerencia_nome || "Sem gerência")) || COLORS[0],
             onToggle: (item) => {
-                const gerenciaName = String(item.gerencia_nome || "Sem gerencia");
+                const gerenciaName = String(item.gerencia_nome || "Sem gerência");
                 if (hiddenGerenciasLegendItems.has(gerenciaName)) {
                     hiddenGerenciasLegendItems.delete(gerenciaName);
                 } else {
@@ -463,13 +589,13 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
         createChart("chart-gerencias", {
             type: "bar",
             data: {
-                labels: rowsForChart.map((item) => item.gerencia_nome || "Sem gerencia"),
+                labels: rowsForChart.map((item) => item.gerencia_nome || "Sem gerência"),
                 datasets: [
                     {
                         label: "Processos",
                         data: rowsForChart.map((item) => Number(item.total_processos || 0)),
                         backgroundColor: rowsForChart.map(
-                            (item) => gerenciaColorByName.get(String(item.gerencia_nome || "Sem gerencia")) || COLORS[0]
+                            (item) => gerenciaColorByName.get(String(item.gerencia_nome || "Sem gerência")) || COLORS[0]
                         ),
                         borderRadius: 6,
                         borderSkipped: false,
@@ -545,9 +671,15 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
 
         setMetricText("m-mais-rapido", `${processoMaisRapido.sigla} (${formatDays(processoMaisRapido.tempo_min_dias)})`);
         setMetricText("m-mais-lento", `${processoMaisLento.sigla} (${formatDays(processoMaisLento.tempo_max_dias)})`);
+        dashboardState.processed.fastestDurationDays = Number(processoMaisRapido.tempo_min_dias);
+        dashboardState.processed.slowestDurationDays = Number(processoMaisLento.tempo_max_dias);
+        refreshTempoExtremeKpiTones();
     } else {
         setMetricText("m-mais-rapido", "Nao identificado");
         setMetricText("m-mais-lento", "Nao identificado");
+        dashboardState.processed.fastestDurationDays = null;
+        dashboardState.processed.slowestDurationDays = null;
+        refreshTempoExtremeKpiTones();
     }
 
     const scopeSelect = document.getElementById("filter-tempo-scope");
@@ -643,7 +775,7 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
                 labels: rowsForChart.map((item) => item.sigla || "N/A"),
                 datasets: [
                     {
-                        label: "Tempo maximo",
+                        label: "Tempo máximo",
                         data: rowsForChart.map((item) => Number(item.tempo_max_dias || 0)),
                         backgroundColor: "rgba(11, 94, 215, 0.8)",
                         borderColor: "rgba(8, 66, 152, 1)",
@@ -653,7 +785,7 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
                         order: 2,
                     },
                     {
-                        label: "Tempo minimo",
+                        label: "Tempo mínimo",
                         data: rowsForChart.map((item) => Number(item.tempo_min_dias || 0)),
                         backgroundColor: "rgba(80, 165, 241, 0.85)",
                         borderColor: "rgba(41, 128, 200, 1)",
@@ -664,7 +796,7 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
                     },
                     {
                         type: "line",
-                        label: "Tempo medio",
+                        label: "Tempo médio",
                         data: rowsForChart.map((item) => Number(item.tempo_medio_dias || 0)),
                         borderColor: "#102a43",
                         backgroundColor: "#102a43",
@@ -690,12 +822,12 @@ export function buildOverviewCharts({ porOrgao, porStage, tempoMedio, sortedOrg,
                     tooltip: {
                         callbacks: {
                             label: (ctx) => {
-                                if (ctx.dataset.label === "Tempo minimo") {
+                                if (ctx.dataset.label === "Tempo mínimo") {
                                     return ` Minimo: ${formatDays(ctx.raw)}`;
                                 }
 
-                                if (ctx.dataset.label === "Tempo maximo") {
-                                    return ` Maximo: ${formatDays(ctx.raw)}`;
+                                if (ctx.dataset.label === "Tempo máximo") {
+                                    return ` Máximo: ${formatDays(ctx.raw)}`;
                                 }
 
                                 return ` Medio: ${formatDays(ctx.raw)}`;
@@ -1292,15 +1424,148 @@ function buildMonochromePalette(size) {
     });
 }
 
-function buildStageEvolutionTotalGradientChart(model) {
+function getMonochromeColorByValue(value, minValue, maxValue) {
+    if (maxValue === minValue) {
+        return interpolateMonochromeColor(0.55);
+    }
+
+    const normalized = (Number(value || 0) - minValue) / (maxValue - minValue);
+    const ratio = 0.08 + normalized * 0.92;
+    return interpolateMonochromeColor(ratio);
+}
+
+function parseRgbColor(colorValue) {
+    const matched = String(colorValue || "").match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/i);
+    if (!matched) {
+        return null;
+    }
+
+    return {
+        r: Number(matched[1] || 0),
+        g: Number(matched[2] || 0),
+        b: Number(matched[3] || 0),
+    };
+}
+
+function getReadableTextColor(backgroundColor) {
+    const rgb = parseRgbColor(backgroundColor);
+    if (!rgb) {
+        return "#1f2937";
+    }
+
+    const luminance = (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
+    return luminance > 0.55 ? "#1f2937" : "#ffffff";
+}
+
+const drawDoughnutSliceValuePlugin = {
+    id: "draw-doughnut-slice-values",
+    afterDatasetsDraw: (chart) => {
+        const dataset = chart.data?.datasets?.[0];
+        if (!dataset || !Array.isArray(dataset.data)) {
+            return;
+        }
+
+        const meta = chart.getDatasetMeta(0);
+        if (!meta || !Array.isArray(meta.data)) {
+            return;
+        }
+
+        const backgroundColor = Array.isArray(dataset.backgroundColor) ? dataset.backgroundColor : [];
+        const { ctx } = chart;
+        ctx.save();
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = "600 11px sans-serif";
+
+        meta.data.forEach((arc, index) => {
+            const value = Number(dataset.data[index] || 0);
+            if (value <= 0) {
+                return;
+            }
+
+            const arcProps = arc.getProps(["x", "y", "startAngle", "endAngle", "innerRadius", "outerRadius"], true);
+            const angle = (arcProps.startAngle + arcProps.endAngle) / 2;
+            const radius = arcProps.innerRadius + (arcProps.outerRadius - arcProps.innerRadius) * 0.62;
+            const x = arcProps.x + Math.cos(angle) * radius;
+            const y = arcProps.y + Math.sin(angle) * radius;
+
+            ctx.fillStyle = getReadableTextColor(backgroundColor[index]);
+            ctx.fillText(formatNumber(value), x, y);
+        });
+
+        ctx.restore();
+    },
+};
+
+function buildCreatedLast30DaysSeries(rows) {
+    const createdDates = (Array.isArray(rows) ? rows : [])
+        .map((row) => parseDateTime(row?.created_at))
+        .filter((date) => date instanceof Date);
+
+    if (createdDates.length === 0) {
+        return {
+            labels: ["Sem dados"],
+            totals: [0],
+        };
+    }
+
+    const maxCreatedAt = createdDates.reduce((maxDate, currentDate) => (currentDate > maxDate ? currentDate : maxDate), createdDates[0]);
+    const endDate = new Date(maxCreatedAt.getFullYear(), maxCreatedAt.getMonth(), maxCreatedAt.getDate(), 23, 59, 59, 999);
+    const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 0, 0, 0, 0);
+    startDate.setDate(startDate.getDate() - 29);
+
+    const dayMap = new Map();
+    const cursorDate = new Date(startDate.getTime());
+    while (cursorDate <= endDate) {
+        const dateKey = `${cursorDate.getFullYear()}-${String(cursorDate.getMonth() + 1).padStart(2, "0")}-${String(cursorDate.getDate()).padStart(2, "0")}`;
+        const dateLabel = `${String(cursorDate.getDate()).padStart(2, "0")}/${String(cursorDate.getMonth() + 1).padStart(2, "0")}`;
+        dayMap.set(dateKey, {
+            label: dateLabel,
+            total: 0,
+        });
+        cursorDate.setDate(cursorDate.getDate() + 1);
+    }
+
+    rows.forEach((row) => {
+        const createdAt = parseDateTime(row?.created_at);
+        if (!createdAt) {
+            return;
+        }
+
+        if (createdAt < startDate || createdAt > endDate) {
+            return;
+        }
+
+        const dateKey = `${createdAt.getFullYear()}-${String(createdAt.getMonth() + 1).padStart(2, "0")}-${String(createdAt.getDate()).padStart(2, "0")}`;
+        const current = dayMap.get(dateKey);
+        if (!current) {
+            return;
+        }
+
+        dayMap.set(dateKey, {
+            ...current,
+            total: current.total + 1,
+        });
+    });
+
+    const buckets = [...dayMap.values()];
+    return {
+        labels: buckets.map((bucket) => bucket.label),
+        totals: buckets.map((bucket) => bucket.total),
+    };
+}
+
+function buildStageEvolutionTotalGradientChart(filteredRows) {
+    const createdSeries = buildCreatedLast30DaysSeries(filteredRows);
+
     createChart("chart-stage-evolution-total-gradient", {
         type: "line",
         data: {
-            labels: model.labels,
+            labels: createdSeries.labels,
             datasets: [
                 {
-                    label: "Total de processos",
-                    data: model.totalsByBucket,
+                    label: "Processos criados (últimos 30 dias)",
+                    data: createdSeries.totals,
                     borderColor: "#08306b",
                     borderWidth: 2,
                     tension: 0.25,
@@ -1334,6 +1599,7 @@ function buildStageEvolutionTotalGradientChart(model) {
                 },
                 tooltip: {
                     callbacks: {
+                        title: (ctx) => `Data: ${ctx?.[0]?.label || "-"}`,
                         label: (ctx) => ` ${ctx.dataset.label}: ${formatNumber(ctx.raw)} processos`,
                     },
                 },
@@ -1345,37 +1611,56 @@ function buildStageEvolutionTotalGradientChart(model) {
                 },
                 y: {
                     beginAtZero: true,
-                    ticks: { color: "#6c757d" },
+                    ticks: {
+                        color: "#6c757d",
+                        callback: (value) => formatNumber(value),
+                    },
                     grid: { color: "rgba(116, 120, 141, 0.15)" },
+                    title: {
+                        display: true,
+                        text: "Quantidade de processos criados",
+                    },
                 },
             },
         },
     });
 }
 
-function buildStageEvolutionDoughnutMonochromeChart(model) {
-    const codes = model.orderedCodesByVolume.slice(0, 10);
-    const labels = codes.map((code) => model.codeLabelMap[code] || `Etapa ${code}`);
-    const data = codes.map((code) => {
-        const series = model.byCodeSeries[code] || [];
-        return series.reduce((sum, value) => sum + Number(value || 0), 0);
-    });
+function buildStageEvolutionDoughnutMonochromeChart(filteredRows) {
+    const groupedByStage = (Array.isArray(filteredRows) ? filteredRows : []).reduce((accumulator, row) => {
+        const stage = String(row?.stage || "Nao Informado");
+        accumulator[stage] = (accumulator[stage] || 0) + 1;
+        return accumulator;
+    }, {});
 
-    if (codes.length === 0) {
-        codes.push("Sem codigo");
+    const orderedStageRows = Object.entries(groupedByStage)
+        .map(([stage, total]) => ({ stage, total: Number(total || 0) }))
+        .sort((a, b) => b.total - a.total)
+        .slice(0, 10);
+
+    const labels = orderedStageRows.map((item) => item.stage);
+    const data = orderedStageRows.map((item) => item.total);
+
+    if (labels.length === 0) {
         labels.push("Nao Informado");
         data.push(0);
     }
 
+    const totalGeral = data.reduce((sum, value) => sum + Number(value || 0), 0);
+    const maxTotal = data.reduce((max, value) => Math.max(max, Number(value || 0)), 0);
+    const minTotal = data.reduce((min, value) => Math.min(min, Number(value || 0)), maxTotal);
+    const palette = data.map((value) => getMonochromeColorByValue(value, minTotal, maxTotal));
+
     createChart("chart-stage-evolution-doughnut-mono", {
         type: "doughnut",
+        plugins: [drawDoughnutSliceValuePlugin],
         data: {
             labels,
             datasets: [
                 {
-                    label: "Volume por Etapa",
+                    label: "Total por Fase",
                     data,
-                    backgroundColor: buildMonochromePalette(codes.length),
+                    backgroundColor: palette,
                     borderColor: "#ffffff",
                     borderWidth: 1,
                     hoverOffset: 6,
@@ -1393,7 +1678,11 @@ function buildStageEvolutionDoughnutMonochromeChart(model) {
                 },
                 tooltip: {
                     callbacks: {
-                        label: (ctx) => ` ${formatNumber(ctx.raw)} processos`,
+                        label: (ctx) => {
+                            const value = Number(ctx.raw || 0);
+                            const percent = totalGeral > 0 ? (value / totalGeral) * 100 : 0;
+                            return ` ${formatNumber(value)} processos (${percent.toFixed(1).replace(".", ",")}%)`;
+                        },
                     },
                 },
             },
@@ -1412,14 +1701,7 @@ function buildStageEvolutionBarMonochromeChart(model) {
 
     const maxTotal = totals.reduce((max, value) => Math.max(max, value), 0);
     const minTotal = totals.reduce((min, value) => Math.min(min, value), maxTotal);
-    const backgroundColor = totals.map((value) => {
-        if (maxTotal === minTotal) {
-            return interpolateMonochromeColor(0.75);
-        }
-
-        const ratio = (value - minTotal) / (maxTotal - minTotal);
-        return interpolateMonochromeColor(ratio);
-    });
+    const backgroundColor = totals.map((value) => getMonochromeColorByValue(value, minTotal, maxTotal));
 
     createChart("chart-stage-evolution-bar-mono", {
         type: "bar",
@@ -1454,7 +1736,7 @@ function buildStageEvolutionBarMonochromeChart(model) {
                 x: {
                     beginAtZero: true,
                     ticks: { color: "#6c757d" },
-                    grid: { color: "rgba(116, 120, 141, 0.15)" },
+                    grid: { color: "rgba(3, 26, 140, 0.15)" },
                     title: {
                         display: true,
                         text: "Quantidade de processos",
@@ -1641,14 +1923,15 @@ function buildStageEvolutionChart() {
     buildStageEvolutionLineChart(model);
     buildStageEvolutionAreaChart(model);
     buildStageEvolutionHeatmapChart(model);
-    buildStageEvolutionTotalGradientChart(model);
-    buildStageEvolutionDoughnutMonochromeChart(model);
+    buildStageEvolutionTotalGradientChart(dashboardState.macro.filteredRows);
+    buildStageEvolutionDoughnutMonochromeChart(dashboardState.macro.filteredRows);
     buildStageEvolutionBarMonochromeChart(model);
 }
 
 export function setMacroMetricValues(filteredRows) {
     const totalProcessos = formatNumber(filteredRows.length);
     setMetricTextMany(["m-consolidado-total", "m-macro-total", "m-total"], totalProcessos);
+    setMetricToneMany(["m-consolidado-total", "m-macro-total", "m-total"], "neutral");
 
     const orgaoCounts = aggregateCountBy(filteredRows, (row) => String(row.orgao || "Nao Informado"));
     const orderedOrgaos = Object.entries(orgaoCounts).sort((a, b) => b[1] - a[1]);
@@ -1666,18 +1949,21 @@ export function setMacroMetricValues(filteredRows) {
         ["m-consolidado-top-orgao", "m-top"],
         topOrgao ? `${topOrgao[0]} (${formatNumber(topOrgao[1])})` : "Nao identificado"
     );
+    setMetricToneMany(["m-consolidado-top-orgao", "m-top"], "neutral");
     setMetricTextMany(
         ["m-consolidado-minor-orgao"],
         minorOrgao ? `${minorOrgao[0]} (${formatNumber(minorOrgao[1])})` : "Nao identificado"
     );
+    setMetricToneMany(["m-consolidado-minor-orgao"], "neutral");
 
-    const gerenciaCounts = aggregateCountBy(filteredRows, (row) => String(row.gerencia_nome || "Sem gerencia"));
+    const gerenciaCounts = aggregateCountBy(filteredRows, (row) => String(row.gerencia_nome || "Sem gerência"));
     const orderedGerencias = Object.entries(gerenciaCounts).sort((a, b) => b[1] - a[1]);
     const topGerencia = orderedGerencias[0];
     setMetricTextMany(
         ["m-consolidado-top-gerencia"],
         topGerencia ? `${topGerencia[0]} (${formatNumber(topGerencia[1])})` : "Nao identificado"
     );
+    setMetricToneMany(["m-consolidado-top-gerencia"], "neutral");
 
 
     const stageCounts = aggregateCountBy(filteredRows, (row) => String(row.stage || "Nao Informado"));
@@ -1687,13 +1973,17 @@ export function setMacroMetricValues(filteredRows) {
         ["m-consolidado-top-stage", "m-top-stage"],
         topStage ? `${topStage[0]} (${formatNumber(topStage[1])})` : "Nao identificado"
     );
+    setMetricToneMany(["m-consolidado-top-stage", "m-top-stage"], "neutral");
 
     const finalizados = filteredRows.filter((row) => String(row.stage || "").toLowerCase().includes("finaliz")).length;
     setMetricTextMany(["m-consolidado-finalizados", "m-finalizados"], formatNumber(finalizados));
+    const finalizadosRate = filteredRows.length > 0 ? finalizados / filteredRows.length : 0;
+    setMetricToneMany(["m-consolidado-finalizados", "m-finalizados"], classifyHigherIsBetter(finalizadosRate, "finalizados_rate"));
 
     const averageAgeValues = filteredRows.map((row) => Number(row._age_days)).filter((value) => Number.isFinite(value));
     const averageAge = averageAgeValues.length > 0 ? averageAgeValues.reduce((acc, value) => acc + value, 0) / averageAgeValues.length : 0;
     setMetricTextMany(["m-consolidado-tempo-medio", "m-tempo-medio"], formatDays(averageAge));
+    setMetricToneMany(["m-consolidado-tempo-medio", "m-tempo-medio"], classifyLowerIsBetter(averageAge, "tempo_medio_dias"));
 
     const modCounts = aggregateCountBy(filteredRows, (row) => String(row.modality || "Nao Informado"));
     const orderedModalities = Object.entries(modCounts).sort((a, b) => b[1] - a[1]);
@@ -1703,21 +1993,27 @@ export function setMacroMetricValues(filteredRows) {
         ["m-consolidado-top-modality", "m-macro-modality"],
         topModality ? `${topModality[0]} (${formatNumber(topModality[1])})` : "Nao identificado"
     );
+    setMetricToneMany(["m-consolidado-top-modality", "m-macro-modality"], "neutral");
 
     const pregaoCount = filteredRows.filter((row) => String(row.modality || "").toLowerCase().includes("pregao")).length;
     setMetricTextMany(["m-operacional-pregao", "m-macro-pregao"], formatNumber(pregaoCount));
+    setMetricToneMany(["m-operacional-pregao", "m-macro-pregao"], "neutral");
 
     const priorityCount = filteredRows.filter((row) => row._priority === 1).length;
     setMetricTextMany(
         ["m-operacional-priority-rate", "m-macro-priority-rate"],
         filteredRows.length > 0 ? formatPercent(priorityCount / filteredRows.length) : "0,0%"
     );
+    const priorityRate = filteredRows.length > 0 ? priorityCount / filteredRows.length : 0;
+    setMetricToneMany(["m-operacional-priority-rate", "m-macro-priority-rate"], classifyLowerIsBetter(priorityRate, "priority_rate"));
 
     const overdueCount = filteredRows.filter((row) => row._sla_risk === "Atrasado").length;
     setMetricTextMany(
         ["m-operacional-overdue-rate", "m-macro-overdue-rate"],
         filteredRows.length > 0 ? formatPercent(overdueCount / filteredRows.length) : "0,0%"
     );
+    const overdueRate = filteredRows.length > 0 ? overdueCount / filteredRows.length : 0;
+    setMetricToneMany(["m-operacional-overdue-rate", "m-macro-overdue-rate"], classifyLowerIsBetter(overdueRate, "overdue_rate"));
 
     const overdueByOrgao = filteredRows.reduce((accumulator, row) => {
         if (row._sla_risk !== "Atrasado") {
@@ -1734,6 +2030,7 @@ export function setMacroMetricValues(filteredRows) {
         ["m-operacional-critical-orgao", "m-macro-critical-orgao"],
         criticalOrgao ? `${criticalOrgao[0]} (${formatNumber(criticalOrgao[1])})` : "Sem atrasos"
     );
+    setMetricToneMany(["m-operacional-critical-orgao", "m-macro-critical-orgao"], criticalOrgao ? "critical" : "good");
 }
 
 export function buildMacroCharts(filteredRows) {
@@ -1847,7 +2144,7 @@ export function buildMacroCharts(filteredRows) {
             maintainAspectRatio: false,
 
             plugins: {
-                legend: { position: "left", ...legendHoverCursor },
+                legend: { position: "top", ...legendHoverCursor },
 
                 tooltip: {
                     callbacks: {
@@ -1907,7 +2204,7 @@ export function buildMacroCharts(filteredRows) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { position: "left", ...legendHoverCursor },
+                legend: { position: "top", ...legendHoverCursor },
                 tooltip: {
                     callbacks: {
                         label: (ctx) => ` ${ctx.dataset.label}: ${formatNumber(ctx.raw)} processos`,

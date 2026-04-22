@@ -3,12 +3,7 @@
         {
             "sigla": "SES",
             "nome": "Secretaria de Saúde do Estado de Pernambuco",
-            "total_processos": 92
-        },
-        {
-            "sigla": null,
-            "nome": null,
-            "total_processos": 48
+            "total_processos": 93
         },
         {
             "sigla": "SEE",
@@ -155,7 +150,7 @@
         {
             "code": "AG_DISTRIBUICAO",
             "description": "Aguardando Distribuição",
-            "total_processos": 3
+            "total_processos": 4
         },
         {
             "code": "ANALISE_COTAS",
@@ -174,198 +169,198 @@
             "sigla": "DEFN",
             "nome": "Distrito Estadual de Fernando de Noronha",
             "total_processos": 6,
-            "tempo_medio_dias": 105.71835117202545,
-            "tempo_min_dias": 28.075677462534724,
-            "tempo_max_dias": 160.08074052966435
+            "tempo_medio_dias": 106.83155728341437,
+            "tempo_min_dias": 29.188883573923615,
+            "tempo_max_dias": 161.19394664105323
         },
         {
             "origin_id": 54,
             "sigla": "ADAGRO",
             "nome": "Agência de Defesa e Fiscalização Agropecuária do Estado de Pernambuco",
             "total_processos": 2,
-            "tempo_medio_dias": 102.37727221369212,
-            "tempo_min_dias": 101.90332577271991,
-            "tempo_max_dias": 102.85121865466435
+            "tempo_medio_dias": 103.49047832508101,
+            "tempo_min_dias": 103.01653188410879,
+            "tempo_max_dias": 103.96442476605324
         },
         {
             "origin_id": 1,
             "sigla": "SDS",
             "nome": "Secretaria de Defesa Social",
             "total_processos": 23,
-            "tempo_medio_dias": 101.29344078743256,
-            "tempo_min_dias": 6.983358295868055,
-            "tempo_max_dias": 177.09953102734954
+            "tempo_medio_dias": 102.35824663310893,
+            "tempo_min_dias": 8.096564407256945,
+            "tempo_max_dias": 178.21273713873842
         },
         {
             "origin_id": 15,
             "sigla": "DETRAN",
             "nome": "Departamento Estadual de Trânsito",
             "total_processos": 3,
-            "tempo_medio_dias": 86.7299540867631,
-            "tempo_min_dias": 83.16897203429399,
-            "tempo_max_dias": 88.97619275188657
+            "tempo_medio_dias": 87.843160198152,
+            "tempo_min_dias": 84.28217814568286,
+            "tempo_max_dias": 90.08939886327546
         },
         {
             "origin_id": 16,
             "sigla": "FACEPE",
             "nome": "Fundação de Amparo a Ciência e Tecnologia do Estado de Pernambuco",
             "total_processos": 1,
-            "tempo_medio_dias": 73.25181453429398,
-            "tempo_min_dias": 73.25181453429398,
-            "tempo_max_dias": 73.25181453429398
+            "tempo_medio_dias": 74.36502064568288,
+            "tempo_min_dias": 74.36502064568288,
+            "tempo_max_dias": 74.36502064568288
         },
         {
             "origin_id": 27,
             "sigla": "SAS",
             "nome": "Secretaria de Assistência Social",
             "total_processos": 2,
-            "tempo_medio_dias": 71.46989441855324,
-            "tempo_min_dias": 53.01159296021991,
-            "tempo_max_dias": 89.92819587688658
+            "tempo_medio_dias": 72.58310052994213,
+            "tempo_min_dias": 54.12479907160879,
+            "tempo_max_dias": 91.04140198827547
         },
         {
             "origin_id": 39,
             "sigla": "SEMOBI",
             "nome": "Secretaria de Mobilidade e Infraestrutura",
             "total_processos": 1,
-            "tempo_medio_dias": 68.96644874725695,
-            "tempo_min_dias": 68.96644874725695,
-            "tempo_max_dias": 68.96644874725695
+            "tempo_medio_dias": 70.07965485864582,
+            "tempo_min_dias": 70.07965485864582,
+            "tempo_max_dias": 70.07965485864582
         },
         {
             "origin_id": 2,
             "sigla": "SAD",
             "nome": "Secretaria de Administração",
             "total_processos": 16,
-            "tempo_medio_dias": 66.98940717152705,
-            "tempo_min_dias": 12.001300379201389,
-            "tempo_max_dias": 166.082215008831
+            "tempo_medio_dias": 67.89388713703053,
+            "tempo_min_dias": 13.114506490590278,
+            "tempo_max_dias": 167.19542112021992
         },
         {
             "origin_id": 33,
             "sigla": "SECMULHER",
             "nome": "Secretaria da Mulher",
             "total_processos": 6,
-            "tempo_medio_dias": 66.4519783368345,
-            "tempo_min_dias": 21.19680918707176,
-            "tempo_max_dias": 88.20607451114584
+            "tempo_medio_dias": 67.37965009632524,
+            "tempo_min_dias": 22.310015298460648,
+            "tempo_max_dias": 89.31928062253472
         },
         {
             "origin_id": 9,
             "sigla": "ATI",
             "nome": "Agência Estadual de Tecnologia da Informação",
             "total_processos": 5,
-            "tempo_medio_dias": 65.19147492086805,
-            "tempo_min_dias": 3.948657531979167,
-            "tempo_max_dias": 140.92530831901618
+            "tempo_medio_dias": 66.30468103225694,
+            "tempo_min_dias": 5.0618636433680555,
+            "tempo_max_dias": 142.03851443040512
         },
         {
             "origin_id": 18,
             "sigla": "FUNASE",
             "nome": "Fundação de Atendimento Socioeducativo de Pernambuco",
             "total_processos": 1,
-            "tempo_medio_dias": 58.89212779818287,
-            "tempo_min_dias": 58.89212779818287,
-            "tempo_max_dias": 58.89212779818287
+            "tempo_medio_dias": 60.00533390957175,
+            "tempo_min_dias": 60.00533390957175,
+            "tempo_max_dias": 60.00533390957175
         },
         {
             "origin_id": 38,
             "sigla": "SEFAZ",
             "nome": "Secretaria da Fazenda",
             "total_processos": 2,
-            "tempo_medio_dias": 58.02779555859954,
-            "tempo_min_dias": 24.95685791392361,
-            "tempo_max_dias": 91.09873320327547
+            "tempo_medio_dias": 59.14100166998843,
+            "tempo_min_dias": 26.0700640253125,
+            "tempo_max_dias": 92.21193931466435
         },
         {
             "origin_id": 4,
             "sigla": "SEE",
             "nome": "Secretaria de Educação",
             "total_processos": 34,
-            "tempo_medio_dias": 56.81792752823463,
-            "tempo_min_dias": 3.8633350667013886,
-            "tempo_max_dias": 122.9577841639236
+            "tempo_medio_dias": 57.9311336396235,
+            "tempo_min_dias": 4.976541178090278,
+            "tempo_max_dias": 124.0709902753125
         },
         {
             "origin_id": 17,
             "sigla": "FUNAPE",
             "nome": "Fundação de Aposentadorias e Pensões dos Servidores do Estado de Pernambuco",
             "total_processos": 1,
-            "tempo_medio_dias": 54.172445737997684,
-            "tempo_min_dias": 54.172445737997684,
-            "tempo_max_dias": 54.172445737997684
+            "tempo_medio_dias": 55.285651849386575,
+            "tempo_min_dias": 55.285651849386575,
+            "tempo_max_dias": 55.285651849386575
         },
         {
             "origin_id": 32,
             "sigla": "SEAP",
             "nome": "Secretaria de Administração Penitenciária e Ressocialização",
             "total_processos": 5,
-            "tempo_medio_dias": 52.40199185373842,
-            "tempo_min_dias": 10.998353955590277,
-            "tempo_max_dias": 93.94795858521991
+            "tempo_medio_dias": 53.51519796512732,
+            "tempo_min_dias": 12.111560066979168,
+            "tempo_max_dias": 95.0611646966088
         },
         {
             "origin_id": 3,
             "sigla": "SES",
             "nome": "Secretaria de Saúde do Estado de Pernambuco",
-            "total_processos": 92,
-            "tempo_medio_dias": 51.96077979640573,
-            "tempo_min_dias": 3.9363018838310184,
-            "tempo_max_dias": 119.15806399031248
+            "total_processos": 93,
+            "tempo_medio_dias": 52.4903963470252,
+            "tempo_min_dias": 1.0265689790162038,
+            "tempo_max_dias": 120.27127010170139
         },
         {
             "origin_id": 23,
             "sigla": "IASSEPE",
             "nome": "Instituto de Atenção à Saúde e Bem-estar dos Servidores do Estado de Pernambuco",
             "total_processos": 18,
-            "tempo_medio_dias": 48.69251351286524,
-            "tempo_min_dias": 3.88123654818287,
-            "tempo_max_dias": 227.16050829586806
+            "tempo_medio_dias": 49.68203005632202,
+            "tempo_min_dias": 4.994442659571759,
+            "tempo_max_dias": 228.27371440725693
         },
         {
             "origin_id": 34,
             "sigla": "SECOM",
             "nome": "Secretaria de Comunicação",
             "total_processos": 1,
-            "tempo_medio_dias": 32.900584337534724,
-            "tempo_min_dias": 32.900584337534724,
-            "tempo_max_dias": 32.900584337534724
+            "tempo_medio_dias": 34.013790448923615,
+            "tempo_min_dias": 34.013790448923615,
+            "tempo_max_dias": 34.013790448923615
         },
         {
             "origin_id": 25,
             "sigla": "JUCEPE",
             "nome": "Junta Comercial do Estado de Pernambuco",
             "total_processos": 1,
-            "tempo_medio_dias": 26.97810190697917,
-            "tempo_min_dias": 26.97810190697917,
-            "tempo_max_dias": 26.97810190697917
+            "tempo_medio_dias": 28.091308018368053,
+            "tempo_min_dias": 28.091308018368053,
+            "tempo_max_dias": 28.091308018368053
         },
         {
             "origin_id": 45,
             "sigla": "SRHE",
             "nome": "Secretaria de Recursos Hídricos e Energéticos",
             "total_processos": 3,
-            "tempo_medio_dias": 25.886372443244596,
-            "tempo_min_dias": 25.207448596793984,
-            "tempo_max_dias": 27.22907140929398
+            "tempo_medio_dias": 26.999578554633487,
+            "tempo_min_dias": 26.320654708182868,
+            "tempo_max_dias": 28.34227752068287
         },
         {
             "origin_id": 6,
             "sigla": "SEDUH",
             "nome": "Secretária de Desenvolvimento Urbano e Habitação",
             "total_processos": 4,
-            "tempo_medio_dias": 15.389473946909721,
-            "tempo_min_dias": 2.893528353738426,
-            "tempo_max_dias": 26.926689812071757
+            "tempo_medio_dias": 16.502680058298612,
+            "tempo_min_dias": 4.006734465127315,
+            "tempo_max_dias": 28.039895923460648
         },
         {
             "origin_id": 37,
             "sigla": "SEDEPE",
             "nome": "Secretaria de Desenvolvimento Profissional e Empreendedorismo de Pernambuco",
             "total_processos": 1,
-            "tempo_medio_dias": 9.929443342164351,
-            "tempo_min_dias": 9.929443342164351,
-            "tempo_max_dias": 9.929443342164351
+            "tempo_medio_dias": 11.04264945355324,
+            "tempo_min_dias": 11.04264945355324,
+            "tempo_max_dias": 11.04264945355324
         }
     ],
     "espelho_processos": [
@@ -420,7 +415,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-02-25 14:51:39",
-            "tempo_no_estagio_atual": "54 days 01:55:40.232348"
+            "tempo_no_estagio_atual": "55 days 04:38:41.409413"
         },
         {
             "id": 66,
@@ -526,7 +521,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-06 18:09:12",
-            "tempo_no_estagio_atual": "13 days 22:38:06.624348"
+            "tempo_no_estagio_atual": "15 days 01:21:07.801413"
         },
         {
             "id": 77,
@@ -579,7 +574,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-01-20 12:36:24",
-            "tempo_no_estagio_atual": "90 days 04:10:55.145348"
+            "tempo_no_estagio_atual": "91 days 06:53:56.322413"
         },
         {
             "id": 78,
@@ -632,7 +627,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-30 13:45:54",
-            "tempo_no_estagio_atual": "21 days 03:01:24.608348"
+            "tempo_no_estagio_atual": "22 days 05:44:25.785413"
         },
         {
             "id": 79,
@@ -685,7 +680,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-01-07 17:31:03",
-            "tempo_no_estagio_atual": "102 days 23:16:15.619348"
+            "tempo_no_estagio_atual": "104 days 01:59:16.796413"
         },
         {
             "id": 80,
@@ -738,7 +733,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-09 16:43:53",
-            "tempo_no_estagio_atual": "11 days 00:03:26.225348"
+            "tempo_no_estagio_atual": "12 days 02:46:27.402413"
         },
         {
             "id": 81,
@@ -791,7 +786,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-24 19:29:20",
-            "tempo_no_estagio_atual": "26 days 21:17:59.081348"
+            "tempo_no_estagio_atual": "28 days 00:01:00.258413"
         },
         {
             "id": 84,
@@ -844,7 +839,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-01-15 13:10:58",
-            "tempo_no_estagio_atual": "95 days 03:36:20.573348"
+            "tempo_no_estagio_atual": "96 days 06:19:21.750413"
         },
         {
             "id": 87,
@@ -897,7 +892,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-03-09 18:50:58",
-            "tempo_no_estagio_atual": "41 days 21:56:20.859348"
+            "tempo_no_estagio_atual": "43 days 00:39:22.036413"
         },
         {
             "id": 88,
@@ -950,7 +945,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-02-25 14:51:58",
-            "tempo_no_estagio_atual": "54 days 01:55:20.576348"
+            "tempo_no_estagio_atual": "55 days 04:38:21.753413"
         },
         {
             "id": 89,
@@ -1003,7 +998,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-02-25 16:59:02",
-            "tempo_no_estagio_atual": "53 days 23:48:16.413348"
+            "tempo_no_estagio_atual": "55 days 02:31:17.590413"
         },
         {
             "id": 94,
@@ -1056,7 +1051,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-18 12:10:07",
-            "tempo_no_estagio_atual": "33 days 04:37:12.110348"
+            "tempo_no_estagio_atual": "34 days 07:20:13.287413"
         },
         {
             "id": 96,
@@ -1109,7 +1104,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-02-13 13:24:46",
-            "tempo_no_estagio_atual": "66 days 03:22:32.863348"
+            "tempo_no_estagio_atual": "67 days 06:05:34.040413"
         },
         {
             "id": 98,
@@ -1162,7 +1157,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 18:46:09",
-            "tempo_no_estagio_atual": "3 days 22:01:09.921348"
+            "tempo_no_estagio_atual": "5 days 00:44:11.098413"
         },
         {
             "id": 99,
@@ -1215,7 +1210,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-10 14:59:05",
-            "tempo_no_estagio_atual": "41 days 01:48:13.272348"
+            "tempo_no_estagio_atual": "42 days 04:31:14.449413"
         },
         {
             "id": 102,
@@ -1268,7 +1263,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-09 13:34:10",
-            "tempo_no_estagio_atual": "11 days 03:13:08.324348"
+            "tempo_no_estagio_atual": "12 days 05:56:09.501413"
         },
         {
             "id": 103,
@@ -1321,7 +1316,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-01-29 13:54:18",
-            "tempo_no_estagio_atual": "81 days 02:53:00.384348"
+            "tempo_no_estagio_atual": "82 days 05:36:01.561413"
         },
         {
             "id": 118,
@@ -1427,7 +1422,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-01-20 16:59:38",
-            "tempo_no_estagio_atual": "89 days 23:47:40.457348"
+            "tempo_no_estagio_atual": "91 days 02:30:41.634413"
         },
         {
             "id": 120,
@@ -1533,7 +1528,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 13:56:37",
-            "tempo_no_estagio_atual": "4 days 02:50:42.102348"
+            "tempo_no_estagio_atual": "5 days 05:33:43.279413"
         },
         {
             "id": 122,
@@ -1586,7 +1581,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 18:14:56",
-            "tempo_no_estagio_atual": "2 days 22:32:22.758348"
+            "tempo_no_estagio_atual": "4 days 01:15:23.935413"
         },
         {
             "id": 123,
@@ -1692,7 +1687,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-03-03 14:23:12",
-            "tempo_no_estagio_atual": "48 days 02:24:07.133348"
+            "tempo_no_estagio_atual": "49 days 05:07:08.310413"
         },
         {
             "id": 131,
@@ -1745,7 +1740,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-16 12:58:59",
-            "tempo_no_estagio_atual": "35 days 03:48:19.637348"
+            "tempo_no_estagio_atual": "36 days 06:31:20.814413"
         },
         {
             "id": 140,
@@ -1798,7 +1793,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-04-16 14:34:42",
-            "tempo_no_estagio_atual": "4 days 02:12:37.174348"
+            "tempo_no_estagio_atual": "5 days 04:55:38.351413"
         },
         {
             "id": 141,
@@ -1851,7 +1846,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-01-22 16:31:02",
-            "tempo_no_estagio_atual": "88 days 00:16:16.621348"
+            "tempo_no_estagio_atual": "89 days 02:59:17.798413"
         },
         {
             "id": 142,
@@ -2010,7 +2005,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-26 18:38:10",
-            "tempo_no_estagio_atual": "24 days 22:09:08.957348"
+            "tempo_no_estagio_atual": "26 days 00:52:10.134413"
         },
         {
             "id": 145,
@@ -2063,7 +2058,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 19:20:48",
-            "tempo_no_estagio_atual": "4 days 21:26:31.072348"
+            "tempo_no_estagio_atual": "6 days 00:09:32.249413"
         },
         {
             "id": 146,
@@ -2116,7 +2111,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-02-12 12:04:45",
-            "tempo_no_estagio_atual": "67 days 04:42:33.309348"
+            "tempo_no_estagio_atual": "68 days 07:25:34.486413"
         },
         {
             "id": 147,
@@ -2169,7 +2164,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-03-30 16:46:44",
-            "tempo_no_estagio_atual": "21 days 00:00:34.410348"
+            "tempo_no_estagio_atual": "22 days 02:43:35.587413"
         },
         {
             "id": 148,
@@ -2222,7 +2217,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-04-14 14:07:30",
-            "tempo_no_estagio_atual": "6 days 02:39:48.714348"
+            "tempo_no_estagio_atual": "7 days 05:22:49.891413"
         },
         {
             "id": 149,
@@ -2275,7 +2270,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-20 18:59:34",
-            "tempo_no_estagio_atual": "-1 days +21:47:45.158348"
+            "tempo_no_estagio_atual": "1 days 00:30:46.335413"
         },
         {
             "id": 166,
@@ -2328,7 +2323,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-03-10 18:22:19",
-            "tempo_no_estagio_atual": "40 days 22:25:00.093348"
+            "tempo_no_estagio_atual": "42 days 01:08:01.270413"
         },
         {
             "id": 177,
@@ -2381,7 +2376,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-24 12:08:16",
-            "tempo_no_estagio_atual": "27 days 04:39:02.363348"
+            "tempo_no_estagio_atual": "28 days 07:22:03.540413"
         },
         {
             "id": 178,
@@ -2434,7 +2429,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-12 18:23:26",
-            "tempo_no_estagio_atual": "38 days 22:23:52.486348"
+            "tempo_no_estagio_atual": "40 days 01:06:53.663413"
         },
         {
             "id": 179,
@@ -2487,7 +2482,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 12:54:52",
-            "tempo_no_estagio_atual": "5 days 03:52:26.465348"
+            "tempo_no_estagio_atual": "6 days 06:35:27.642413"
         },
         {
             "id": 180,
@@ -2540,7 +2535,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-04-01 16:16:46",
-            "tempo_no_estagio_atual": "19 days 00:30:32.309348"
+            "tempo_no_estagio_atual": "20 days 03:13:33.486413"
         },
         {
             "id": 181,
@@ -2593,7 +2588,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-30 16:58:22",
-            "tempo_no_estagio_atual": "20 days 23:48:56.789348"
+            "tempo_no_estagio_atual": "22 days 02:31:57.966413"
         },
         {
             "id": 182,
@@ -2646,7 +2641,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-04-17 20:00:40",
-            "tempo_no_estagio_atual": "2 days 20:46:38.332348"
+            "tempo_no_estagio_atual": "3 days 23:29:39.509413"
         },
         {
             "id": 183,
@@ -2699,7 +2694,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 18:47:38",
-            "tempo_no_estagio_atual": "2 days 21:59:40.687348"
+            "tempo_no_estagio_atual": "4 days 00:42:41.864413"
         },
         {
             "id": 184,
@@ -2752,7 +2747,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-13 13:50:43",
-            "tempo_no_estagio_atual": "38 days 02:56:36.073348"
+            "tempo_no_estagio_atual": "39 days 05:39:37.250413"
         },
         {
             "id": 185,
@@ -2805,7 +2800,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-20 13:47:24",
-            "tempo_no_estagio_atual": "31 days 02:59:54.684348"
+            "tempo_no_estagio_atual": "32 days 05:42:55.861413"
         },
         {
             "id": 186,
@@ -2858,7 +2853,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-30 16:54:56",
-            "tempo_no_estagio_atual": "20 days 23:52:22.520348"
+            "tempo_no_estagio_atual": "22 days 02:35:23.697413"
         },
         {
             "id": 187,
@@ -2911,7 +2906,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 13:04:39",
-            "tempo_no_estagio_atual": "6 days 03:42:39.422348"
+            "tempo_no_estagio_atual": "7 days 06:25:40.599413"
         },
         {
             "id": 188,
@@ -2964,7 +2959,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-03-27 18:49:12",
-            "tempo_no_estagio_atual": "23 days 21:58:06.629348"
+            "tempo_no_estagio_atual": "25 days 00:41:07.806413"
         },
         {
             "id": 189,
@@ -3070,7 +3065,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-03-12 17:45:21",
-            "tempo_no_estagio_atual": "38 days 23:01:57.455348"
+            "tempo_no_estagio_atual": "40 days 01:44:58.632413"
         },
         {
             "id": 191,
@@ -3123,7 +3118,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-04-10 18:19:45",
-            "tempo_no_estagio_atual": "9 days 22:27:33.635348"
+            "tempo_no_estagio_atual": "11 days 01:10:34.812413"
         },
         {
             "id": 192,
@@ -3176,7 +3171,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-04-01 16:18:22",
-            "tempo_no_estagio_atual": "19 days 00:28:56.952348"
+            "tempo_no_estagio_atual": "20 days 03:11:58.129413"
         },
         {
             "id": 193,
@@ -3229,7 +3224,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-12 12:40:52",
-            "tempo_no_estagio_atual": "39 days 04:06:26.587348"
+            "tempo_no_estagio_atual": "40 days 06:49:27.764413"
         },
         {
             "id": 195,
@@ -3282,7 +3277,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-04-16 18:45:01",
-            "tempo_no_estagio_atual": "3 days 22:02:17.768348"
+            "tempo_no_estagio_atual": "5 days 00:45:18.945413"
         },
         {
             "id": 196,
@@ -3335,7 +3330,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-30 17:02:12",
-            "tempo_no_estagio_atual": "20 days 23:45:07.040348"
+            "tempo_no_estagio_atual": "22 days 02:28:08.217413"
         },
         {
             "id": 197,
@@ -3441,7 +3436,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-18 13:41:56",
-            "tempo_no_estagio_atual": "33 days 03:05:22.689348"
+            "tempo_no_estagio_atual": "34 days 05:48:23.866413"
         },
         {
             "id": 199,
@@ -3494,7 +3489,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-02 15:14:12",
-            "tempo_no_estagio_atual": "49 days 01:33:06.873348"
+            "tempo_no_estagio_atual": "50 days 04:16:08.050413"
         },
         {
             "id": 200,
@@ -3547,7 +3542,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 12:41:36",
-            "tempo_no_estagio_atual": "4 days 04:05:42.527348"
+            "tempo_no_estagio_atual": "5 days 06:48:43.704413"
         },
         {
             "id": 202,
@@ -3600,7 +3595,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-03-19 12:54:39",
-            "tempo_no_estagio_atual": "32 days 03:52:39.881348"
+            "tempo_no_estagio_atual": "33 days 06:35:41.058413"
         },
         {
             "id": 203,
@@ -3653,7 +3648,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 18:53:09",
-            "tempo_no_estagio_atual": "4 days 21:54:10.007348"
+            "tempo_no_estagio_atual": "6 days 00:37:11.184413"
         },
         {
             "id": 204,
@@ -3706,7 +3701,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-04-14 13:48:54",
-            "tempo_no_estagio_atual": "6 days 02:58:24.621348"
+            "tempo_no_estagio_atual": "7 days 05:41:25.798413"
         },
         {
             "id": 205,
@@ -3759,7 +3754,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-04 14:50:28",
-            "tempo_no_estagio_atual": "47 days 01:56:50.577348"
+            "tempo_no_estagio_atual": "48 days 04:39:51.754413"
         },
         {
             "id": 206,
@@ -3812,7 +3807,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-08 16:15:01",
-            "tempo_no_estagio_atual": "12 days 00:32:17.335348"
+            "tempo_no_estagio_atual": "13 days 03:15:18.512413"
         },
         {
             "id": 207,
@@ -3865,7 +3860,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-02-23 18:30:51",
-            "tempo_no_estagio_atual": "55 days 22:16:27.348348"
+            "tempo_no_estagio_atual": "57 days 00:59:28.525413"
         },
         {
             "id": 221,
@@ -3918,7 +3913,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-02-25 14:10:35",
-            "tempo_no_estagio_atual": "54 days 02:36:43.363348"
+            "tempo_no_estagio_atual": "55 days 05:19:44.540413"
         },
         {
             "id": 222,
@@ -3971,7 +3966,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-10 12:23:29",
-            "tempo_no_estagio_atual": "41 days 04:23:49.390348"
+            "tempo_no_estagio_atual": "42 days 07:06:50.567413"
         },
         {
             "id": 223,
@@ -4024,7 +4019,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-11 17:08:10",
-            "tempo_no_estagio_atual": "39 days 23:39:08.955348"
+            "tempo_no_estagio_atual": "41 days 02:22:10.132413"
         },
         {
             "id": 224,
@@ -4077,7 +4072,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-23 12:31:07",
-            "tempo_no_estagio_atual": "28 days 04:16:11.571348"
+            "tempo_no_estagio_atual": "29 days 06:59:12.748413"
         },
         {
             "id": 225,
@@ -4130,7 +4125,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 14:23:52",
-            "tempo_no_estagio_atual": "6 days 02:23:26.793348"
+            "tempo_no_estagio_atual": "7 days 05:06:27.970413"
         },
         {
             "id": 226,
@@ -4183,7 +4178,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-03-24 19:09:02",
-            "tempo_no_estagio_atual": "26 days 21:38:17.189348"
+            "tempo_no_estagio_atual": "28 days 00:21:18.366413"
         },
         {
             "id": 228,
@@ -4236,7 +4231,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-31 22:46:09",
-            "tempo_no_estagio_atual": "19 days 18:01:09.875348"
+            "tempo_no_estagio_atual": "20 days 20:44:11.052413"
         },
         {
             "id": 229,
@@ -4289,7 +4284,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-06 18:34:21",
-            "tempo_no_estagio_atual": "13 days 22:12:58.098348"
+            "tempo_no_estagio_atual": "15 days 00:55:59.275413"
         },
         {
             "id": 230,
@@ -4342,7 +4337,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-04-20 16:18:42",
-            "tempo_no_estagio_atual": "0 days 00:28:37.065348"
+            "tempo_no_estagio_atual": "1 days 03:11:38.242413"
         },
         {
             "id": 231,
@@ -4395,7 +4390,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 17:54:29",
-            "tempo_no_estagio_atual": "2 days 22:52:49.479348"
+            "tempo_no_estagio_atual": "4 days 01:35:50.656413"
         },
         {
             "id": 241,
@@ -4448,7 +4443,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-04-16 17:05:41",
-            "tempo_no_estagio_atual": "3 days 23:41:37.795348"
+            "tempo_no_estagio_atual": "5 days 02:24:38.972413"
         },
         {
             "id": 242,
@@ -4501,7 +4496,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-03-20 12:42:12",
-            "tempo_no_estagio_atual": "31 days 04:05:07.086348"
+            "tempo_no_estagio_atual": "32 days 06:48:08.263413"
         },
         {
             "id": 243,
@@ -4554,7 +4549,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-02-12 11:56:48",
-            "tempo_no_estagio_atual": "67 days 04:50:30.430348"
+            "tempo_no_estagio_atual": "68 days 07:33:31.607413"
         },
         {
             "id": 244,
@@ -4607,7 +4602,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-11 14:19:32",
-            "tempo_no_estagio_atual": "40 days 02:27:46.716348"
+            "tempo_no_estagio_atual": "41 days 05:10:47.893413"
         },
         {
             "id": 245,
@@ -4660,7 +4655,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-26 11:05:57",
-            "tempo_no_estagio_atual": "25 days 05:41:21.863348"
+            "tempo_no_estagio_atual": "26 days 08:24:23.040413"
         },
         {
             "id": 246,
@@ -4713,7 +4708,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-02-19 13:47:21",
-            "tempo_no_estagio_atual": "60 days 02:59:58.039348"
+            "tempo_no_estagio_atual": "61 days 05:42:59.216413"
         },
         {
             "id": 247,
@@ -4766,7 +4761,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-03-26 13:28:21",
-            "tempo_no_estagio_atual": "25 days 03:18:57.930348"
+            "tempo_no_estagio_atual": "26 days 06:01:59.107413"
         },
         {
             "id": 248,
@@ -4819,7 +4814,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-06 18:15:00",
-            "tempo_no_estagio_atual": "13 days 22:32:18.306348"
+            "tempo_no_estagio_atual": "15 days 01:15:19.483413"
         },
         {
             "id": 250,
@@ -4872,7 +4867,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-07 16:40:59",
-            "tempo_no_estagio_atual": "13 days 00:06:19.647348"
+            "tempo_no_estagio_atual": "14 days 02:49:20.824413"
         },
         {
             "id": 251,
@@ -4925,7 +4920,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-03-27 17:18:51",
-            "tempo_no_estagio_atual": "23 days 23:28:27.524348"
+            "tempo_no_estagio_atual": "25 days 02:11:28.701413"
         },
         {
             "id": 253,
@@ -4978,7 +4973,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-23 12:30:33",
-            "tempo_no_estagio_atual": "28 days 04:16:45.424348"
+            "tempo_no_estagio_atual": "29 days 06:59:46.601413"
         },
         {
             "id": 255,
@@ -5031,7 +5026,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-03-27 13:22:00",
-            "tempo_no_estagio_atual": "24 days 03:25:18.496348"
+            "tempo_no_estagio_atual": "25 days 06:08:19.673413"
         },
         {
             "id": 256,
@@ -5084,7 +5079,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-17 14:24:17",
-            "tempo_no_estagio_atual": "3 days 02:23:01.982348"
+            "tempo_no_estagio_atual": "4 days 05:06:03.159413"
         },
         {
             "id": 257,
@@ -5137,7 +5132,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-09 18:09:25",
-            "tempo_no_estagio_atual": "10 days 22:37:53.764348"
+            "tempo_no_estagio_atual": "12 days 01:20:54.941413"
         },
         {
             "id": 258,
@@ -5190,7 +5185,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 17:24:48",
-            "tempo_no_estagio_atual": "3 days 23:22:30.507348"
+            "tempo_no_estagio_atual": "5 days 02:05:31.684413"
         },
         {
             "id": 259,
@@ -5243,7 +5238,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-25 14:19:52",
-            "tempo_no_estagio_atual": "26 days 02:27:26.932348"
+            "tempo_no_estagio_atual": "27 days 05:10:28.109413"
         },
         {
             "id": 261,
@@ -5349,7 +5344,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 17:52:06",
-            "tempo_no_estagio_atual": "-1 days +22:55:13.202348"
+            "tempo_no_estagio_atual": "1 days 01:38:14.379413"
         },
         {
             "id": 263,
@@ -5402,7 +5397,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-13 18:50:20",
-            "tempo_no_estagio_atual": "6 days 21:56:58.838348"
+            "tempo_no_estagio_atual": "8 days 00:40:00.015413"
         },
         {
             "id": 264,
@@ -5455,7 +5450,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-17 17:40:14",
-            "tempo_no_estagio_atual": "2 days 23:07:05.231348"
+            "tempo_no_estagio_atual": "4 days 01:50:06.408413"
         },
         {
             "id": 266,
@@ -5508,7 +5503,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-04-13 18:46:02",
-            "tempo_no_estagio_atual": "6 days 22:01:16.834348"
+            "tempo_no_estagio_atual": "8 days 00:44:18.011413"
         },
         {
             "id": 267,
@@ -5561,7 +5556,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-09 17:54:21",
-            "tempo_no_estagio_atual": "10 days 22:52:57.713348"
+            "tempo_no_estagio_atual": "12 days 01:35:58.890413"
         },
         {
             "id": 268,
@@ -5614,7 +5609,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-26 19:14:48",
-            "tempo_no_estagio_atual": "24 days 21:32:30.464348"
+            "tempo_no_estagio_atual": "26 days 00:15:31.641413"
         },
         {
             "id": 269,
@@ -5667,7 +5662,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-04-01 18:33:13",
-            "tempo_no_estagio_atual": "18 days 22:14:05.262348"
+            "tempo_no_estagio_atual": "20 days 00:57:06.439413"
         },
         {
             "id": 270,
@@ -5720,7 +5715,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-10 17:17:45",
-            "tempo_no_estagio_atual": "9 days 23:29:34.081348"
+            "tempo_no_estagio_atual": "11 days 02:12:35.258413"
         },
         {
             "id": 271,
@@ -5773,7 +5768,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-10 12:52:01",
-            "tempo_no_estagio_atual": "10 days 03:55:17.937348"
+            "tempo_no_estagio_atual": "11 days 06:38:19.114413"
         },
         {
             "id": 272,
@@ -5826,7 +5821,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-10 13:58:56",
-            "tempo_no_estagio_atual": "10 days 02:48:22.854348"
+            "tempo_no_estagio_atual": "11 days 05:31:24.031413"
         },
         {
             "id": 273,
@@ -5879,7 +5874,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 18:05:15",
-            "tempo_no_estagio_atual": "-1 days +22:42:03.446348"
+            "tempo_no_estagio_atual": "1 days 01:25:04.623413"
         },
         {
             "id": 274,
@@ -5932,7 +5927,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-15 16:57:29",
-            "tempo_no_estagio_atual": "4 days 23:49:49.594348"
+            "tempo_no_estagio_atual": "6 days 02:32:50.771413"
         },
         {
             "id": 275,
@@ -5985,7 +5980,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-31 12:17:57",
-            "tempo_no_estagio_atual": "20 days 04:29:21.459348"
+            "tempo_no_estagio_atual": "21 days 07:12:22.636413"
         },
         {
             "id": 276,
@@ -6038,7 +6033,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-27 18:51:14",
-            "tempo_no_estagio_atual": "23 days 21:56:05.107348"
+            "tempo_no_estagio_atual": "25 days 00:39:06.284413"
         },
         {
             "id": 277,
@@ -6091,7 +6086,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-24 13:10:05",
-            "tempo_no_estagio_atual": "27 days 03:37:13.862348"
+            "tempo_no_estagio_atual": "28 days 06:20:15.039413"
         },
         {
             "id": 278,
@@ -6144,7 +6139,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-25 13:58:47",
-            "tempo_no_estagio_atual": "26 days 02:48:31.326348"
+            "tempo_no_estagio_atual": "27 days 05:31:32.503413"
         },
         {
             "id": 279,
@@ -6197,7 +6192,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-30 20:06:27",
-            "tempo_no_estagio_atual": "20 days 20:40:51.299348"
+            "tempo_no_estagio_atual": "21 days 23:23:52.476413"
         },
         {
             "id": 280,
@@ -6250,7 +6245,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-17 17:00:52",
-            "tempo_no_estagio_atual": "33 days 23:46:26.384348"
+            "tempo_no_estagio_atual": "35 days 02:29:27.561413"
         },
         {
             "id": 281,
@@ -6303,7 +6298,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 14:20:11",
-            "tempo_no_estagio_atual": "4 days 02:27:08.101348"
+            "tempo_no_estagio_atual": "5 days 05:10:09.278413"
         },
         {
             "id": 282,
@@ -6356,7 +6351,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-08 00:21:42",
-            "tempo_no_estagio_atual": "12 days 16:25:37.190348"
+            "tempo_no_estagio_atual": "13 days 19:08:38.367413"
         },
         {
             "id": 283,
@@ -6409,7 +6404,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-09 13:51:28",
-            "tempo_no_estagio_atual": "11 days 02:55:50.897348"
+            "tempo_no_estagio_atual": "12 days 05:38:52.074413"
         },
         {
             "id": 284,
@@ -6462,7 +6457,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-03-31 13:40:53",
-            "tempo_no_estagio_atual": "20 days 03:06:25.757348"
+            "tempo_no_estagio_atual": "21 days 05:49:26.934413"
         },
         {
             "id": 285,
@@ -6515,7 +6510,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 13:14:35",
-            "tempo_no_estagio_atual": "4 days 03:32:43.798348"
+            "tempo_no_estagio_atual": "5 days 06:15:44.975413"
         },
         {
             "id": 287,
@@ -6568,7 +6563,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-12 14:12:44",
-            "tempo_no_estagio_atual": "39 days 02:34:35.154348"
+            "tempo_no_estagio_atual": "40 days 05:17:36.331413"
         },
         {
             "id": 288,
@@ -6621,7 +6616,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-26 18:37:48",
-            "tempo_no_estagio_atual": "24 days 22:09:30.840348"
+            "tempo_no_estagio_atual": "26 days 00:52:32.017413"
         },
         {
             "id": 290,
@@ -6674,7 +6669,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-23 12:31:34",
-            "tempo_no_estagio_atual": "28 days 04:15:44.639348"
+            "tempo_no_estagio_atual": "29 days 06:58:45.816413"
         },
         {
             "id": 292,
@@ -6727,7 +6722,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-19 18:31:59",
-            "tempo_no_estagio_atual": "31 days 22:15:20.037348"
+            "tempo_no_estagio_atual": "33 days 00:58:21.214413"
         },
         {
             "id": 293,
@@ -6780,7 +6775,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-09 13:51:49",
-            "tempo_no_estagio_atual": "11 days 02:55:29.752348"
+            "tempo_no_estagio_atual": "12 days 05:38:30.929413"
         },
         {
             "id": 294,
@@ -6833,7 +6828,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-07 16:44:10",
-            "tempo_no_estagio_atual": "13 days 00:03:08.639348"
+            "tempo_no_estagio_atual": "14 days 02:46:09.816413"
         },
         {
             "id": 295,
@@ -6886,7 +6881,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-08 11:50:17",
-            "tempo_no_estagio_atual": "12 days 04:57:02.079348"
+            "tempo_no_estagio_atual": "13 days 07:40:03.256413"
         },
         {
             "id": 296,
@@ -6939,7 +6934,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 13:37:53",
-            "tempo_no_estagio_atual": "4 days 03:09:25.435348"
+            "tempo_no_estagio_atual": "5 days 05:52:26.612413"
         },
         {
             "id": 297,
@@ -6992,7 +6987,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-17 13:30:33",
-            "tempo_no_estagio_atual": "34 days 03:16:45.292348"
+            "tempo_no_estagio_atual": "35 days 05:59:46.469413"
         },
         {
             "id": 298,
@@ -7045,7 +7040,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-08 10:59:41",
-            "tempo_no_estagio_atual": "12 days 05:47:37.528348"
+            "tempo_no_estagio_atual": "13 days 08:30:38.705413"
         },
         {
             "id": 299,
@@ -7098,7 +7093,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-04-17 20:02:39",
-            "tempo_no_estagio_atual": "2 days 20:44:40.056348"
+            "tempo_no_estagio_atual": "3 days 23:27:41.233413"
         },
         {
             "id": 300,
@@ -7151,7 +7146,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-10 14:42:12",
-            "tempo_no_estagio_atual": "10 days 02:05:06.947348"
+            "tempo_no_estagio_atual": "11 days 04:48:08.124413"
         },
         {
             "id": 301,
@@ -7204,7 +7199,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 14:30:42",
-            "tempo_no_estagio_atual": "5 days 02:16:36.885348"
+            "tempo_no_estagio_atual": "6 days 04:59:38.062413"
         },
         {
             "id": 302,
@@ -7257,7 +7252,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-20 17:42:35",
-            "tempo_no_estagio_atual": "30 days 23:04:43.854348"
+            "tempo_no_estagio_atual": "32 days 01:47:45.031413"
         },
         {
             "id": 303,
@@ -7310,7 +7305,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-06 19:43:38",
-            "tempo_no_estagio_atual": "13 days 21:03:40.576348"
+            "tempo_no_estagio_atual": "14 days 23:46:41.753413"
         },
         {
             "id": 304,
@@ -7363,7 +7358,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-06 16:41:24",
-            "tempo_no_estagio_atual": "14 days 00:05:54.968348"
+            "tempo_no_estagio_atual": "15 days 02:48:56.145413"
         },
         {
             "id": 305,
@@ -7416,7 +7411,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 11:12:14",
-            "tempo_no_estagio_atual": "0 days 05:35:04.406348"
+            "tempo_no_estagio_atual": "1 days 08:18:05.583413"
         },
         {
             "id": 306,
@@ -7469,7 +7464,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-12 17:48:14",
-            "tempo_no_estagio_atual": "38 days 22:59:04.968348"
+            "tempo_no_estagio_atual": "40 days 01:42:06.145413"
         },
         {
             "id": 307,
@@ -7522,7 +7517,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-08 20:42:03",
-            "tempo_no_estagio_atual": "11 days 20:05:16.226348"
+            "tempo_no_estagio_atual": "12 days 22:48:17.403413"
         },
         {
             "id": 308,
@@ -7575,7 +7570,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 19:58:14",
-            "tempo_no_estagio_atual": "2 days 20:49:04.763348"
+            "tempo_no_estagio_atual": "3 days 23:32:05.940413"
         },
         {
             "id": 310,
@@ -7628,7 +7623,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-03-27 13:08:50",
-            "tempo_no_estagio_atual": "24 days 03:38:29.073348"
+            "tempo_no_estagio_atual": "25 days 06:21:30.250413"
         },
         {
             "id": 311,
@@ -7681,7 +7676,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-08 13:42:12",
-            "tempo_no_estagio_atual": "12 days 03:05:06.294348"
+            "tempo_no_estagio_atual": "13 days 05:48:07.471413"
         },
         {
             "id": 324,
@@ -7734,7 +7729,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 16:29:37",
-            "tempo_no_estagio_atual": "0 days 00:17:41.467348"
+            "tempo_no_estagio_atual": "1 days 03:00:42.644413"
         },
         {
             "id": 325,
@@ -7787,7 +7782,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-03-30 16:17:20",
-            "tempo_no_estagio_atual": "21 days 00:29:58.457348"
+            "tempo_no_estagio_atual": "22 days 03:12:59.634413"
         },
         {
             "id": 326,
@@ -7840,7 +7835,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 19:04:27",
-            "tempo_no_estagio_atual": "-1 days +21:42:52.087348"
+            "tempo_no_estagio_atual": "1 days 00:25:53.264413"
         },
         {
             "id": 327,
@@ -7893,7 +7888,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-04-20 19:22:56",
-            "tempo_no_estagio_atual": "-1 days +21:24:22.540348"
+            "tempo_no_estagio_atual": "1 days 00:07:23.717413"
         },
         {
             "id": 328,
@@ -7946,7 +7941,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-15 14:19:33",
-            "tempo_no_estagio_atual": "5 days 02:27:45.616348"
+            "tempo_no_estagio_atual": "6 days 05:10:46.793413"
         },
         {
             "id": 329,
@@ -7999,7 +7994,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-06 17:54:14",
-            "tempo_no_estagio_atual": "13 days 22:53:04.334348"
+            "tempo_no_estagio_atual": "15 days 01:36:05.511413"
         },
         {
             "id": 330,
@@ -8052,7 +8047,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-10 13:04:38",
-            "tempo_no_estagio_atual": "10 days 03:42:40.812348"
+            "tempo_no_estagio_atual": "11 days 06:25:41.989413"
         },
         {
             "id": 331,
@@ -8105,7 +8100,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-20 18:09:50",
-            "tempo_no_estagio_atual": "-1 days +22:37:28.981348"
+            "tempo_no_estagio_atual": "1 days 01:20:30.158413"
         },
         {
             "id": 335,
@@ -8158,7 +8153,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-13 13:35:13",
-            "tempo_no_estagio_atual": "7 days 03:12:05.589348"
+            "tempo_no_estagio_atual": "8 days 05:55:06.766413"
         },
         {
             "id": 336,
@@ -8211,7 +8206,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-07 13:57:36",
-            "tempo_no_estagio_atual": "13 days 02:49:42.489348"
+            "tempo_no_estagio_atual": "14 days 05:32:43.666413"
         },
         {
             "id": 337,
@@ -8264,7 +8259,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-08 13:28:26",
-            "tempo_no_estagio_atual": "12 days 03:18:52.918348"
+            "tempo_no_estagio_atual": "13 days 06:01:54.095413"
         },
         {
             "id": 338,
@@ -8317,7 +8312,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 12:50:51",
-            "tempo_no_estagio_atual": "4 days 03:56:27.799348"
+            "tempo_no_estagio_atual": "5 days 06:39:28.976413"
         },
         {
             "id": 339,
@@ -8370,7 +8365,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-20 14:15:36",
-            "tempo_no_estagio_atual": "31 days 02:31:43.230348"
+            "tempo_no_estagio_atual": "32 days 05:14:44.407413"
         },
         {
             "id": 340,
@@ -8423,7 +8418,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-08 19:02:11",
-            "tempo_no_estagio_atual": "11 days 21:45:07.868348"
+            "tempo_no_estagio_atual": "13 days 00:28:09.045413"
         },
         {
             "id": 341,
@@ -8476,7 +8471,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-06 17:12:09",
-            "tempo_no_estagio_atual": "13 days 23:35:10.105348"
+            "tempo_no_estagio_atual": "15 days 02:18:11.282413"
         },
         {
             "id": 342,
@@ -8529,7 +8524,7 @@
             "gerencia_nome": "GLIDS",
             "gerencia_id": 7.0,
             "atual_entrada_neste_estagio": "2026-04-17 14:35:55",
-            "tempo_no_estagio_atual": "3 days 02:11:23.777348"
+            "tempo_no_estagio_atual": "4 days 04:54:24.954413"
         },
         {
             "id": 343,
@@ -8582,7 +8577,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 16:41:39",
-            "tempo_no_estagio_atual": "6 days 00:05:39.356348"
+            "tempo_no_estagio_atual": "7 days 02:48:40.533413"
         },
         {
             "id": 344,
@@ -8635,7 +8630,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-08 10:42:45",
-            "tempo_no_estagio_atual": "12 days 06:04:34.010348"
+            "tempo_no_estagio_atual": "13 days 08:47:35.187413"
         },
         {
             "id": 345,
@@ -8688,7 +8683,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-09 17:27:26",
-            "tempo_no_estagio_atual": "10 days 23:19:52.891348"
+            "tempo_no_estagio_atual": "12 days 02:02:54.068413"
         },
         {
             "id": 346,
@@ -8741,7 +8736,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-10 17:50:44",
-            "tempo_no_estagio_atual": "9 days 22:56:34.994348"
+            "tempo_no_estagio_atual": "11 days 01:39:36.171413"
         },
         {
             "id": 347,
@@ -8794,7 +8789,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-17 10:51:26",
-            "tempo_no_estagio_atual": "3 days 05:55:52.292348"
+            "tempo_no_estagio_atual": "4 days 08:38:53.469413"
         },
         {
             "id": 350,
@@ -8847,7 +8842,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-31 13:38:53",
-            "tempo_no_estagio_atual": "20 days 03:08:25.958348"
+            "tempo_no_estagio_atual": "21 days 05:51:27.135413"
         },
         {
             "id": 351,
@@ -8900,7 +8895,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-03-27 17:26:41",
-            "tempo_no_estagio_atual": "23 days 23:20:37.263348"
+            "tempo_no_estagio_atual": "25 days 02:03:38.440413"
         },
         {
             "id": 352,
@@ -8953,7 +8948,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 14:41:28",
-            "tempo_no_estagio_atual": "5 days 02:05:50.892348"
+            "tempo_no_estagio_atual": "6 days 04:48:52.069413"
         },
         {
             "id": 353,
@@ -9006,7 +9001,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 19:10:34",
-            "tempo_no_estagio_atual": "3 days 21:36:44.622348"
+            "tempo_no_estagio_atual": "5 days 00:19:45.799413"
         },
         {
             "id": 355,
@@ -9059,7 +9054,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 16:43:56",
-            "tempo_no_estagio_atual": "6 days 00:03:22.877348"
+            "tempo_no_estagio_atual": "7 days 02:46:24.054413"
         },
         {
             "id": 356,
@@ -9112,7 +9107,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 17:58:56",
-            "tempo_no_estagio_atual": "-1 days +22:48:22.779348"
+            "tempo_no_estagio_atual": "1 days 01:31:23.956413"
         },
         {
             "id": 357,
@@ -9165,7 +9160,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-13 14:41:28",
-            "tempo_no_estagio_atual": "7 days 02:05:50.307348"
+            "tempo_no_estagio_atual": "8 days 04:48:51.484413"
         },
         {
             "id": 358,
@@ -9218,7 +9213,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 17:41:33",
-            "tempo_no_estagio_atual": "5 days 23:05:46.171348"
+            "tempo_no_estagio_atual": "7 days 01:48:47.348413"
         },
         {
             "id": 359,
@@ -9271,7 +9266,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 15:28:53",
-            "tempo_no_estagio_atual": "0 days 01:18:26.150348"
+            "tempo_no_estagio_atual": "1 days 04:01:27.327413"
         },
         {
             "id": 360,
@@ -9324,7 +9319,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-07 13:50:50",
-            "tempo_no_estagio_atual": "13 days 02:56:28.554348"
+            "tempo_no_estagio_atual": "14 days 05:39:29.731413"
         },
         {
             "id": 361,
@@ -9377,7 +9372,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-09 17:46:01",
-            "tempo_no_estagio_atual": "10 days 23:01:18.126348"
+            "tempo_no_estagio_atual": "12 days 01:44:19.303413"
         },
         {
             "id": 362,
@@ -9430,7 +9425,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-26 13:06:29",
-            "tempo_no_estagio_atual": "25 days 03:40:49.827348"
+            "tempo_no_estagio_atual": "26 days 06:23:51.004413"
         },
         {
             "id": 363,
@@ -9483,7 +9478,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 17:10:36",
-            "tempo_no_estagio_atual": "-1 days +23:36:43.081348"
+            "tempo_no_estagio_atual": "1 days 02:19:44.258413"
         },
         {
             "id": 364,
@@ -9536,7 +9531,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 12:25:48",
-            "tempo_no_estagio_atual": "5 days 04:21:30.981348"
+            "tempo_no_estagio_atual": "6 days 07:04:32.158413"
         },
         {
             "id": 365,
@@ -9589,7 +9584,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-03-30 16:38:15",
-            "tempo_no_estagio_atual": "21 days 00:09:04.167348"
+            "tempo_no_estagio_atual": "22 days 02:52:05.344413"
         },
         {
             "id": 366,
@@ -9642,7 +9637,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-01 12:42:26",
-            "tempo_no_estagio_atual": "19 days 04:04:52.380348"
+            "tempo_no_estagio_atual": "20 days 06:47:53.557413"
         },
         {
             "id": 367,
@@ -9695,7 +9690,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-01 17:25:33",
-            "tempo_no_estagio_atual": "18 days 23:21:45.542348"
+            "tempo_no_estagio_atual": "20 days 02:04:46.719413"
         },
         {
             "id": 368,
@@ -9748,7 +9743,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-25 14:23:47",
-            "tempo_no_estagio_atual": "26 days 02:23:31.766348"
+            "tempo_no_estagio_atual": "27 days 05:06:32.943413"
         },
         {
             "id": 369,
@@ -9801,7 +9796,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-03-27 11:51:00",
-            "tempo_no_estagio_atual": "24 days 04:56:18.803348"
+            "tempo_no_estagio_atual": "25 days 07:39:19.980413"
         },
         {
             "id": 370,
@@ -9854,7 +9849,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 19:22:37",
-            "tempo_no_estagio_atual": "-1 days +21:24:41.432348"
+            "tempo_no_estagio_atual": "1 days 00:07:42.609413"
         },
         {
             "id": 371,
@@ -9907,7 +9902,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-27 11:48:45",
-            "tempo_no_estagio_atual": "24 days 04:58:34.142348"
+            "tempo_no_estagio_atual": "25 days 07:41:35.319413"
         },
         {
             "id": 372,
@@ -9960,7 +9955,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 19:00:45",
-            "tempo_no_estagio_atual": "2 days 21:46:33.334348"
+            "tempo_no_estagio_atual": "4 days 00:29:34.511413"
         },
         {
             "id": 373,
@@ -10013,7 +10008,7 @@
             "gerencia_nome": "GLIFE",
             "gerencia_id": 4.0,
             "atual_entrada_neste_estagio": "2026-04-17 17:08:02",
-            "tempo_no_estagio_atual": "2 days 23:39:17.092348"
+            "tempo_no_estagio_atual": "4 days 02:22:18.269413"
         },
         {
             "id": 374,
@@ -10066,7 +10061,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 18:24:12",
-            "tempo_no_estagio_atual": "-1 days +22:23:06.806348"
+            "tempo_no_estagio_atual": "1 days 01:06:07.983413"
         },
         {
             "id": 376,
@@ -10119,7 +10114,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-30 16:42:54",
-            "tempo_no_estagio_atual": "21 days 00:04:25.179348"
+            "tempo_no_estagio_atual": "22 days 02:47:26.356413"
         },
         {
             "id": 377,
@@ -10172,7 +10167,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-03-27 16:53:42",
-            "tempo_no_estagio_atual": "23 days 23:53:36.996348"
+            "tempo_no_estagio_atual": "25 days 02:36:38.173413"
         },
         {
             "id": 378,
@@ -10225,7 +10220,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-13 12:04:45",
-            "tempo_no_estagio_atual": "7 days 04:42:34.020348"
+            "tempo_no_estagio_atual": "8 days 07:25:35.197413"
         },
         {
             "id": 379,
@@ -10278,7 +10273,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-13 17:55:49",
-            "tempo_no_estagio_atual": "6 days 22:51:29.281348"
+            "tempo_no_estagio_atual": "8 days 01:34:30.458413"
         },
         {
             "id": 380,
@@ -10331,7 +10326,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 15:01:11",
-            "tempo_no_estagio_atual": "4 days 01:46:07.746348"
+            "tempo_no_estagio_atual": "5 days 04:29:08.923413"
         },
         {
             "id": 381,
@@ -10384,7 +10379,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 17:01:13",
-            "tempo_no_estagio_atual": "5 days 23:46:05.482348"
+            "tempo_no_estagio_atual": "7 days 02:29:06.659413"
         },
         {
             "id": 382,
@@ -10437,7 +10432,7 @@
             "gerencia_nome": "GEMMH",
             "gerencia_id": 2.0,
             "atual_entrada_neste_estagio": "2026-04-15 13:46:20",
-            "tempo_no_estagio_atual": "5 days 03:00:58.318348"
+            "tempo_no_estagio_atual": "6 days 05:43:59.495413"
         },
         {
             "id": 383,
@@ -10490,7 +10485,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 14:35:53",
-            "tempo_no_estagio_atual": "4 days 02:11:26.186348"
+            "tempo_no_estagio_atual": "5 days 04:54:27.363413"
         },
         {
             "id": 384,
@@ -10543,7 +10538,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-07 15:24:11",
-            "tempo_no_estagio_atual": "13 days 01:23:08.004348"
+            "tempo_no_estagio_atual": "14 days 04:06:09.181413"
         },
         {
             "id": 385,
@@ -10596,7 +10591,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 11:35:29",
-            "tempo_no_estagio_atual": "0 days 05:11:50.216348"
+            "tempo_no_estagio_atual": "1 days 07:54:51.393413"
         },
         {
             "id": 386,
@@ -10649,7 +10644,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 12:45:16",
-            "tempo_no_estagio_atual": "0 days 04:02:02.658348"
+            "tempo_no_estagio_atual": "1 days 06:45:03.835413"
         },
         {
             "id": 387,
@@ -10702,7 +10697,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 18:48:13",
-            "tempo_no_estagio_atual": "-1 days +21:59:06.021348"
+            "tempo_no_estagio_atual": "1 days 00:42:07.198413"
         },
         {
             "id": 388,
@@ -10755,7 +10750,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-06 20:28:03",
-            "tempo_no_estagio_atual": "13 days 20:19:15.581348"
+            "tempo_no_estagio_atual": "14 days 23:02:16.758413"
         },
         {
             "id": 389,
@@ -10808,7 +10803,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-20 13:12:11",
-            "tempo_no_estagio_atual": "0 days 03:35:07.896348"
+            "tempo_no_estagio_atual": "1 days 06:18:09.073413"
         },
         {
             "id": 390,
@@ -10861,7 +10856,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-17 14:05:56",
-            "tempo_no_estagio_atual": "3 days 02:41:22.453348"
+            "tempo_no_estagio_atual": "4 days 05:24:23.630413"
         },
         {
             "id": 391,
@@ -10914,7 +10909,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-08 20:41:51",
-            "tempo_no_estagio_atual": "11 days 20:05:27.446348"
+            "tempo_no_estagio_atual": "12 days 22:48:28.623413"
         },
         {
             "id": 392,
@@ -10967,7 +10962,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 16:32:24",
-            "tempo_no_estagio_atual": "4 days 00:14:54.538348"
+            "tempo_no_estagio_atual": "5 days 02:57:55.715413"
         },
         {
             "id": 393,
@@ -11020,7 +11015,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 13:10:29",
-            "tempo_no_estagio_atual": "6 days 03:36:49.844348"
+            "tempo_no_estagio_atual": "7 days 06:19:51.021413"
         },
         {
             "id": 394,
@@ -11073,7 +11068,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 18:24:05",
-            "tempo_no_estagio_atual": "4 days 22:23:13.552348"
+            "tempo_no_estagio_atual": "6 days 01:06:14.729413"
         },
         {
             "id": 395,
@@ -11126,7 +11121,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 19:12:54",
-            "tempo_no_estagio_atual": "-1 days +21:34:24.954348"
+            "tempo_no_estagio_atual": "1 days 00:17:26.131413"
         },
         {
             "id": 396,
@@ -11179,7 +11174,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 17:43:38",
-            "tempo_no_estagio_atual": "3 days 23:03:40.890348"
+            "tempo_no_estagio_atual": "5 days 01:46:42.067413"
         },
         {
             "id": 397,
@@ -11232,7 +11227,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-10 13:32:31",
-            "tempo_no_estagio_atual": "10 days 03:14:48.125348"
+            "tempo_no_estagio_atual": "11 days 05:57:49.302413"
         },
         {
             "id": 398,
@@ -11285,7 +11280,7 @@
             "gerencia_nome": "GLICT",
             "gerencia_id": 10.0,
             "atual_entrada_neste_estagio": "2026-04-15 17:39:15",
-            "tempo_no_estagio_atual": "4 days 23:08:03.630348"
+            "tempo_no_estagio_atual": "6 days 01:51:04.807413"
         },
         {
             "id": 401,
@@ -11338,7 +11333,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-09 17:16:46",
-            "tempo_no_estagio_atual": "10 days 23:30:32.260348"
+            "tempo_no_estagio_atual": "12 days 02:13:33.437413"
         },
         {
             "id": 403,
@@ -11391,7 +11386,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 14:24:06",
-            "tempo_no_estagio_atual": "5 days 02:23:13.024348"
+            "tempo_no_estagio_atual": "6 days 05:06:14.201413"
         },
         {
             "id": 404,
@@ -11444,7 +11439,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 14:16:34",
-            "tempo_no_estagio_atual": "0 days 02:30:44.488348"
+            "tempo_no_estagio_atual": "1 days 05:13:45.665413"
         },
         {
             "id": 405,
@@ -11497,7 +11492,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 17:00:26",
-            "tempo_no_estagio_atual": "2 days 23:46:52.258348"
+            "tempo_no_estagio_atual": "4 days 02:29:53.435413"
         },
         {
             "id": 408,
@@ -11550,7 +11545,7 @@
             "gerencia_nome": "GLIDS",
             "gerencia_id": 7.0,
             "atual_entrada_neste_estagio": "2026-04-15 13:45:32",
-            "tempo_no_estagio_atual": "5 days 03:01:46.900348"
+            "tempo_no_estagio_atual": "6 days 05:44:48.077413"
         },
         {
             "id": 412,
@@ -11603,7 +11598,7 @@
             "gerencia_nome": "GCC-ATI",
             "gerencia_id": 12.0,
             "atual_entrada_neste_estagio": "2026-04-20 18:38:21",
-            "tempo_no_estagio_atual": "-1 days +22:08:57.730348"
+            "tempo_no_estagio_atual": "1 days 00:51:58.907413"
         },
         {
             "id": 413,
@@ -11656,7 +11651,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 13:11:50",
-            "tempo_no_estagio_atual": "6 days 03:35:28.658348"
+            "tempo_no_estagio_atual": "7 days 06:18:29.835413"
         },
         {
             "id": 414,
@@ -11709,7 +11704,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 13:44:26",
-            "tempo_no_estagio_atual": "5 days 03:02:53.099348"
+            "tempo_no_estagio_atual": "6 days 05:45:54.276413"
         },
         {
             "id": 415,
@@ -11762,7 +11757,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-14 12:58:26",
-            "tempo_no_estagio_atual": "6 days 03:48:52.697348"
+            "tempo_no_estagio_atual": "7 days 06:31:53.874413"
         },
         {
             "id": 417,
@@ -11815,7 +11810,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-15 17:02:54",
-            "tempo_no_estagio_atual": "4 days 23:44:24.783348"
+            "tempo_no_estagio_atual": "6 days 02:27:25.960413"
         },
         {
             "id": 418,
@@ -11868,7 +11863,7 @@
             "gerencia_nome": "GEMEQ",
             "gerencia_id": 1.0,
             "atual_entrada_neste_estagio": "2026-04-15 13:17:52",
-            "tempo_no_estagio_atual": "5 days 03:29:26.342348"
+            "tempo_no_estagio_atual": "6 days 06:12:27.519413"
         },
         {
             "id": 421,
@@ -11921,7 +11916,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 12:38:30",
-            "tempo_no_estagio_atual": "4 days 04:08:48.853348"
+            "tempo_no_estagio_atual": "5 days 06:51:50.030413"
         },
         {
             "id": 422,
@@ -11974,7 +11969,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 20:07:15",
-            "tempo_no_estagio_atual": "2 days 20:40:04.187348"
+            "tempo_no_estagio_atual": "3 days 23:23:05.364413"
         },
         {
             "id": 423,
@@ -12027,7 +12022,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-16 12:00:15",
-            "tempo_no_estagio_atual": "4 days 04:47:03.932348"
+            "tempo_no_estagio_atual": "5 days 07:30:05.109413"
         },
         {
             "id": 426,
@@ -12080,7 +12075,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-20 11:36:07",
-            "tempo_no_estagio_atual": "0 days 05:11:11.637348"
+            "tempo_no_estagio_atual": "1 days 07:54:12.814413"
         },
         {
             "id": 427,
@@ -12133,7 +12128,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 20:09:06",
-            "tempo_no_estagio_atual": "2 days 20:38:12.673348"
+            "tempo_no_estagio_atual": "3 days 23:21:13.850413"
         },
         {
             "id": 429,
@@ -12186,7 +12181,7 @@
             "gerencia_nome": "GLIDS",
             "gerencia_id": 7.0,
             "atual_entrada_neste_estagio": "2026-04-20 13:21:49",
-            "tempo_no_estagio_atual": "0 days 03:25:29.388348"
+            "tempo_no_estagio_atual": "1 days 06:08:30.565413"
         },
         {
             "id": 430,
@@ -12239,7 +12234,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 18:18:24",
-            "tempo_no_estagio_atual": "2 days 22:28:54.965348"
+            "tempo_no_estagio_atual": "4 days 01:11:56.142413"
         },
         {
             "id": 432,
@@ -12292,7 +12287,7 @@
             "gerencia_nome": "GLIDS",
             "gerencia_id": 7.0,
             "atual_entrada_neste_estagio": "2026-04-17 15:07:02",
-            "tempo_no_estagio_atual": "3 days 01:40:17.156348"
+            "tempo_no_estagio_atual": "4 days 04:23:18.333413"
         },
         {
             "id": 434,
@@ -12345,7 +12340,7 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 13:22:22",
-            "tempo_no_estagio_atual": "3 days 03:24:56.602348"
+            "tempo_no_estagio_atual": "4 days 06:07:57.779413"
         },
         {
             "id": 435,
@@ -12398,7 +12393,7 @@
             "gerencia_nome": "GLIDS",
             "gerencia_id": 7.0,
             "atual_entrada_neste_estagio": "2026-04-20 13:42:45",
-            "tempo_no_estagio_atual": "0 days 03:04:33.665348"
+            "tempo_no_estagio_atual": "1 days 05:47:34.842413"
         },
         {
             "id": 436,
@@ -12451,7 +12446,60 @@
             "gerencia_nome": null,
             "gerencia_id": null,
             "atual_entrada_neste_estagio": "2026-04-17 20:00:59",
-            "tempo_no_estagio_atual": "2 days 20:46:19.996348"
+            "tempo_no_estagio_atual": "3 days 23:29:21.173413"
+        },
+        {
+            "id": 438,
+            "specification": "MMH (unificados)",
+            "process_number": "272/2026",
+            "user_name": "André Ricardo Melo",
+            "stage": "Aguardando Distribuição",
+            "summary_object": "Formação de Registro de Preços Unificada para o fornecimento eventual de Dispositivos Médicos do tipo Macas Hospitalares Para Transporte de Pacientes, visando atender as necessidades dos hospitais e estabelecimentos vinculados à Secretaria Estadual de Saúde de Pernambuco",
+            "sei": null,
+            "modality": "I - Pregão",
+            "judgment": "Menor preço (art.33,I)",
+            "dispute_mode": "Aberto(art. 56, II)",
+            "price_record": "Comum",
+            "topic": "Fornecimento",
+            "created_at": "2026-04-20 18:52:04",
+            "updated_at": "2026-04-20 22:26:18",
+            "origin_id": 3,
+            "orgao": "SES",
+            "priority_level": 0,
+            "agent_id": null,
+            "received_at": "2026-04-20 22:26:18",
+            "process_max_time": 120,
+            "process_max_time_with_priority": 76,
+            "process_max_time_without_priority": 76,
+            "stage_started_at": "2026-04-20 22:26:18",
+            "initial_sei": "2300002414.000020/2026-60",
+            "notice_number": null,
+            "final_value": null,
+            "opening_published_at": null,
+            "appeal": null,
+            "purchase_request": null,
+            "legal_framework": null,
+            "external_phase_number": null,
+            "result": null,
+            "proposal_opened_at": null,
+            "award_published_at": null,
+            "result_at": null,
+            "clearance_at": null,
+            "priority_level_at": null,
+            "current_owner_name": null,
+            "link_acesso_sei": null,
+            "sei_id": null,
+            "co_unidade_sei": null,
+            "pncp_number": null,
+            "is_process_result_finished": false,
+            "is_process_result_started": false,
+            "agent_external_id": null,
+            "stage_before_finalize_id": null,
+            "finalized_at": null,
+            "gerencia_nome": null,
+            "gerencia_id": null,
+            "atual_entrada_neste_estagio": "2026-04-20 22:26:18",
+            "tempo_no_estagio_atual": "0 days 21:04:01.528413"
         }
     ],
     "evolution": [
@@ -93622,7 +93670,63 @@
             "topic": "Obra / Serviço de Engenharia",
             "rn": 1,
             "finished_at_calculated": null
+        },
+        {
+            "id": 6491,
+            "process_id": 438,
+            "stage_id": 8,
+            "created_at": "2026-04-20 22:26:18",
+            "finished_at": null,
+            "stages": "Aguardando Distribuição",
+            "code": "AG_DISTRIBUICAO",
+            "orgao_id": 3,
+            "orgao_nome": "Secretaria de Saúde do Estado de Pernambuco",
+            "orgao_sigla": "SES",
+            "summary_object": "Formação de Registro de Preços Unificada para o fornecimento eventual de Dispositivos Médicos do tipo Macas Hospitalares Para Transporte de Pacientes, visando atender as necessidades dos hospitais e estabelecimentos vinculados à Secretaria Estadual de Saúde de Pernambuco",
+            "sei": null,
+            "updated_at": "2026-04-20 22:26:18",
+            "organization_id": 4,
+            "priority_level": 0,
+            "agent_id": null,
+            "received_at": "2026-04-20 22:26:18",
+            "initial_sei": "2300002414.000020/2026-60",
+            "notice_number": null,
+            "final_value": null,
+            "opening_published_at": null,
+            "appeal": null,
+            "purchase_request": null,
+            "legal_framework": null,
+            "external_phase_number": null,
+            "result": null,
+            "proposal_opened_at": null,
+            "award_published_at": null,
+            "result_at": null,
+            "clearance_at": null,
+            "priority_level_at": null,
+            "current_owner_name": null,
+            "link_acesso_sei": null,
+            "sei_id": null,
+            "co_unidade_sei": null,
+            "pncp_number": null,
+            "finalized_at": null,
+            "specification": "MMH (unificados)",
+            "user_name": "André Ricardo Melo",
+            "modality": "I - Pregão",
+            "judgment": "Menor preço (art.33,I)",
+            "dispute_mode": "Aberto(art. 56, II)",
+            "price_record": "Comum",
+            "topic": "Fornecimento",
+            "rn": 1,
+            "finished_at_calculated": null
         }
     ],
-    "insights": "A análise dos dados indica que o **Pregão**, sendo a modalidade mais adotada com 191 ocorrências, possui um impacto significativo sobre as fases de maior retenção — notadamente nas fases de **\"Ajustes Solicitados\" (AG_CORRECAO)** e **\"Processo em Análise SEI\" (ANALISE_SEI)**, que juntas acumulam 104 processos mantidos. A natureza dinâmica e concorrencial do Pregão, aliada à necessidade de múltiplas revisões e correções documentais, impõe sérios gargalos que afetam diretamente a eficiência do ciclo de contratação pública. Esses atrasos não apenas dificultam o andamento dos processos, mas amplificam os tempos médios de tramitação em órgãos como a **Secretaria de Defesa Social (SDS)**, que já apresenta 101 dias de tempo médio.\n\nComo recomendação estratégica, sugere-se priorizar esforços para escoar os processos acumulados, começando pelos maiores gargalos: a **Secretaria de Saúde do Estado de Pernambuco (SES)**, com 92 processos retidos, e a fase de **\"Ajustes Solicitados\" (AG_CORRECAO)**, que concentra 53 processos. Para isso, recomenda-se a inclusão de equipes de auditoria e revisão interna dedicada a esses casos críticos, com prazo de atuação definido. Adicionalmente, deve-se fortalecer o treinamento em **conformidade documental e processual**, especialmente de"
+    "insights_by_view": {
+        "consolidado": "O panorama geral das compras públicas e gestão de processos indica alguns gargalos sistêmicos que demandam atenção. A Secretaria de Saúde do Estado de Pernambuco (SES) concentra o maior volume de processos (93), seguida por Educação (34) e Defesa Social (23), o que evidencia a necessidade de otimização nos órgãos de maior demanda para evitar sobrecarga. Além disso, as fases \"Ajustes Solicitados\" (53 processos) e \"Processo em Análise SEI\" (51 processos) apresentam alta retenção, indicando possíveis dificuldades na revisão de documentos e na tramitação interna. Esses gargalos podem atrasar decisões e comprometer a eficiência geral.\n\nNo que diz respeito ao tempo médio dos processos, órgãos como o Distrito Estadual de Fernando de Noronha (106,8 dias) e Secretaria de Defesa Social (102,3 dias) possuem tempos excessivos, refletindo possíveis entraves operacionais que requerem intervenções para maior agilidade. A modalidade \"Pregão\" se destaca como a mais utilizada (192 processos), sugerindo foco na padronização e capacitação das equipes nessa modalidade para otimizar fluxos. Recomendam-se ações estratégicas como auditoria nas fases com maior retenção, capacitação em melhores práticas e digitalização para ganho de eficiência. Além disso, monitorar continuamente os tempos de processo nos órgãos com maior demanda e criar indicadores de desempenho podem apoiar a decisão gerencial e agilidade.",
+        "volume": "Os dados indicam que há órgãos com maior volume de processos, como a Secretaria de Saúde (SES) e a Secretaria de Educação (SEE), o que sugere uma forte concentração de atividades nessas áreas. Contudo, os tempos médios elevados em órgãos como o Distrito Estadual de Fernando de Noronha (DEFN) e a Agência de Defesa Agropecuária (ADAGRO) revelam gargalos significativos, possivelmente relacionados à complexidade dos processos ou baixa capacidade operacional. As fases de \"Ajustes Solicitados\" e \"Processo em Análise\" apresentam alta retenção, indicando etapas críticas que demandam atenção para fluxos mais ágeis. As modalidades mais usadas, com predominância do Pregão, sinalizam também uma preferência por processos de competitividade, embora haja margem para reduzir atrasos e otimizar rotinas.\n\nComo ação prática, é essencial redirecionar esforços para análise detalhada dos processos em órgãos com maiores tempos médios e altas retenções nas etapas de ajustes e análises. Priorizar automação para fases críticas, reforçar equipes e promover capacitações focadas em técnicas de agilidade, especialmente nos órgãos com volumes elevados. Também é recomendável revisar a utilização das modalidades de contratação para maximizar eficiência em casos de menor complexidade, como Inexigibilidade ou Dispensa, quando aplicável.",
+        "atraso": "A análise indica riscos operacionais significativos relacionados a atrasos nos processos de compras públicas, especialmente observados nos elevados tempos médios de tramitação de órgãos como o Distrito Estadual de Fernando de Noronha (106 dias) e a Secretaria de Defesa Social (102 dias). Fases como \"Ajustes Solicitados\" (53 processos) e \"Processo em Análise SEI\" (51 processos) mostram gargalos críticos na retenção documental e revisão. Além disso, a predominância do pregão como modalidade (192 casos) demanda atenção à celeridade em processos frequentemente utilizados.\n\nPara mitigação de curto prazo, recomendo: (1) Revisar fluxos nas fases mais críticas, priorizando a automação na triagem e correção; (2) Implementar um cronograma de força-tarefa em órgãos com maior volume de processos, redistribuindo análises técnicas para reduzir o tempo médio; e (3) Centralizar a comunicação e capacitar equipes sobre boas práticas para minimizar revisões. Além disso, monitorar os processos em tempo real e criar relatórios semanais pode ajudar a identificar atrasos emergentes e atuar preventivamente."
+    },
+    "insights": "O panorama geral das compras públicas e gestão de processos indica alguns gargalos sistêmicos que demandam atenção. A Secretaria de Saúde do Estado de Pernambuco (SES) concentra o maior volume de processos (93), seguida por Educação (34) e Defesa Social (23), o que evidencia a necessidade de otimização nos órgãos de maior demanda para evitar sobrecarga. Além disso, as fases \"Ajustes Solicitados\" (53 processos) e \"Processo em Análise SEI\" (51 processos) apresentam alta retenção, indicando possíveis dificuldades na revisão de documentos e na tramitação interna. Esses gargalos podem atrasar decisões e comprometer a eficiência geral.\n\nNo que diz respeito ao tempo médio dos processos, órgãos como o Distrito Estadual de Fernando de Noronha (106,8 dias) e Secretaria de Defesa Social (102,3 dias) possuem tempos excessivos, refletindo possíveis entraves operacionais que requerem intervenções para maior agilidade. A modalidade \"Pregão\" se destaca como a mais utilizada (192 processos), sugerindo foco na padronização e capacitação das equipes nessa modalidade para otimizar fluxos. Recomendam-se ações estratégicas como auditoria nas fases com maior retenção, capacitação em melhores práticas e digitalização para ganho de eficiência. Além disso, monitorar continuamente os tempos de processo nos órgãos com maior demanda e criar indicadores de desempenho podem apoiar a decisão gerencial e agilidade.",
+    "insights_consolidado": "O panorama geral das compras públicas e gestão de processos indica alguns gargalos sistêmicos que demandam atenção. A Secretaria de Saúde do Estado de Pernambuco (SES) concentra o maior volume de processos (93), seguida por Educação (34) e Defesa Social (23), o que evidencia a necessidade de otimização nos órgãos de maior demanda para evitar sobrecarga. Além disso, as fases \"Ajustes Solicitados\" (53 processos) e \"Processo em Análise SEI\" (51 processos) apresentam alta retenção, indicando possíveis dificuldades na revisão de documentos e na tramitação interna. Esses gargalos podem atrasar decisões e comprometer a eficiência geral.\n\nNo que diz respeito ao tempo médio dos processos, órgãos como o Distrito Estadual de Fernando de Noronha (106,8 dias) e Secretaria de Defesa Social (102,3 dias) possuem tempos excessivos, refletindo possíveis entraves operacionais que requerem intervenções para maior agilidade. A modalidade \"Pregão\" se destaca como a mais utilizada (192 processos), sugerindo foco na padronização e capacitação das equipes nessa modalidade para otimizar fluxos. Recomendam-se ações estratégicas como auditoria nas fases com maior retenção, capacitação em melhores práticas e digitalização para ganho de eficiência. Além disso, monitorar continuamente os tempos de processo nos órgãos com maior demanda e criar indicadores de desempenho podem apoiar a decisão gerencial e agilidade.",
+    "insights_volume": "Os dados indicam que há órgãos com maior volume de processos, como a Secretaria de Saúde (SES) e a Secretaria de Educação (SEE), o que sugere uma forte concentração de atividades nessas áreas. Contudo, os tempos médios elevados em órgãos como o Distrito Estadual de Fernando de Noronha (DEFN) e a Agência de Defesa Agropecuária (ADAGRO) revelam gargalos significativos, possivelmente relacionados à complexidade dos processos ou baixa capacidade operacional. As fases de \"Ajustes Solicitados\" e \"Processo em Análise\" apresentam alta retenção, indicando etapas críticas que demandam atenção para fluxos mais ágeis. As modalidades mais usadas, com predominância do Pregão, sinalizam também uma preferência por processos de competitividade, embora haja margem para reduzir atrasos e otimizar rotinas.\n\nComo ação prática, é essencial redirecionar esforços para análise detalhada dos processos em órgãos com maiores tempos médios e altas retenções nas etapas de ajustes e análises. Priorizar automação para fases críticas, reforçar equipes e promover capacitações focadas em técnicas de agilidade, especialmente nos órgãos com volumes elevados. Também é recomendável revisar a utilização das modalidades de contratação para maximizar eficiência em casos de menor complexidade, como Inexigibilidade ou Dispensa, quando aplicável.",
+    "insights_atraso": "A análise indica riscos operacionais significativos relacionados a atrasos nos processos de compras públicas, especialmente observados nos elevados tempos médios de tramitação de órgãos como o Distrito Estadual de Fernando de Noronha (106 dias) e a Secretaria de Defesa Social (102 dias). Fases como \"Ajustes Solicitados\" (53 processos) e \"Processo em Análise SEI\" (51 processos) mostram gargalos críticos na retenção documental e revisão. Além disso, a predominância do pregão como modalidade (192 casos) demanda atenção à celeridade em processos frequentemente utilizados.\n\nPara mitigação de curto prazo, recomendo: (1) Revisar fluxos nas fases mais críticas, priorizando a automação na triagem e correção; (2) Implementar um cronograma de força-tarefa em órgãos com maior volume de processos, redistribuindo análises técnicas para reduzir o tempo médio; e (3) Centralizar a comunicação e capacitar equipes sobre boas práticas para minimizar revisões. Além disso, monitorar os processos em tempo real e criar relatórios semanais pode ajudar a identificar atrasos emergentes e atuar preventivamente."
 }

@@ -1,4 +1,4 @@
-import { TAB_CONFIG, chartRegistry, dashboardState, macroFilters, temporalFilters, uiBindings } from "./state.js";
+import { TAB_CONFIG, chartRegistry, dashboardState, dashboardUiState, macroFilters, temporalFilters, uiBindings } from "./state.js";
 import {
     aggregateEvolutionByBucketAndCode,
     applyEvolutionFilters,
@@ -8,12 +8,58 @@ import {
     formatNumber,
     getTemporalDateRange,
     normalizeEvolutionRows,
+    parseDateTime,
     rowsToCsv,
     parseDateInput,
     clampDate,
 } from "./utils.js";
-import { getActiveTabId, getChartText, getTabTitle } from "./data.js";
-import { buildTemporalChart, refreshTemporalChart, refreshMacroSection } from "./charts.js";
+import { getActiveTabId, getChartText, getTabTitle, resetKpiThresholds, saveKpiThresholds } from "./data.js";
+import { buildTemporalChart, refreshTempoExtremeKpiTones, refreshTemporalChart, refreshMacroSection } from "./charts.js";
+
+const KPI_THRESHOLD_FIELDS = [
+    {
+        key: "finalizados_rate",
+        label: "Taxa de finalizados",
+        help: "Maior é melhor (0 a 100%).",
+        unit: "percent",
+        trend: "higher",
+    },
+    {
+        key: "priority_rate",
+        label: "Taxa de prioridade",
+        help: "Menor é melhor (0 a 100%).",
+        unit: "percent",
+        trend: "lower",
+    },
+    {
+        key: "overdue_rate",
+        label: "Taxa de atrasos",
+        help: "Menor é melhor (0 a 100%).",
+        unit: "percent",
+        trend: "lower",
+    },
+    {
+        key: "tempo_medio_dias",
+        label: "Tempo medio (dias)",
+        help: "Menor é melhor (dias).",
+        unit: "number",
+        trend: "lower",
+    },
+    {
+        key: "critical_delay_total",
+        label: "Qtd. de atrasados",
+        help: "Menor é melhor (contagem).",
+        unit: "number",
+        trend: "lower",
+    },
+    {
+        key: "mais_lento_dias",
+        label: "Processo mais lento",
+        help: "Menor é melhor (dias).",
+        unit: "number",
+        trend: "lower",
+    },
+];
 
 export function populateSelectOptions(selectId, values) {
     const select = document.getElementById(selectId);
@@ -34,6 +80,56 @@ export function populateSelectOptions(selectId, values) {
     if (["all", ...values].includes(currentValue)) {
         select.value = currentValue;
     }
+}
+
+function syncSideMenuToggleState(toggleButton) {
+    const isDesktop = window.innerWidth >= 992;
+    const isCollapsedDesktop = isDesktop && document.body.classList.contains("vertical-collpsed");
+    const isOpenMobile = !isDesktop && document.body.classList.contains("sidebar-enable");
+    const labelElement = toggleButton.querySelector("span");
+
+    if (labelElement) {
+        if (isDesktop) {
+            labelElement.textContent = isCollapsedDesktop ? "Expandir menu" : "Recolher menu";
+        } else {
+            labelElement.textContent = isOpenMobile ? "Fechar menu" : "Abrir menu";
+        }
+    }
+
+    const expanded = isDesktop ? !isCollapsedDesktop : isOpenMobile;
+    toggleButton.setAttribute("aria-expanded", String(expanded));
+}
+
+export function initSideMenuToggle() {
+    if (uiBindings.sideMenuToggleBound) {
+        return;
+    }
+
+    const toggleButton = document.getElementById("vertical-menu-btn");
+    if (!toggleButton) {
+        return;
+    }
+
+    if (window.jQuery) {
+        window.jQuery("#vertical-menu-btn").off("click");
+    }
+
+    toggleButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        document.body.classList.toggle("sidebar-enable");
+
+        if (window.innerWidth >= 992) {
+            document.body.classList.toggle("vertical-collpsed");
+        } else {
+            document.body.classList.remove("vertical-collpsed");
+        }
+
+        syncSideMenuToggleState(toggleButton);
+    });
+
+    window.addEventListener("resize", () => syncSideMenuToggleState(toggleButton));
+    syncSideMenuToggleState(toggleButton);
+    uiBindings.sideMenuToggleBound = true;
 }
 
 export function updateTemporalInputState() {
@@ -138,6 +234,126 @@ export function initTemporalControls() {
 
     bindTemporalFullscreenModal();
     uiBindings.temporalControlsAreBound = true;
+}
+
+function toDisplayThresholdValue(value, unit) {
+    if (!Number.isFinite(Number(value))) {
+        return "";
+    }
+
+    if (unit === "percent") {
+        return String(Math.round(Number(value) * 10000) / 100);
+    }
+
+    return String(Number(value));
+}
+
+function toStoredThresholdValue(value, unit) {
+    const numericValue = Number(value);
+    if (!Number.isFinite(numericValue)) {
+        return null;
+    }
+
+    if (unit === "percent") {
+        return numericValue / 100;
+    }
+
+    return numericValue;
+}
+
+function populateKpiThresholdModalValues() {
+    KPI_THRESHOLD_FIELDS.forEach((field) => {
+        const threshold = dashboardUiState.kpiThresholds[field.key] || {};
+        const goodInput = document.getElementById(`kpi-threshold-${field.key}-good`);
+        const warningInput = document.getElementById(`kpi-threshold-${field.key}-warning`);
+
+        if (goodInput) {
+            goodInput.value = toDisplayThresholdValue(threshold.good, field.unit);
+        }
+
+        if (warningInput) {
+            warningInput.value = toDisplayThresholdValue(threshold.warning, field.unit);
+        }
+    });
+}
+
+function buildKpiThresholdFromModal() {
+    const parsedThresholds = {};
+
+    for (const field of KPI_THRESHOLD_FIELDS) {
+        const goodInput = document.getElementById(`kpi-threshold-${field.key}-good`);
+        const warningInput = document.getElementById(`kpi-threshold-${field.key}-warning`);
+        const goodValue = toStoredThresholdValue(goodInput?.value, field.unit);
+        const warningValue = toStoredThresholdValue(warningInput?.value, field.unit);
+
+        if (!Number.isFinite(goodValue) || !Number.isFinite(warningValue)) {
+            window.alert(`Preencha valores numericos validos em \"${field.label}\".`);
+            return null;
+        }
+
+        if (field.trend === "lower" && goodValue > warningValue) {
+            window.alert(`Em \"${field.label}\", o limite Saudavel deve ser menor ou igual ao limite Atencao.`);
+            return null;
+        }
+
+        if (field.trend === "higher" && goodValue < warningValue) {
+            window.alert(`Em \"${field.label}\", o limite Saudavel deve ser maior ou igual ao limite Atencao.`);
+            return null;
+        }
+
+        parsedThresholds[field.key] = {
+            good: goodValue,
+            warning: warningValue,
+        };
+    }
+
+    return parsedThresholds;
+}
+
+function applyKpiThresholdRefresh() {
+    refreshMacroSection();
+    refreshTempoExtremeKpiTones();
+}
+
+export function bindKpiSettingsModal() {
+    if (uiBindings.kpiSettingsBound) {
+        return;
+    }
+
+    const openButton = document.getElementById("btn-open-kpi-settings");
+    const modalElement = document.getElementById("kpi-settings-modal");
+    const saveButton = document.getElementById("btn-kpi-threshold-save");
+    const resetButton = document.getElementById("btn-kpi-threshold-reset");
+
+    if (!openButton || !modalElement || !saveButton || !resetButton) {
+        return;
+    }
+
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+
+    openButton.addEventListener("click", () => {
+        populateKpiThresholdModalValues();
+        modal.show();
+    });
+
+    saveButton.addEventListener("click", () => {
+        const parsedThresholds = buildKpiThresholdFromModal();
+        if (!parsedThresholds) {
+            return;
+        }
+
+        saveKpiThresholds(parsedThresholds);
+        applyKpiThresholdRefresh();
+        modal.hide();
+    });
+
+    resetButton.addEventListener("click", () => {
+        resetKpiThresholds();
+        populateKpiThresholdModalValues();
+        applyKpiThresholdRefresh();
+    });
+
+    uiBindings.kpiSettingsBound = true;
 }
 
 export function initMacroControls(rows) {
@@ -333,13 +549,63 @@ function getCsvRowsForChart(chartId) {
             .slice(0, 10);
     }
 
+    if (chartId === "chart-stage-evolution-total-gradient") {
+        const rows = Array.isArray(dashboardState.macro.filteredRows) ? dashboardState.macro.filteredRows : [];
+        const createdDates = rows
+            .map((row) => parseDateTime(row?.created_at))
+            .filter((date) => date instanceof Date);
+
+        if (createdDates.length === 0) {
+            return [];
+        }
+
+        const maxCreatedAt = createdDates.reduce((maxDate, currentDate) => (currentDate > maxDate ? currentDate : maxDate), createdDates[0]);
+        const endDate = new Date(maxCreatedAt.getFullYear(), maxCreatedAt.getMonth(), maxCreatedAt.getDate(), 23, 59, 59, 999);
+        const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 0, 0, 0, 0);
+        startDate.setDate(startDate.getDate() - 29);
+
+        const countsByDay = new Map();
+        const cursor = new Date(startDate.getTime());
+        while (cursor <= endDate) {
+            const key = `${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, "0")}-${String(cursor.getDate()).padStart(2, "0")}`;
+            countsByDay.set(key, 0);
+            cursor.setDate(cursor.getDate() + 1);
+        }
+
+        rows.forEach((row) => {
+            const createdAt = parseDateTime(row?.created_at);
+            if (!createdAt || createdAt < startDate || createdAt > endDate) {
+                return;
+            }
+
+            const key = `${createdAt.getFullYear()}-${String(createdAt.getMonth() + 1).padStart(2, "0")}-${String(createdAt.getDate()).padStart(2, "0")}`;
+            const current = countsByDay.get(key);
+            countsByDay.set(key, (current || 0) + 1);
+        });
+
+        return [...countsByDay.entries()].map(([data, quantidade_processos]) => ({ data, quantidade_processos }));
+    }
+
+    if (chartId === "chart-stage-evolution-doughnut-mono") {
+        const rows = Array.isArray(dashboardState.macro.filteredRows) ? dashboardState.macro.filteredRows : [];
+        const groupedByStage = rows.reduce((accumulator, row) => {
+            const stage = String(row?.stage || "Nao Informado");
+            accumulator[stage] = (accumulator[stage] || 0) + 1;
+            return accumulator;
+        }, {});
+
+        return Object.entries(groupedByStage)
+            .map(([fase, total_processos]) => ({ fase, total_processos: Number(total_processos || 0) }))
+            .sort((a, b) => b.total_processos - a.total_processos)
+            .slice(0, 10);
+    }
+
     if ([
         "chart-stage-evolution",
         "chart-stage-evolution-line",
         "chart-stage-evolution-area",
         "chart-stage-evolution-heatmap",
         "chart-stage-evolution-total-gradient",
-        "chart-stage-evolution-doughnut-mono",
         "chart-stage-evolution-bar-mono",
     ].includes(chartId)) {
         const normalizedRows = normalizeEvolutionRows(dashboardState.macro.evolutionRows);
@@ -441,18 +707,69 @@ function openChartRuleModal(chartId) {
     modal.show();
 }
 
-function openTemporalFullscreenModal(chartId) {
-    if (chartId !== "chart-temporal-orgaos") {
+function openFullscreenChartModal(chartId) {
+    if (chartId === "chart-temporal-orgaos") {
+        const temporalModalElement = document.getElementById("temporal-fullscreen-modal");
+        if (!temporalModalElement) {
+            return;
+        }
+
+        const temporalModal = bootstrap.Modal.getOrCreateInstance(temporalModalElement);
+        temporalModal.show();
         return;
     }
 
-    const modalElement = document.getElementById("temporal-fullscreen-modal");
-    if (!modalElement) {
+    const chart = chartRegistry[chartId];
+    const modalElement = document.getElementById("stage-evolution-fullscreen-modal");
+    const imageElement = document.getElementById("chart-stage-evolution-fullscreen-image");
+    const titleElement = document.getElementById("text-chart-stage-evolution-fullscreen-title");
+
+    if (!modalElement || !imageElement || !chart) {
         return;
     }
+
+    if (titleElement) {
+        titleElement.textContent = getChartText(chartId).name;
+    }
+
+    imageElement.src = chart.toBase64Image("image/png", 1);
+    imageElement.alt = getChartText(chartId).alt;
 
     const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
     modal.show();
+}
+
+function ensureFullscreenButtons() {
+    const panelActions = [...document.querySelectorAll(".chart-panel-actions")];
+
+    panelActions.forEach((actionsContainer) => {
+        const chartButton = actionsContainer.querySelector(".chart-tool-btn[data-chart-id]");
+        if (!chartButton) {
+            return;
+        }
+
+        const chartId = chartButton.dataset.chartId;
+        if (!chartId) {
+            return;
+        }
+
+        const hasFullscreenButton = Boolean(
+            actionsContainer.querySelector(`.chart-tool-btn[data-action=\"fullscreen\"][data-chart-id=\"${chartId}\"]`)
+        );
+
+        if (hasFullscreenButton) {
+            return;
+        }
+
+        const fullscreenButton = document.createElement("button");
+        fullscreenButton.type = "button";
+        fullscreenButton.className = "btn btn-outline-secondary btn-sm chart-tool-btn";
+        fullscreenButton.dataset.action = "fullscreen";
+        fullscreenButton.dataset.chartId = chartId;
+        fullscreenButton.textContent = "Tela cheia";
+
+        actionsContainer.prepend(fullscreenButton);
+    });
 }
 
 const chartToolActions = {
@@ -460,7 +777,7 @@ const chartToolActions = {
     png: exportChartPng,
     pdf: exportChartPdf,
     info: openChartRuleModal,
-    fullscreen: openTemporalFullscreenModal,
+    fullscreen: openFullscreenChartModal,
 };
 
 function runChartToolAction(action, chartId) {
@@ -477,6 +794,8 @@ export function bindChartTools() {
         return;
     }
 
+    ensureFullscreenButtons();
+
     const buttons = [...document.querySelectorAll(".chart-tool-btn")];
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -490,10 +809,75 @@ export function bindChartTools() {
         });
     });
 
+    const stageFullscreenModal = document.getElementById("stage-evolution-fullscreen-modal");
+    if (stageFullscreenModal && !stageFullscreenModal.dataset.bound) {
+        stageFullscreenModal.addEventListener("hidden.bs.modal", () => {
+            const imageElement = document.getElementById("chart-stage-evolution-fullscreen-image");
+            if (imageElement) {
+                imageElement.removeAttribute("src");
+            }
+        });
+        stageFullscreenModal.dataset.bound = "1";
+    }
+
     uiBindings.chartToolsBound = true;
 }
 
 function getCsvRowsForTab(tabId) {
+    if (tabId === "dashboard-consolidado") {
+        const rows = [];
+
+        dashboardState.processed.sortedOrg.forEach((row) => {
+            rows.push({ bloco: "por_orgao", referencia: row.sigla, valor_1: row.nome, valor_2: Number(row.total_processos || 0) });
+        });
+
+        dashboardState.processed.sortedGerencia.forEach((row) => {
+            rows.push({
+                bloco: "por_gerencia",
+                referencia: String(row.gerencia_nome || "Sem gerencia"),
+                valor_1: Number(row.total_processos || 0),
+            });
+        });
+
+        dashboardState.macro.filteredRows.forEach((row) => {
+            rows.push({ bloco: "macro_espelho", referencia: row.orgao, valor_1: row.stage, valor_2: row._sla_risk });
+        });
+
+        return rows;
+    }
+
+    if (tabId === "dashboard-volume") {
+        const rows = [];
+
+        dashboardState.processed.sortedTempo.forEach((row) => {
+            rows.push({ bloco: "tempo_medio", referencia: row.sigla, valor_1: Number(row.tempo_medio_dias || 0), valor_2: Number(row.tempo_max_dias || 0) });
+        });
+
+        const temporalBuckets = buildTemporalBuckets(dashboardState.macro.allRows, temporalFilters.granularity);
+        temporalBuckets.forEach((bucket) => {
+            Object.entries(bucket.byOrgao).forEach(([orgao, count]) => {
+                rows.push({ bloco: `temporal_${temporalFilters.granularity}`, referencia: bucket.label, valor_1: orgao, valor_2: Number(count || 0) });
+            });
+        });
+
+        return rows;
+    }
+
+    if (tabId === "dashboard-atraso") {
+        return dashboardState.macro.filteredDelayRows.map((row) => ({
+            id: Number(row.id || 0),
+            process_number: String(row.process_number || ""),
+            orgao: String(row.orgao || ""),
+            stage: String(row.stage || ""),
+            dias_em_tramitacao: Number(row._age_days || 0),
+            limite_sla_dias: Number(row._sla_limit_days || 0),
+            dias_em_atraso: Number(row._days_overdue || 0),
+            dias_sem_movimentacao: Number(row._days_without_stage_movement || 0),
+            qtd_mov_stage: Number(row._stage_movement_count || 0),
+            ultima_movimentacao_stage: String(row._last_stage_movement_at || ""),
+        }));
+    }
+
     if (tabId === "dashboard-all") {
         const rows = [];
 
